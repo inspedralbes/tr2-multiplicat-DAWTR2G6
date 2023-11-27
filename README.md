@@ -9,7 +9,7 @@ HEU DE MODIFICAR AQUEST DOCUMENT AMB LA VOSTRA INFORMACIÖ:
 * Som una web que aporta exercicis dinàmics i divertits per a alumnes de PCI
 * Josu Largo Fernandez, Pol Donya Pozuelo, Hugo Tripiana Gonzalez, Ruben de la Cerreza
 * URL del prototip de penpod (penseu a deixar el prototip públic)
-* URL del taiga.io
+* URL del taiga.io: https://tree.taiga.io/project/poleet-xifraxalada/timeline
 * URL de preproducció 
 * URL de producció (amb un domini registrat)
 
