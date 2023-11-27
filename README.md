@@ -6,7 +6,7 @@ Teniu la carpeta /doc per deixar-hi tota la documentació que genereu, en format
 
 HEU DE MODIFICAR AQUEST DOCUMENT AMB LA VOSTRA INFORMACIÖ:
 * Xifra Xalada
-* Som una web que aporta exercicis dinàmics i divertits per a alumnes de PCI
+* Som una web que aporta exercicis dinàmics i divertits per a alumnes de PFI
 * Josu Largo Fernandez, Pol Donya Pozuelo, Hugo Tripiana Gonzalez, Ruben de la Cerreza
 * URL del prototip de penpod (penseu a deixar el prototip públic)
 * URL del taiga.io: https://tree.taiga.io/project/poleet-xifraxalada/timeline
