@@ -15,8 +15,28 @@ const router = createRouter({
       path: '/votacions',
       name: 'votacions',
       component: VotacionsScreen
+    },
+    {
+      path: '/lp',
+      name: 'lp',
+      component: lp
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: register
+    },
+    {
+      path: '/block-game',
+      name: 'blockgame',
+      component: blockgame
     }
-   
+
   ]
 })
 
