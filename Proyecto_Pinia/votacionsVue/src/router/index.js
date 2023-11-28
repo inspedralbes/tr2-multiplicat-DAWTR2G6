@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import LoginScreen from '../components/LoginScreen.vue';
 import VotacionsScreen from '../components/VotacionsScreen.vue';
+import RegisterScreen from '../components/RegisterScreen.vue';
+import GameScreen from '../components/GameScreen.vue';
+import Juego from '../components/Juego.vue';
 
 
 const router = createRouter({
@@ -17,24 +20,19 @@ const router = createRouter({
       component: VotacionsScreen
     },
     {
-      path: '/lp',
-      name: 'lp',
-      component: lp
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: login
+      path: '/GameScreen',
+      name: 'game',
+      component: GameScreen
     },
     {
       path: '/register',
       name: 'register',
-      component: register
+      component: RegisterScreen
     },
     {
-      path: '/block-game',
-      name: 'blockgame',
-      component: blockgame
+      path: '/Juego',
+      name: 'Juego',
+      component: Juego
     }
 
   ]
