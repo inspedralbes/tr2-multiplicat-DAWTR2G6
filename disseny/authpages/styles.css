@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgba(22, 2, 10, 0.897);
+    color: #DFDFDF;
+    font-family: 'Anek Bangla', sans-serif;
+    height: 50vh;
+    font-variant: small-caps;
+    background-color: #A2909F;
+    
+}
+
+input[type="email"],
+input[type="password"],
+input[type="submit"],
+input[type="text"],
+div>a {
+    text-decoration: none;
+    border: 2px solid #A2909F;
+    padding: 10px;
+    width: 100%;
+    background-color: #1F1C1C;
+    color: #A2909F;
+    font-variant: small-caps;
+}
+
+input[type="submit"], div>a {
+    position: relative;
+    top: 50px;
+   
+}
+
+.tornar{
+    display: flex;
+    
+}
+
+input[type="submit"]:hover, div>a:hover {
+    background-color: #A2909F;
+    border-color: #1F1C1C;
+    color: #1F1C1C;
+    box-shadow: 2px 2px 10px 4px #0a0a0a98;
+}
+
+fieldset {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #1F1C1C;
+    color: #A2909F;
+    border: 2px solid #DFDFDF;
+    border-radius: 25px;
+    height: 600px;
+    margin-top: 3%;
+    font-size: 25px;
+    box-shadow: 0px 0px 4px 4px #0a0a0a98;
+
+}
+
+fieldset>div {
+    margin: 20px;
+}
