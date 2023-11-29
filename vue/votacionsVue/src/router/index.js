@@ -38,9 +38,7 @@ const router = createRouter({
       path: '/api-fetch',
       name: 'api-fetch',
       component: ApiFetch
-=======
->>>>>>> api-fetch:vue/votacionsVue/src/router/index.js
-    },
+    }
   ]
 })
 
