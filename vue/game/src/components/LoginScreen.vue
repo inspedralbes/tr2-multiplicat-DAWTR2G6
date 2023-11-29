@@ -1,61 +1,48 @@
 <template>
-   
-<div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
-    <div class="text-center mb-5">
-        <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
-        <span class="text-600 font-medium line-height-3">Don't have an account?</span>
-        <router-link to="/register" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</router-link>
-    </div>
-
-    <div>
-        <label for="email1" class="block text-900 font-medium mb-2">Email</label>
-        <InputText id="email1" type="text" class="w-full mb-3" v-model="usuari"/>
-
-        <label for="password1" class="block text-900 font-medium mb-2">Password</label>
-        <InputText id="password1" type="password" class="w-full mb-3" v-model="password" />
-
-        <div class="flex align-items-center justify-content-between mb-6">
-            <div class="flex align-items-center">
-                <Checkbox id="rememberme1" :binary="true" v-model="checked" class="mr-2"></Checkbox>
-                <label for="rememberme1">Remember me</label>
-            </div>
-            <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
-        </div>
- 
-
-
-            <Button label="Sign In" icon="pi pi-user" class="w-full" type="submit" v-on:click="login()">afs</Button>
-
-    </div>
-</div>
+  <div class="container">
+    <h2 class="mt-5">Iniciar sesión</h2>
+    <!-- Formulario de inicio de sesión -->
+    <form @submit.prevent="login">
+      <div class="form-group">
+        <label for="username">Nombre de usuario</label>
+        <input type="text" class="form-control" id="username" v-model="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input type="password" class="form-control" id="password" v-model="password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+    </form>
+  </div>
 </template>
 
 <script>
-    import {useAppStore} from '../stores/app'
-    export default {
-        data(){
-            return{
-                checked:false,
-                usuari:'',
-                password:''
-            } 
-        
-        },
-        methods:{
-            login() {
-        if (this.usuari === 'user' && this.password === '123') {
-            const appStore = useAppStore();
-            appStore.setLoginInfo(true, "Alvaro", "image.jpg");
-            console.log('Login successful:', appStore.getLoginInfo());
-            this.$router.push('/Juego');
-        } else {
-            console.error('Login failed');
-        }
-            }
-        }
+export default {
+  name: 'LoginScreen',
+  data() {
+    return {
+      username: '',
+      password: ''
+    };
+  },
+  methods: {
+    login() {
+      
+      // hacer una solicitud al servidor para verificar credenciales
+      const loginSuccessful = true;
+
+      if (loginSuccessful) {
+        // Redirigir a la sala de lobby después de un inicio de sesión exitoso
+        this.$router.push('/lobby');
+      } else {
+        // Manejar el caso en que el inicio de sesión no sea exitoso
+        alert('Inicio de sesión fallido. Verifica tus credenciales.');
+      }
     }
+  }
+};
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+/* No se necesitan estilos específicos aquí */
 </style>

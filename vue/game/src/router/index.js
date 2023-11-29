@@ -1,23 +1,21 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import {
+  createRouter,
+  createWebHistory
+} from 'vue-router';
 import LoginScreen from '../components/LoginScreen.vue';
-import VotacionsScreen from '../components/VotacionsScreen.vue';
 import RegisterScreen from '../components/RegisterScreen.vue';
 import GameScreen from '../components/GameScreen.vue';
-import Juego from '../components/Juego.vue';
+import LandingScreen from '../components/LandingScreen.vue';
+import LobbyScreen from '../components/LobbyScreen.vue';
 
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
+  history: createWebHistory(
+    import.meta.env.BASE_URL),
+  routes: [{
+      path: '/login',
       name: 'home',
       component: LoginScreen
-    },
-    {
-      path: '/votacions',
-      name: 'votacions',
-      component: VotacionsScreen
     },
     {
       path: '/GameScreen',
@@ -30,10 +28,16 @@ const router = createRouter({
       component: RegisterScreen
     },
     {
-      path: '/Juego',
-      name: 'Juego',
-      component: Juego
+      path: '/Lobby',
+      name: 'lobby',
+      component: LobbyScreen
+    },
+    {
+      path: '/',
+      name: 'landingpage',
+      component: LandingScreen
     }
+
 
   ]
 })
