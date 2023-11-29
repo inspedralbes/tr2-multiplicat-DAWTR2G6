@@ -28,7 +28,7 @@ export default {
   methods: {
     startSinglePlayerMode() {
       this.mode = 'singlePlayer';
-      this.socket.emit('startPlayingSinglePlayer');
+      this.socket.emit('begin-SP-gameMode');
     },
     startMultiPlayerMode() {
       this.mode = 'multiPlayer';
@@ -37,10 +37,7 @@ export default {
     initSocket() {
       // Inicializar el socket para el modo multijugador
       this.socket = io('http://localhost:3333'); // Ajusta la URL del servidor de sockets
-      this.socket.on('playerJoined', (count) => {
-        // Actualizar el contador de jugadores cuando un jugador se une
-        this.playersCount = count;
-      });
+    
     },
   },
   beforeDestroy() {

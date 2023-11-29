@@ -8,94 +8,87 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
-// Lista de jugadores
+// LISTA DE JUGADORES
 const players = {};
 
-// Lista de bloques de Tetris iniciales para cada jugador
+// LISTA DE PUNTOS A QUITARSE, QUANTOS MENOS MEJOR
 const initialBlocks = 10;
 
-// igual a lo escogido en LobbyScreen
+// MODO ESCOGIDO EN LOBBYSCREEN
 let gameMode = mode;
 
-// Número mínimo de jugadores requeridos para iniciar el juego en modo multijugador
+// MIN NUM DE JUGADORES PARA CHECKMULTIPLAYER DEVUELVA begin-MULT-gameMode
 const minPlayersForMultiplayer = 2;
 
-// Manejador de conexiones
+// QUANDO ALGUIEN SE UNE . . .
 io.on('connection', (socket) => {
+  // MENSAJE POR CONSOLA
   console.log('Nuevo jugador conectado');
+  // NUEVA CONEXION, NUEVO JUGADOR -> UPDATEAR PLAYER COUNT
   playersCount += 1;
-  io.emit('playerJoined', playersCount);
 
-  // Asignar bloques iniciales al jugador
+  // NUEVO JUGADOR -> ASIGNAR NUMERO DE BLOCKS
   players[socket.id] = {
     blocks: initialBlocks
   };
 
-  // Notificar a todos los jugadores sobre el nuevo jugador
+  // NOTIFICAR A CADA JUGADOR SOBRE ESTA NUEVA CONEXION
   io.emit('updatePlayers', Object.keys(players));
 
-  // Manejador de inicio de juego
-  socket.on('startMultiplayerGame', () => {
-    // Comprobar si el lobby puede pasar a jugar
-    checkStartMultiplayerGame();
+  // SOCKET RECIBE socket.emit('begin-SP-gameMode')
+  socket.on('begin-SP-gameMode', () => {
+    // EMPEZAR SP gameMode
+
   });
 
-  socket.on('startPlayingSinglePlayer', () => {
-    // Comprobar si el lobby puede pasar a jugar
-    checkStartMultiplayerGame();
+  // SOCKET RECIBE socket.emit('check-if-mult-isPlayable')
+  socket.on('check-if-mult-isPlayable', () => {
+    // COMPROBAR QUE HAY SUFICIENTES JUGADORES CONECTADOS
+    checkMultiplayer();
   });
 
 
 
-  // Manejador de respuestas a preguntas
+  // SOCKET RECIBE socket.emit('answerQuestion')
   socket.on('answerQuestion', (isCorrect) => {
     if (isCorrect) {
-      // Reducir bloques si la respuesta es correcta
+      // RESPUESTA CORRECTA, REDUCIR NUMERO DE BLOQUES
       players[socket.id].blocks -= 1;
-
-      // Notificar a todos los jugadores sobre la respuesta correcta
-      io.emit('updateBlocks', {
-        id: socket.id,
-        blocks: players[socket.id].blocks
-      });
+      if (players[socket.id].blocks = 0) {
+        socket.emit('end-game--playerVictory');
+        console.log(players[socket.id] + 'ha guanyat la partida!');
+      }
     } else {
-      // Aumentar bloques si la respuesta es incorrecta
+      // RESPUESTA INCORRECTA, AUGMENTAR NUMERO DE BLOQUES
       players[socket.id].blocks += 1;
-
-      // Notificar a todos los jugadores sobre la respuesta incorrecta
-      io.emit('updateBlocks', {
-        id: socket.id,
-        blocks: players[socket.id].blocks
-      });
     }
   });
 
-  // Manejador de desconexiones
+  // SE PIERDE UNA CONEXION
   socket.on('disconnect', () => {
-    // Eliminar al jugador desconectado de la lista
+    // REDUCIR PLAYER COUNT
     playersCount -= 1;
+
     delete players[socket.id];
-
-    // Notificar a todos los jugadores sobre la actualización de jugadores
+    // UPDATEAR A LOS JUGADORES SOBRE LOS VACANTES
     io.emit('updatePlayers', Object.keys(players));
-
-    // Comprobar si el lobby puede pasar a jugar
-    checkStartMultiplayerGame();
+    // SE PUEDE JUGAR ?
+    // checkMultiplayer();
   });
 
-  // Función para comprobar si el lobby puede pasar a jugar
-  const checkStartMultiplayerGame = () => {
+  // SUFICIENTES JUGADORES PARA UNA PARTIDA MULTIJUGADOR ?
+  const checkMultiplayer = () => {
     if ((gameMode === 2 && Object.keys(players).length >= minPlayersForMultiplayer)) {
-      // Notificar a todos los jugadores para comenzar el juego
-      io.emit('startPlayingMultiplayer');
+      // EMPIEZA LA PARTIDA MULTIJUGADOR
+      io.emit('begin-MULT-gameMode');
     } else {
-      alert('Se requiere mas jugadores');
+      console.log('Se requiren mas jugadores para una partida multijugador');
     }
   };
 
 });
 
-// Configuración del servidor
+//  CONF DEL SV
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);
