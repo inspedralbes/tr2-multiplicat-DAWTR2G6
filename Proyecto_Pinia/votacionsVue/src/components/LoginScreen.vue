@@ -24,7 +24,7 @@
  
 
 
-            <Button label="Sign In" icon="pi pi-user" class="w-full" type="submit" v-on:click="login()">afs</Button>
+            <Button label="Sign In" icon="pi pi-user" class="w-full" type="submit" v-on:click="login()">Entrar</Button>
 
     </div>
 </div>

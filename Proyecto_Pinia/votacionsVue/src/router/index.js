@@ -4,6 +4,7 @@ import VotacionsScreen from '../components/VotacionsScreen.vue';
 import RegisterScreen from '../components/RegisterScreen.vue';
 import GameScreen from '../components/GameScreen.vue';
 import Juego from '../components/Juego.vue';
+import ApiFetch from '../components/ApiFetch.vue';
 
 
 const router = createRouter({
@@ -28,6 +29,11 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: RegisterScreen
+    },
+    {
+      path: '/api-fetch',
+      name: 'api-fetch',
+      component: ApiFetch
     },
     {
       path: '/Juego',
