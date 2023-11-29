@@ -39,7 +39,6 @@ export default {
 
 <style lang="scss" scoped>
     .fondo{
-  background-image: url('https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2015/02/85655-fondos-android.jpg?tf=1080x'); // Ajusta el nombre de tu imagen y la extensión
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;

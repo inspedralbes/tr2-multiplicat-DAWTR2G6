@@ -47,7 +47,7 @@
             const appStore = useAppStore();
             appStore.setLoginInfo(true, "Alvaro", "image.jpg");
             console.log('Login successful:', appStore.getLoginInfo());
-            this.$router.push('/votacions');
+            this.$router.push('/Juego');
         } else {
             console.error('Login failed');
         }
