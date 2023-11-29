@@ -22,6 +22,10 @@
             <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
         </div>
  
+<<<<<<< HEAD:Proyecto_Pinia/votacionsVue/src/components/LoginScreen.vue
+=======
+
+>>>>>>> api-fetch:vue/votacionsVue/src/components/LoginScreen.vue
 
 
             <Button label="Sign In" icon="pi pi-user" class="w-full" type="submit" v-on:click="login()">Entrar</Button>

@@ -4,7 +4,10 @@ import VotacionsScreen from '../components/VotacionsScreen.vue';
 import RegisterScreen from '../components/RegisterScreen.vue';
 import GameScreen from '../components/GameScreen.vue';
 import Juego from '../components/Juego.vue';
+<<<<<<< HEAD:Proyecto_Pinia/votacionsVue/src/router/index.js
 import ApiFetch from '../components/ApiFetch.vue';
+=======
+>>>>>>> api-fetch:vue/votacionsVue/src/router/index.js
 
 
 const router = createRouter({
@@ -29,11 +32,14 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: RegisterScreen
+<<<<<<< HEAD:Proyecto_Pinia/votacionsVue/src/router/index.js
     },
     {
       path: '/api-fetch',
       name: 'api-fetch',
       component: ApiFetch
+=======
+>>>>>>> api-fetch:vue/votacionsVue/src/router/index.js
     },
     {
       path: '/Juego',
