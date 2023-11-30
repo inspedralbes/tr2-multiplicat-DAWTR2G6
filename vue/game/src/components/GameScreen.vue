@@ -26,6 +26,7 @@ export default {
   data() {
     return {
       data_preguntas: [],
+      index: 0,
       blocks: 5,
       preguntas_guardadas: false,
       // OBJ con la informacion de pregunta actual / index / enunciado / opciones / respuesta-correcta
@@ -47,10 +48,9 @@ export default {
         this.data_preguntas = await response.json();
 
         this.preguntaActual = {
-          index: 0,
-          enunciado: this.data_preguntas[this.preguntaActual.index].pregunta,
-          opciones: JSON.parse(this.data_preguntas[this.preguntaActual.index].opciones),
-          respuesta_correcta: this.data_preguntas[this.preguntaActual.index].respuesta_correcta
+          enunciado: this.data_preguntas[this.index].pregunta,
+          opciones: JSON.parse(this.data_preguntas[this.index].opciones),
+          respuesta_correcta: this.data_preguntas[this.index].respuesta_correcta
         };
         this.preguntas_guardadas = true;
 
@@ -73,7 +73,7 @@ export default {
       this.partida_preguntas.push(preguntaActual.enunciado);
       this.partida_respuestas.push(preguntaActual.respuesta_correcta);
       // PARA EL PROFESSOR --------------------------------------------------------------------------------------------- 
-      this.preguntaActual.index++;
+      this.index++;
     },
 
   },
@@ -82,6 +82,7 @@ export default {
   },
   mounted() {
     // socket escucha la llama redirect... y carga la 1era pregunta
+    this.cargarPreguntas();
     socket.on('redirectPantallaJuego', () => {
       this.cargarPreguntas();
     });
