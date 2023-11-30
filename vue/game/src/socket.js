@@ -1,11 +1,18 @@
-// socket.js
-
-const express = require('express');
-const http = require('http');
-const socketIO = require('socket.io');
+import express from 'express';
+import { createServer } from 'http';
+import socketIO from 'socket.io';
+import cors from 'cors';
 
 const app = express();
-const server = http.createServer(app);
+
+// Explicitly set up CORS to allow requests from the client application.
+app.use(cors({
+  origin: 'http://localhost:3333',
+  methods: ['GET', 'POST'],
+  credentials: true,
+}));
+
+const server = createServer(app);
 const io = socketIO(server);
 
 // LISTA DE JUGADORES
@@ -89,7 +96,7 @@ io.on('connection', (socket) => {
 });
 
 //  CONF DEL SV
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3333;
 server.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);
 });

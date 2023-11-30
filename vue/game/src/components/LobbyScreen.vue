@@ -23,25 +23,44 @@ export default {
       mode: null, // 'singlePlayer' o 'multiPlayer'
       playersCount: 0,
       socket: null,
+      players: [],
     };
   },
   methods: {
     startSinglePlayerMode() {
       this.mode = 'singlePlayer';
-      this.socket.emit('begin-SP-gameMode');
+      this.initSocket(() => {
+        this.socket.emit('begin-SP-gameMode');
+      });
     },
     startMultiPlayerMode() {
       this.mode = 'multiPlayer';
-      this.initSocket();
+      this.initSocket(() => {
+        this.socket.emit('check-if-mult-isPlayable');
+      });
     },
-    initSocket() {
-      // Inicializar el socket para el modo multijugador
-      this.socket = io('http://localhost:3333'); // Ajusta la URL del servidor de sockets
-    
+    initSocket(callback) {
+      if (this.socket && this.socket.connected) {
+        console.log('Socket already connected');
+        if (typeof callback === 'function') {
+          callback();
+        }
+        return;
+      }
+
+      // Connect to the server with the origin of your Vue.js application
+      this.socket = io('http://localhost:3333', {
+        withCredentials: true, // Add this line to include credentials
+      });
+
+      // Rest of your existing code...
+
+      if (typeof callback === 'function') {
+        callback();
+      }
     },
   },
   beforeDestroy() {
-    // Desconectar el socket al salir del componente
     if (this.socket) {
       this.socket.disconnect();
     }
@@ -50,5 +69,5 @@ export default {
 </script>
 
 <style scoped>
-/* No se necesitan estilos específicos aquí */
+/* Your existing styles... */
 </style>
