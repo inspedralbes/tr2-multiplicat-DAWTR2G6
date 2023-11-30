@@ -6,7 +6,6 @@
     <p>Bloques restantes: {{ blocks }}</p>
 
     <!-- Mostrar Pregunta y Campo de Respuesta -->
-
     <div v-if="preguntas_guardadas">
       <p>{{ preguntaActual.enunciado }}</p>
       <input v-model="usuario_respuesta_preguntaActual" @keyup.enter="evento_respuestaEnviada" />
