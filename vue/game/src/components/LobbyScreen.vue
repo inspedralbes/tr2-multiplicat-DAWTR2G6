@@ -30,6 +30,7 @@ export default {
     startSinglePlayerMode() {
       // PONER EL MODO DE JUEGO EN 1 JUG
       this.mode = "singlePlayer";
+      this.$router.push('/GameScreen');
     },
     startMultiPlayerMode() {
       // PONER EL MODO DE JUEGO EN +1 JUG
@@ -39,8 +40,8 @@ export default {
     },
   },
   beforeDestroy() {
-    if (this.socket) {
-      this.socket.disconnect();
+    if (socket) {
+      socket.disconnect();
     }
   },
 };

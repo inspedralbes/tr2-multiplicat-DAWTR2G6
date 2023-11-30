@@ -6,11 +6,15 @@
 </template>
 
 <script>
+import { socket } from "../socket.js";
+
 export default {
+  
+
   name: 'GameScreen',
   mounted() {
     // Escuchar el evento para navegar a la pantalla de juego
-    this.$socket.on('redirectPantallaJuego', () => {
+   socket.on('redirectPantallaJuego', () => {
       // Utilizar Vue Router para navegar
       this.$router.push({ name: 'GameScreen' }); // Asegúrate de tener configurado Vue Router correctamente
     });
