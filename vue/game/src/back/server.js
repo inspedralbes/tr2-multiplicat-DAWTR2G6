@@ -1,13 +1,13 @@
 import express from 'express';
 import { createServer } from 'http';
-import socketIO from 'socket.io';
+import { Server } from 'socket.io';
 import cors from 'cors';
 
 const app = express();
 
 // Explicitly set up CORS to allow requests from the client application.
 app.use(cors({
-    origin: 'http://localhost:3333',
+    origin: '*',
     methods: ['GET', 'POST'],
     credentials: true,
 }));
@@ -45,6 +45,7 @@ io.on('connection', (socket) => {
     // SOCKET RECIBE socket.emit('begin-SP-gameMode')
     socket.on('begin-SP-gameMode', () => {
         // EMPEZAR SP gameMode
+        console.log('hola');
 
     });
 
