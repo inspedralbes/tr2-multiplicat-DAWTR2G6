@@ -14,10 +14,10 @@
 </template>
 
 <script>
-import io from 'socket.io-client';
+import { socket } from "../socket.js";
 
 export default {
-  name: 'LobbyScreen',
+  name: "LobbyScreen",
   data() {
     return {
       mode: null, // singlePlayer / multiPlayer
@@ -29,43 +29,13 @@ export default {
   methods: {
     startSinglePlayerMode() {
       // PONER EL MODO DE JUEGO EN 1 JUG
-      this.mode = 'singlePlayer';
-      // INICIAR SOCKET
-      this.initSocket(() => {
-        // FUNCION DE INICIO DE JUEGO DE 1 JUG
-        this.socket.emit('begin-SP-gameMode', { mode: this.mode });
-
-      });
+      this.mode = "singlePlayer";
     },
     startMultiPlayerMode() {
-       // PONER EL MODO DE JUEGO EN +1 JUG
-      this.mode = 'multiPlayer';
-       // INICIAR SOCKET
-      this.initSocket(() => {
-        // FUNCION DE INICIO DE JUEGO DE +1 JUG
-        this.socket.emit('check-if-mult-isPlayable', { mode: this.mode });
-      });
-    },
-    // ____________________________________________________FUNCION CALLBACK
-    initSocket(callback) {
-      if (this.socket && this.socket.connected) {
-        console.log('Socket already connected');
-        if (typeof callback === 'function') {
-          callback();
-        }
-        return;
-      }
-    // ____________________________________________________FUNCION CALLBACK
+      // PONER EL MODO DE JUEGO EN +1 JUG
+      this.mode = "multiPlayer";
 
-      // PONER LA URL EN EL SOCKET
-      this.socket = io('http://localhost:3333', {
-        withCredentials: true, 
-      });
-
-
-      if (typeof callback === 'function') {
-        callback();
-      }
+      socket.emit("check-mult-jugable");
     },
   },
   beforeDestroy() {
@@ -74,6 +44,7 @@ export default {
     }
   },
 };
+
 </script>
 
 <style scoped>
