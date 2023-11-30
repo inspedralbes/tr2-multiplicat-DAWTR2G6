@@ -11,14 +11,14 @@ const corsOptions = {
     origin: 'http://localhost:5173', // Reemplaza con la URL de tu aplicación Vue.js
     methods: ['GET', 'POST'],
     credentials: true,
-  };
+};
 
 app.use(cors(corsOptions));
 
 const server = createServer(app);
 const io = new Server(server, {
     cors: corsOptions,
-  });
+});
 
 
 // LISTA DE JUGADORES
@@ -33,7 +33,7 @@ const minPlayersForMultiplayer = 2;
 // QUANDO ALGUIEN SE UNE . . .
 io.on('connection', (socket) => {
     // MENSAJE POR CONSOLA
-    console.log('Nuevo jugador conectado');
+    console.log('Jugadors', (players));
     // NUEVO JUGADOR -> ASIGNAR NUMERO DE BLOCKS
     players[socket.id] = {
         blocks: initialBlocks
@@ -45,31 +45,28 @@ io.on('connection', (socket) => {
     // SOCKET RECIBE socket.emit('begin-SP-gameMode')
     socket.on('begin-SP-gameMode', (data) => {
         // EMPEZAR SP gameMode
-        if (data === 'singlePlayer'){
-            console.log('hola hola hola hola caracola caracola caracola caracola');
-        }    
+        router.push({ name: 'GameScreen' });
 
     });
-     
-     socket.on('begin-MULT-gameMode', (data) => {
+
+    socket.on('begin-MULT-gameMode', (data) => {
         // EMPEZAR MULT gameMode
-        if (data === 'multiPlayer'){
+        if (data === 'multiPlayer') {
             console.log('ADIOS ADIOS ADIOS ADIOS');
-        }    
+        }
 
     });
 
     // SOCKET RECIBE socket.emit('check-if-mult-isPlayable')
     socket.on('check-if-mult-isPlayable', (data) => {
         // COMPROBAR QUE HAY SUFICIENTES JUGADORES CONECTADOS
-        if (data === 'multPlayer'){
+        if (data === 'multPlayer') {
             playersCount += 1;
             console.log('hola hola hola hola caracola caracola caracola caracola');
             checkMultiplayer(data);
-        }   
-       
-    });
+        }
 
+    });
 
 
     // SOCKET RECIBE socket.emit('answerQuestion')
@@ -90,8 +87,8 @@ io.on('connection', (socket) => {
     // SE PIERDE UNA CONEXION
     socket.on('disconnect', () => {
         // REDUCIR PLAYER COUNT
-       /* playersCount -= 1;*/
-       
+        /* playersCount -= 1;*/
+
 
         delete players[socket.id];
         // UPDATEAR A LOS JUGADORES SOBRE LOS VACANTES
