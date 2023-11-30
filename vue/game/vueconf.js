@@ -1,14 +1,14 @@
-// vue.config.js
+// // vue.config.js
 
-module.exports = {
-    devServer: {
-      proxy: {
-        '/': {
-          target: 'http://localhost:3333',
-          changeOrigin: true,
-          secure: false,
-        },
-      },
-    },
-  };
+// module.exports = {
+//     devServer: {
+//       proxy: {
+//         '/': {
+//           target: 'http://localhost:3333',
+//           changeOrigin: true,
+//           secure: false,
+//         },
+//       },
+//     },
+//   };
   

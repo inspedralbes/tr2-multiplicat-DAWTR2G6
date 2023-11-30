@@ -20,7 +20,7 @@ export default {
   name: 'LobbyScreen',
   data() {
     return {
-      mode: null, // 'singlePlayer' o 'multiPlayer'
+      mode: null, // singlePlayer / multiPlayer
       playersCount: 0,
       socket: null,
       players: [],
@@ -28,17 +28,24 @@ export default {
   },
   methods: {
     startSinglePlayerMode() {
+      // PONER EL MODO DE JUEGO EN 1 JUG
       this.mode = 'singlePlayer';
+      // INICIAR SOCKET
       this.initSocket(() => {
+        // FUNCION DE INICIO DE JUEGO DE 1 JUG
         this.socket.emit('begin-SP-gameMode');
       });
     },
     startMultiPlayerMode() {
+       // PONER EL MODO DE JUEGO EN +1 JUG
       this.mode = 'multiPlayer';
+       // INICIAR SOCKET
       this.initSocket(() => {
+        // FUNCION DE INICIO DE JUEGO DE +1 JUG
         this.socket.emit('check-if-mult-isPlayable');
       });
     },
+    // ____________________________________________________FUNCION CALLBACK
     initSocket(callback) {
       if (this.socket && this.socket.connected) {
         console.log('Socket already connected');
@@ -47,13 +54,13 @@ export default {
         }
         return;
       }
+    // ____________________________________________________FUNCION CALLBACK
 
-      // Connect to the server with the origin of your Vue.js application
+      // PONER LA URL EN EL SOCKET
       this.socket = io('http://localhost:3333', {
-        withCredentials: true, // Add this line to include credentials
+        withCredentials: true, 
       });
 
-      // Rest of your existing code...
 
       if (typeof callback === 'function') {
         callback();
