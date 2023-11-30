@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\preguntas;
+use App\Http\Controllers\userController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,9 +24,8 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
 
     Route::get('user-profile', [UserController::class, 'userProfile']);
     Route::get('logout', [UserController::class, 'logout']);
-    // es veuen nomes els snippets del usuari registrat
-    Route::get('/my_snippets', [snippetController::class, 'myIndex']);
-
+   
+    
 });
 
 

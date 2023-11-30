@@ -6,9 +6,14 @@
     <p>Bloques restantes: {{ blocks }}</p>
 
     <!-- Mostrar Pregunta y Campo de Respuesta -->
-    <div v-if="preguntaActual">
-      <p>{{ preguntaActual.text }}</p>
-      <input v-model="userAnswer" @keyup.enter="submitAnswer" />
+
+    <div v-if="preguntas_guardadas">
+      <p>{{ preguntaActual.enunciado }}</p>
+      <input v-model="usuario_respuesta_preguntaActual" @keyup.enter="evento_respuestaEnviada" />
+
+      <p>
+        {{ usuario_respuesta_preguntaActual }}
+      </p>
     </div>
   </div>
 </template>
@@ -20,50 +25,65 @@ export default {
   name: 'GameScreen',
   data() {
     return {
+      data_preguntas: [],
       blocks: 5,
+      preguntas_guardadas: false,
+      // OBJ con la informacion de pregunta actual / index / enunciado / opciones / respuesta-correcta
       preguntaActual: null,
       usuario_respuesta_preguntaActual: "",
-      respuesta_preguntaActual: null,
-      index_preguntaActual: 0,
-      usuario_respuestas: [],
-      usuario_preguntas: [],
-      usuario_preguntas_cheatsheet: [],
+      partida_respuestas_usuario: [],
+      // PARA EL PROFESSOR --------------------------------------------------------------------------------------------- 
+      partida_preguntas: [],
+      partida_respuestas: [],
+      // PARA EL PROFESSOR --------------------------------------------------------------------------------------------- 
+
     };
   },
   methods: {
-    async cargarPregunta() {
+    async cargarPreguntas() {
       try {
-        // Hacer la solicitud para obtener la primera pregunta
-        const response = await fetch("http://localhost:8000/api/recibir-preguntas-unidades");
-        const data = await response.json();
 
-        // pregunta actual
-        this.preguntaActual = data.pregunta[this.index_preguntaActual];
-        // arr respuestas de usuario 
-        this.usuario_preguntas.push(this.preguntaActual);
-        // respuesta de la pregunta actual
-        this.respuesta_preguntaActual = data.resposta_correcta[this.index_preguntaActual];
-        // arr de todas las respuestas correctas de las preguntas de la partida
-        this.usuario_preguntas_cheatsheet.push(this.respuesta_preguntaActual);
+        const response = await fetch("http://localhost:8000/api/recibir-preguntas-todas");
+        this.data_preguntas = await response.json();
+
+        this.preguntaActual = {
+          index: 0,
+          enunciado: this.data_preguntas[this.preguntaActual.index].pregunta,
+          opciones: JSON.parse(this.data_preguntas[this.preguntaActual.index].opciones),
+          respuesta_correcta: this.data_preguntas[this.preguntaActual.index].respuesta_correcta
+        };
+        this.preguntas_guardadas = true;
+
       } catch (error) {
         console.error("Error al cargar la pregunta:", error);
       }
     },
-    submitAnswer() {
-      if (this.usuario_respuesta_preguntaActual === this.respuesta_preguntaActual) {
+    evento_respuestaEnviada() {
+      if (this.usuario_respuesta_preguntaActual === this.preguntaActual.respuesta_correcta) {
         // respuesta correcta 
         this.blocks -= -1;
+        if (this.blocks === 0) {
+          partidaAcabada();
+        }
       } else {
         // respuesta incorrecta
         this.blocks += 1;
       }
-      cargarPregunta();
+      // PARA EL PROFESSOR --------------------------------------------------------------------------------------------- 
+      this.partida_preguntas.push(preguntaActual.enunciado);
+      this.partida_respuestas.push(preguntaActual.respuesta_correcta);
+      // PARA EL PROFESSOR --------------------------------------------------------------------------------------------- 
+      this.preguntaActual.index++;
     },
+
+  },
+  beforeDestroy() {
+    socket.off('redirectPantallaJuego');
   },
   mounted() {
-    // Escuchar el evento para navegar a la pantalla de juego y cargar la primera pregunta
+    // socket escucha la llama redirect... y carga la 1era pregunta
     socket.on('redirectPantallaJuego', () => {
-      this.cargarPregunta();
+      this.cargarPreguntas();
     });
   }
 };

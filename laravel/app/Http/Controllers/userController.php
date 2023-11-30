@@ -42,10 +42,7 @@ class userController extends Controller
 
         if (isset($user->id)) {
             if (Hash::check($request->password, $user->password)) {
-                //creamos el token
-                // cambiar esta linia 
-                // $token =  $user->createToken("auth_token")->plainTextToken;
-                // por esta linia 
+              
                 $token = $user->createToken("auth_token", ['expires_in' => 100000])->plainTextToken;
 
                 //si esta todo bien
