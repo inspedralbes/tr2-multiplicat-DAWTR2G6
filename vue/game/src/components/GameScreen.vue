@@ -9,9 +9,13 @@
 import { socket } from "../socket.js";
 
 export default {
-  
-
   name: 'GameScreen',
+  data() {
+    return {
+    };
+  },
+  methods: {
+  },
   mounted() {
     // Escuchar el evento para navegar a la pantalla de juego
    socket.on('redirectPantallaJuego', () => {
