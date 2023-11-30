@@ -13,11 +13,12 @@ app.use(cors({
 }));
 
 const server = createServer(app);
-const io = socketIO(server);
+const io = new Server(server);
+
 
 // LISTA DE JUGADORES
 const players = {};
-
+const playersCount = 0;
 // LISTA DE PUNTOS A QUITARSE, QUANTOS MENOS MEJOR
 const initialBlocks = 10;
 
@@ -31,9 +32,6 @@ const minPlayersForMultiplayer = 2;
 io.on('connection', (socket) => {
     // MENSAJE POR CONSOLA
     console.log('Nuevo jugador conectado');
-    // NUEVA CONEXION, NUEVO JUGADOR -> UPDATEAR PLAYER COUNT
-    playersCount += 1;
-
     // NUEVO JUGADOR -> ASIGNAR NUMERO DE BLOCKS
     players[socket.id] = {
         blocks: initialBlocks
@@ -43,16 +41,31 @@ io.on('connection', (socket) => {
     io.emit('updatePlayers', Object.keys(players));
 
     // SOCKET RECIBE socket.emit('begin-SP-gameMode')
-    socket.on('begin-SP-gameMode', () => {
+    socket.on('begin-SP-gameMode', (data) => {
         // EMPEZAR SP gameMode
-        console.log('hola');
+        if (data === 'singlePlayer'){
+            console.log('hola hola hola hola caracola caracola caracola caracola');
+        }    
+
+    });
+     
+     socket.on('begin-MULT-gameMode', (data) => {
+        // EMPEZAR MULT gameMode
+        if (data === 'multiPlayer'){
+            console.log('ADIOS ADIOS ADIOS ADIOS');
+        }    
 
     });
 
     // SOCKET RECIBE socket.emit('check-if-mult-isPlayable')
-    socket.on('check-if-mult-isPlayable', () => {
+    socket.on('check-if-mult-isPlayable', (data) => {
         // COMPROBAR QUE HAY SUFICIENTES JUGADORES CONECTADOS
-        checkMultiplayer();
+        if (data === 'multPlayer'){
+            playersCount += 1;
+            console.log('hola hola hola hola caracola caracola caracola caracola');
+            checkMultiplayer(data);
+        }   
+       
     });
 
 
@@ -85,9 +98,10 @@ io.on('connection', (socket) => {
     });
 
     // SUFICIENTES JUGADORES PARA UNA PARTIDA MULTIJUGADOR ?
-    const checkMultiplayer = () => {
-        if ((gameMode === 2 && Object.keys(players).length >= minPlayersForMultiplayer)) {
+    const checkMultiplayer = (data) => {
+        if ((data === 2 && Object.keys(players).length >= minPlayersForMultiplayer)) {
             // EMPIEZA LA PARTIDA MULTIJUGADOR
+            playersCount += Object.keys(players).length;
             io.emit('begin-MULT-gameMode');
         } else {
             console.log('Se requiren mas jugadores para una partida multijugador');

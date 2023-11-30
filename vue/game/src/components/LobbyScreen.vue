@@ -33,7 +33,8 @@ export default {
       // INICIAR SOCKET
       this.initSocket(() => {
         // FUNCION DE INICIO DE JUEGO DE 1 JUG
-        this.socket.emit('begin-SP-gameMode');
+        this.socket.emit('begin-SP-gameMode', { mode: this.mode });
+
       });
     },
     startMultiPlayerMode() {
@@ -42,7 +43,7 @@ export default {
        // INICIAR SOCKET
       this.initSocket(() => {
         // FUNCION DE INICIO DE JUEGO DE +1 JUG
-        this.socket.emit('check-if-mult-isPlayable');
+        this.socket.emit('check-if-mult-isPlayable', { mode: this.mode });
       });
     },
     // ____________________________________________________FUNCION CALLBACK
