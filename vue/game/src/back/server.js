@@ -22,8 +22,6 @@ const playersCount = 0;
 // LISTA DE PUNTOS A QUITARSE, QUANTOS MENOS MEJOR
 const initialBlocks = 10;
 
-// MODO ESCOGIDO EN LOBBYSCREEN
-let gameMode = mode;
 
 // MIN NUM DE JUGADORES PARA CHECKMULTIPLAYER DEVUELVA begin-MULT-gameMode
 const minPlayersForMultiplayer = 2;
