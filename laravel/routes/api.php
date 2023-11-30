@@ -15,10 +15,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('register', [UserController::class, 'register']);
+Route::post('login', [UserController::class, 'login']);
+
+
+Route::group(['middleware' => ["auth:sanctum"]], function () {
+
+    Route::get('user-profile', [UserController::class, 'userProfile']);
+    Route::get('logout', [UserController::class, 'logout']);
+    // es veuen nomes els snippets del usuari registrat
+    Route::get('/my_snippets', [snippetController::class, 'myIndex']);
+
+});
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::get('recibir-preguntas-todas', [preguntas::class, 'recibir_preguntas_TODAS']);
 Route::get('recibir-preguntas-porCategoriaID/{id}', [preguntas::class, 'recibir_preguntas_porCategoriaID']);
-Route::get('recibir-preguntas-porCategoria/{nomCategoria}', [preguntas::class, 'recibir_preguntas_porCategoria']);
+Route::get('recibir-preguntas-porCategoria/{id}', [preguntas::class, 'recibir_preguntas_porCategoria']);
