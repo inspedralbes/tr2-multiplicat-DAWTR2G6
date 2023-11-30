@@ -6,14 +6,19 @@ import cors from 'cors';
 const app = express();
 
 // Explicitly set up CORS to allow requests from the client application.
-app.use(cors({
-    origin: '*',
+// Configuración CORS
+const corsOptions = {
+    origin: 'http://localhost:5173', // Reemplaza con la URL de tu aplicación Vue.js
     methods: ['GET', 'POST'],
     credentials: true,
-}));
+  };
+
+app.use(cors(corsOptions));
 
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: corsOptions,
+  });
 
 
 // LISTA DE JUGADORES
@@ -21,9 +26,6 @@ const players = {};
 const playersCount = 0;
 // LISTA DE PUNTOS A QUITARSE, QUANTOS MENOS MEJOR
 const initialBlocks = 10;
-
-// MODO ESCOGIDO EN LOBBYSCREEN
-let gameMode = mode;
 
 // MIN NUM DE JUGADORES PARA CHECKMULTIPLAYER DEVUELVA begin-MULT-gameMode
 const minPlayersForMultiplayer = 2;
@@ -88,7 +90,8 @@ io.on('connection', (socket) => {
     // SE PIERDE UNA CONEXION
     socket.on('disconnect', () => {
         // REDUCIR PLAYER COUNT
-        playersCount -= 1;
+       /* playersCount -= 1;*/
+       
 
         delete players[socket.id];
         // UPDATEAR A LOS JUGADORES SOBRE LOS VACANTES
