@@ -5,6 +5,7 @@
       <div class="tetris-piece"></div>
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -16,6 +17,11 @@ export default {
 
 <style scoped>
 /* Estilos específicos para este componente */
+
+div{
+  border: 2px solid black;
+}
+
 .tetris-block {
   width: 50px;
   height: 50px;
@@ -25,11 +31,10 @@ export default {
 
 .tetris-piece {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 50px;
+  height: 50px;
   background-color: red;
   border: 2px solid yellow;
-  transform: rotate(45deg);
 }
 
 /* Puedes agregar estilos adicionales según sea necesario para otras piezas de Tetris */

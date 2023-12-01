@@ -13,30 +13,34 @@ const router = createRouter({
   history: createWebHistory(
     import.meta.env.BASE_URL),
   routes: [{
-      path: '/login',
-      name: 'home',
-      component: LoginScreen
-    },
-    {
-      path: '/GameScreen',
-      name: 'game',
-      component: GameScreen
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: RegisterScreen
-    },
-    {
-      path: '/Lobby',
-      name: 'lobby',
-      component: LobbyScreen
-    },
-    {
-      path: '/',
-      name: 'landingpage',
-      component: LandingScreen
-    }
+    path: '/login',
+    name: 'home',
+    component: LoginScreen
+  },
+  {
+    path: '/GameScreen',
+    name: 'game',
+    component: GameScreen
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: RegisterScreen
+  },
+  {
+    path: '/Lobby',
+    name: 'lobby',
+    component: LobbyScreen
+  },
+  {
+    path: '/',
+    name: 'landingpage',
+    component: LandingScreen
+  }, {
+    path: '/post-juego-screen',
+    name: 'post-juego',
+    component: Post_Juego
+  }
 
 
   ]

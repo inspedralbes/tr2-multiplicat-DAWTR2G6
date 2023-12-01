@@ -2,21 +2,19 @@
   <div class="container">
     <h2 class="mt-5">Pantalla de Juego</h2>
 
-    <!-- Mostrar Pregunta y Campo de Respuesta -->
     <div v-if="preguntas_guardadas">
       <p>{{ preguntaActual.enunciado }}</p>
 
       <div class="options">
-        <div v-for="(opcion, index) in preguntaActual.opciones" :key="index" class="option">
+        <button v-for="(opcion, index) in preguntaActual.opciones" :key="index" class="option"
+          @click="evento_respuestaEnviada(opcion)">
           {{ opcion }}
-        </div>
+        </button>
       </div>
 
       <div class="tetris-container">
         <BlockElement v-for="blockIndex in blocks" :key="blockIndex" :cantidad="blockIndex" />
       </div>
-
-      <input v-model="usuario_respuesta_preguntaActual" @keyup.enter="evento_respuestaEnviada" />
 
       <p>{{ usuario_respuesta_preguntaActual }}</p>
     </div>
@@ -49,21 +47,37 @@ export default {
         const response = await fetch("http://localhost:8000/api/recibir-preguntas-todas");
         this.data_preguntas = await response.json();
 
-        this.preguntaActual = this.getPreguntaActual();
-        this.preguntas_guardadas = true;
+        // para que no sean las mismas preguntas cada vez que se inicia el juego
+        if (Array.isArray(this.data_preguntas["preguntas_unidades"])) {
+          // Fisher-Yates shuffle ....
+          for (let i = this.data_preguntas["preguntas_unidades"].length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.data_preguntas["preguntas_unidades"][i], this.data_preguntas["preguntas_unidades"][j]] = [
+              this.data_preguntas["preguntas_unidades"][j],
+              this.data_preguntas["preguntas_unidades"][i],
+            ];
+          }
+          // para que no sean las mismas preguntas cada vez que se inicia el juego
+
+          // getPreguntaActual = preguntaActual {blablabla}
+          this.preguntaActual = this.getPreguntaActual();
+          this.preguntas_guardadas = true;
+        } else {
+          console.error("preguntas_unidades is not an array.");
+        }
       } catch (error) {
         console.error("Error al cargar la pregunta:", error);
       }
     },
-    evento_respuestaEnviada() {
-      const respuestaUsuarioTrimmed = this.usuario_respuesta_preguntaActual.trim();
+    evento_respuestaEnviada(opcion) {
+      const respuestaUsuarioTrimmed = opcion.trim();
       const respuestaCorrecta = this.preguntaActual.respuesta_correcta.trim();
 
       if (respuestaUsuarioTrimmed === respuestaCorrecta) {
-        // respuesta correcta 
+        // respuesta correcta
         this.blocks -= 1;
         if (this.blocks === 0) {
-          partidaAcabada();
+          this.partidaAcabada();
         }
       } else {
         // respuesta incorrecta
@@ -91,6 +105,22 @@ export default {
       this.partida_respuestas.push(this.preguntaActual.respuesta_correcta.trim());
     },
   },
+  partidaAcabada() {
+
+    console.log('Game Over!');
+
+    this.guardar_resultatsPartida();
+
+
+    this.$router.push('/post-juego-screen');
+  },
+  guardar_resultatsPartida() {
+    socket.emit('guardar-resultatsPartida', {
+      partida_preguntas: this.partida_preguntas,
+      partida_respuestas: this.partida_respuestas,
+
+    });
+  },
   beforeDestroy() {
     socket.off('redirectPantallaJuego');
   },
@@ -103,9 +133,7 @@ export default {
 };
 </script>
 
-
 <style scoped>
-
 .tetris-container {
   display: flex;
   justify-content: center;
