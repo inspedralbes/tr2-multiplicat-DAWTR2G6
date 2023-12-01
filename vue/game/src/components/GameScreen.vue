@@ -6,14 +6,22 @@
       <p>{{ preguntaActual.enunciado }}</p>
 
       <div class="options">
-        <button v-for="(opcion, index) in preguntaActual.opciones" :key="index" class="option"
-          @click="evento_respuestaEnviada(opcion)">
+        <button
+          v-for="(opcion, index) in preguntaActual.opciones"
+          :key="index"
+          class="option"
+          @click="evento_respuestaEnviada(opcion)"
+        >
           {{ opcion }}
         </button>
       </div>
 
       <div class="tetris-container">
-        <BlockElement v-for="blockIndex in blocks" :key="blockIndex" :cantidad="blockIndex" />
+        <BlockElement
+          v-for="blockIndex in blocks"
+          :key="blockIndex"
+          :cantidad="blockIndex"
+        />
       </div>
 
       <p>{{ usuario_respuesta_preguntaActual }}</p>
@@ -22,10 +30,11 @@
 </template>
 
 <script>
+import { guardar_sp_data } from "../return_sp_data"; // importar guardar_sp_data de guardar_sp_data.js
 import { socket } from "../socket.js";
 import BlockElement from "@/components/BlockElement.vue"; // Ajusta la ruta según la ubicación real de tu componente
 export default {
-  name: 'GameScreen',
+  name: "GameScreen",
   components: {
     BlockElement,
   },
@@ -53,14 +62,17 @@ export default {
           // Fisher-Yates shuffle ....
           for (let i = this.data_preguntas["preguntas_unidades"].length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [this.data_preguntas["preguntas_unidades"][i], this.data_preguntas["preguntas_unidades"][j]] = [
+            [
+              this.data_preguntas["preguntas_unidades"][i],
+              this.data_preguntas["preguntas_unidades"][j],
+            ] = [
               this.data_preguntas["preguntas_unidades"][j],
               this.data_preguntas["preguntas_unidades"][i],
             ];
           }
           // para que no sean las mismas preguntas cada vez que se inicia el juego
 
-          // getPreguntaActual = preguntaActual {blablabla}
+          // getPreguntaActual = preguntaActual {pregunta=..., opciones=...., respuesta_correcta=....}
           this.preguntaActual = this.getPreguntaActual();
           this.preguntas_guardadas = true;
         } else {
@@ -91,14 +103,17 @@ export default {
         this.index++;
         this.preguntaActual = this.getPreguntaActual();
       } else {
-        console.log('No hay más preguntas disponibles');
+        console.log("No hay más preguntas disponibles");
       }
     },
     getPreguntaActual() {
       return {
         enunciado: this.data_preguntas["preguntas_unidades"][this.index].pregunta,
-        opciones: JSON.parse(this.data_preguntas["preguntas_unidades"][this.index].opciones),
-        respuesta_correcta: this.data_preguntas["preguntas_unidades"][this.index].respuesta_correcta,
+        opciones: JSON.parse(
+          this.data_preguntas["preguntas_unidades"][this.index].opciones
+        ),
+        respuesta_correcta: this.data_preguntas["preguntas_unidades"][this.index]
+          .respuesta_correcta,
       };
     },
     guardarRespuestasParaProfesor() {
@@ -107,27 +122,32 @@ export default {
       this.partida_respuestas.push(this.preguntaActual.respuesta_correcta.trim());
     },
     partidaAcabada() {
-      console.log('Game Over!');
+      console.log("Game Over!");
 
-      // vuex.js -------------------------------------------------------------------------------------------------------
-      this.$store.commit('setPartidaPreguntas', this.partida_preguntas);
-      this.$store.commit('setPartidaRespuestas', this.partida_respuestas);
-      this.$store.commit('setPartidaUsuarioRespuestas', this.partida_usuario_respuestas);
-      // vuex.js -------------------------------------------------------------------------------------------------------
+      // return_sp_data.js :: guardando para luego usar en ScoreScreen -------------------------------------------------------------------------------------------------------
+      const store = guardar_sp_data(); // referencia a return_sp_data.js
+      store.setPartidaUsuarioRespuestas(this.partida_usuario_respuestas);
+      store.setPartidaPreguntas(this.partida_preguntas);
+      store.setPartidaRespuestas(this.partida_respuestas);
+      store.guardar_sp_allData(
+        this.partida_preguntas,
+        this.partida_respuestas,
+        this.partida_usuario_respuestas
+      );
+      // return_sp_data.js  -------------------------------------------------------------------------------------------------------
 
-      
-      this.$router.push('/scores');
+      this.$router.push("/scores");
     },
   },
   beforeDestroy() {
-    socket.off('redirectPantallaJuego');
+    socket.off("redirectPantallaJuego");
   },
   mounted() {
     this.cargarPreguntas();
-    socket.on('redirectPantallaJuego', () => {
+    socket.on("redirectPantallaJuego", () => {
       this.cargarPreguntas();
     });
-  }
+  },
 };
 </script>
 
@@ -137,7 +157,6 @@ export default {
   justify-content: center;
   margin-top: 20px;
 }
-
 
 .container {
   max-width: 800px;
@@ -195,4 +214,3 @@ input {
   background-color: #27ae60;
 }
 </style>
-
