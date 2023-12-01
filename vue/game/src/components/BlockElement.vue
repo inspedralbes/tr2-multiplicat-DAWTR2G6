@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <h3 class="mt-3">Bloque de Tetris</h3>
-    <p class="lead">Cantidad: {{ cantidad }}</p>
     <!-- Representación gráfica del bloque de Tetris -->
-    <div class="tetris-block"></div>
+    <div class="tetris-block">
+      <div class="tetris-piece"></div>
+    </div>
   </div>
 </template>
 
@@ -19,7 +19,18 @@ export default {
 .tetris-block {
   width: 50px;
   height: 50px;
-  background-color: blue;
-  /* Agrega estilos adicionales según sea necesario */
+  background-color: transparent;
+  position: relative;
 }
+
+.tetris-piece {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border: 2px solid yellow;
+  transform: rotate(45deg);
+}
+
+/* Puedes agregar estilos adicionales según sea necesario para otras piezas de Tetris */
 </style>
