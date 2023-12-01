@@ -104,22 +104,19 @@ export default {
       this.partida_preguntas.push(this.preguntaActual.enunciado.trim());
       this.partida_respuestas.push(this.preguntaActual.respuesta_correcta.trim());
     },
+    partidaAcabada() {
+
+      console.log('Game Over!');
+
+      //this.guardar_resultatsPartida(this.partida_preguntas, this.partida_respuestas);
+
+      this.$router.push('/post-juego-screen');
+    },
   },
-  partidaAcabada() {
-
-    console.log('Game Over!');
-
-    this.guardar_resultatsPartida();
-
-
-    this.$router.push('/post-juego-screen');
-  },
-  guardar_resultatsPartida() {
-    socket.emit('guardar-resultatsPartida', {
-      partida_preguntas: this.partida_preguntas,
-      partida_respuestas: this.partida_respuestas,
-
-    });
+  guardar_resultatsPartida(preguntas, respuestas) {
+    // socket.emit('guardar-resultatsPartida-SP', (preguntas, respuestas) => {
+    //   console.log('resultats de la partida SP guardats');
+    // });
   },
   beforeDestroy() {
     socket.off('redirectPantallaJuego');

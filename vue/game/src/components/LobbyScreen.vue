@@ -1,13 +1,12 @@
-<!-- LobbyScreen.vue -->
 <template>
-  <div class="container">
-    <h2 class="mt-5">Sala de Lobby</h2>
-    <div>
+  <div class="lobby-container">
+    <h2 class="lobby-title mt-5">Sala de Lobby</h2>
+    <div class="lobby-options">
       <p>Selecciona el modo de juego:</p>
-      <button @click="startSinglePlayerMode">Un solo jugador</button>
-      <button @click="startMultiPlayerMode">4 jugadores</button>
+      <button @click="startSinglePlayerMode" class="btn btn-primary">Un solo jugador</button>
+      <button @click="startMultiPlayerMode" class="btn btn-success">4 jugadores</button>
     </div>
-    <div v-if="mode === 'multiPlayer'">
+    <div v-if="mode === 'multiPlayer'" class="player-info">
       <p>{{ playersCount }} jugadores en la sala</p>
     </div>
   </div>
@@ -49,5 +48,47 @@ export default {
 </script>
 
 <style scoped>
-/* Your existing styles... */
+.lobby-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.lobby-title {
+  font-family: 'Arial', sans-serif;
+}
+
+.lobby-options {
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px;
+  margin: 5px;
+  font-family: 'Arial', sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.btn-success {
+  background-color: #2ecc71;
+  color: #fff;
+}
+
+.player-info {
+  margin-top: 20px;
+}
 </style>

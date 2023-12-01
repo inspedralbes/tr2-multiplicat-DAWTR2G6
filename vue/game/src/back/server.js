@@ -61,6 +61,7 @@ io.on("connection", (socket) => {
     }
   });
 
+
   /*
   // SOCKET RECIBE socket.emit('answerQuestion')
   socket.on("answerQuestion", (isCorrect) => {

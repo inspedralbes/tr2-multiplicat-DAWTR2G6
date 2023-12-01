@@ -1,11 +1,10 @@
 <template>
-  <div class="container">
+  <div class="block-element-container">
     <!-- Representación gráfica del bloque de Tetris -->
     <div class="tetris-block">
       <div class="tetris-piece"></div>
     </div>
   </div>
-  
 </template>
 
 <script>
@@ -18,23 +17,23 @@ export default {
 <style scoped>
 /* Estilos específicos para este componente */
 
-div{
-  border: 2px solid black;
+.block-element-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .tetris-block {
-  width: 50px;
-  height: 50px;
-  background-color: transparent;
-  position: relative;
+  display: flex;
 }
 
 .tetris-piece {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background-color: red;
-  border: 2px solid yellow;
+  width: 70px;
+  height: 70px;
+  background-color: #3498db;
+  border: 1px solid #2980b9;
+  border-radius: 3px;
+  margin: 2px;
 }
 
 /* Puedes agregar estilos adicionales según sea necesario para otras piezas de Tetris */

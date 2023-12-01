@@ -7,6 +7,7 @@ import RegisterScreen from '../components/RegisterScreen.vue';
 import GameScreen from '../components/GameScreen.vue';
 import LandingScreen from '../components/LandingScreen.vue';
 import LobbyScreen from '../components/LobbyScreen.vue';
+import Post_Juego from '../components/Post_Juego.vue';
 
 
 const router = createRouter({
