@@ -7,7 +7,7 @@ import RegisterScreen from '../components/RegisterScreen.vue';
 import GameScreen from '../components/GameScreen.vue';
 import LandingScreen from '../components/LandingScreen.vue';
 import LobbyScreen from '../components/LobbyScreen.vue';
-import Post_Juego from '../components/Post_Juego.vue';
+import ScoreScreen from '../components/ScoreScreen.vue';
 
 
 const router = createRouter({
@@ -38,9 +38,9 @@ const router = createRouter({
     name: 'landingpage',
     component: LandingScreen
   }, {
-    path: '/post-juego-screen',
-    name: 'post-juego',
-    component: Post_Juego
+    path: '/scores',
+    name: 'ScoreScreen',
+    component: ScoreScreen
   }
 
 

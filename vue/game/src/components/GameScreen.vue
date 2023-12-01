@@ -37,6 +37,7 @@ export default {
       preguntas_guardadas: false,
       preguntaActual: null,
       usuario_respuesta_preguntaActual: "",
+      partida_usuario_respuestas: [],
       partida_preguntas: [],
       partida_respuestas: [],
     };
@@ -101,22 +102,22 @@ export default {
       };
     },
     guardarRespuestasParaProfesor() {
+      this.partida_usuario_respuestas.push(this.usuario_respuesta_preguntaActual.trim());
       this.partida_preguntas.push(this.preguntaActual.enunciado.trim());
       this.partida_respuestas.push(this.preguntaActual.respuesta_correcta.trim());
     },
     partidaAcabada() {
-
       console.log('Game Over!');
 
-      //this.guardar_resultatsPartida(this.partida_preguntas, this.partida_respuestas);
+      // vuex.js -------------------------------------------------------------------------------------------------------
+      this.$store.commit('setPartidaPreguntas', this.partida_preguntas);
+      this.$store.commit('setPartidaRespuestas', this.partida_respuestas);
+      this.$store.commit('setPartidaUsuarioRespuestas', this.partida_usuario_respuestas);
+      // vuex.js -------------------------------------------------------------------------------------------------------
 
-      this.$router.push('/post-juego-screen');
+      
+      this.$router.push('/scores');
     },
-  },
-  guardar_resultatsPartida(preguntas, respuestas) {
-    // socket.emit('guardar-resultatsPartida-SP', (preguntas, respuestas) => {
-    //   console.log('resultats de la partida SP guardats');
-    // });
   },
   beforeDestroy() {
     socket.off('redirectPantallaJuego');
@@ -193,7 +194,5 @@ input {
 .option:hover {
   background-color: #27ae60;
 }
-
-/* Agrega estilos adicionales según tus preferencias */
 </style>
 
