@@ -31,12 +31,9 @@ const minJugsMult = 2;
 // QUANDO ALGUIEN SE UNE . . .
 io.on("connection", (socket) => {
 
-
-
-  cont_jugadors++;
+  //Contador jugadors
+  cont_jugadors+= 1;
   io.emit("update_llista_jugadors", cont_jugadors);
-
-
 
   socket.on("empezarJuego-mult", () => {
     // EMPEZAR MULT gameMode
@@ -57,7 +54,6 @@ io.on("connection", (socket) => {
     io.emit("updatePlayers", Object.keys(arr_jugadors));
 
     // COMPROBAR QUE HAY SUFICIENTES JUGADORES CONECTADOS
-    cont_jugadors += 1;
     console.log("somos " + cont_jugadors);
     if (cont_jugadors >= minJugsMult) {
       // EMPIEZA LA PARTIDA MULTIJUGADOR
