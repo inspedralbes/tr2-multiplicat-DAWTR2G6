@@ -36,23 +36,23 @@ export default {
     startMultiPlayerMode() {
       // PONER EL MODO DE JUEGO EN +1 JUG
       this.mode = "multiPlayer";
-
+      this.updatear_players();
       socket.emit("check-mult-jugable");
     },
     updatear_contador_jugadors(contador) {
       this.contador_jugadors = contador;
-    }, 
-  },
-  created() {
-    socket.on('update_llista_jugadors', this.updatear_contador_jugadors);
+    },
+    updatear_players() {
+      socket.on("update_llista_jugadors", (players) => {
+        this.contador_jugadors = players;
+      });
 
+    },
   },
   beforeDestroy() {
     if (socket) {
       socket.disconnect();
     }
-    socket.off('update_llista_jugadors', this.updatear_contador_jugadors);
-
 
   },
 };

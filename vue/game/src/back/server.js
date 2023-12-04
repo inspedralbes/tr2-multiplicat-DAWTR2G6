@@ -32,8 +32,7 @@ const minJugsMult = 2;
 io.on("connection", (socket) => {
 
   //Contador jugadors
-  cont_jugadors+= 1;
-  io.emit("update_llista_jugadors", cont_jugadors);
+
 
   socket.on("empezarJuego-mult", () => {
     // EMPEZAR MULT gameMode
@@ -42,6 +41,8 @@ io.on("connection", (socket) => {
 
   // SOCKET RECIBE socket.emit('check-mult-jugable')
   socket.on("check-mult-jugable", () => {
+    cont_jugadors += 1;
+    io.emit("update_llista_jugadors", cont_jugadors);
     // MENSAJE POR CONSOLA
     console.log("Jugadors antes ", arr_jugadors);
     // NUEVO JUGADOR -> ASIGNAR NUMERO DE BLOCKS
@@ -66,26 +67,13 @@ io.on("connection", (socket) => {
   });
 
 
-  /*
-  // SOCKET RECIBE socket.emit('answerQuestion')
-  socket.on("answerQuestion", (isCorrect) => {
-    if (isCorrect) {
-      // RESPUESTA CORRECTA, REDUCIR NUMERO DE BLOQUES
-      arr_jugadors[socket.id].blocks -= 1;
-      if (arr_jugadors[socket.id].blocks === 0) {
-        socket.emit("end-game--playerVictory");
-        console.log(arr_jugadors[socket.id] + "ha guanyat la partida!");
-      }
-    } else {
-      // RESPUESTA INCORRECTA, AUGMENTAR NUMERO DE BLOQUES
-      arr_jugadors[socket.id].blocks += 1;
-    }
-  });
-*/
+
 
   // SE PIERDE UNA CONEXION
   socket.on("disconnect", () => {
     delete arr_jugadors[socket.id];
+    cont_jugadors -= 1;
+    io.emit("update_llista_jugadors", cont_jugadors);
     // UPDATEAR A LOS JUGADORES SOBRE LOS VACANTES
     io.emit("updatePlayers", Object.keys(arr_jugadors));
   });
