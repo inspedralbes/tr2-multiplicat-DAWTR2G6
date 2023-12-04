@@ -58,20 +58,15 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("respuesta_enviada", (data) => {
+  socket.on('enviar_bloques', (id) => {
 
-
-    arr_jugadors.forEach(element => {
-      if (element === socket.id) {
-        element.blocks -= 1;
-      } else {
-        element.blocks += 1;
+    for (let socketId in arr_jugadors) {
+      if (socketId !== id) {
+        arr_jugadors[socketId].blocks += 1;
       }
-    });
-
+    }
+    io.emit('updatear_bloques_cliente', arr_jugadors);
   });
-
-
 
 
   // SE PIERDE UNA CONEXION

@@ -41,7 +41,7 @@ export default {
             partida_usuario_respuestas: [],
             partida_preguntas: [],
             partida_respuestas: [],
-            modo: 'solitario',
+            modo: 'mutiplayer',
             players: [],
 
         };
@@ -85,6 +85,11 @@ export default {
             if (respuestaUsuarioTrimmed === respuestaCorrecta) {
                 // respuesta correcta
                 this.blocks -= 1;
+
+
+                socket.emit("enviar_bloques", this.socket.id);
+
+
                 if (this.blocks === 0) {
                     this.partidaAcabada();
                 }
@@ -140,6 +145,9 @@ export default {
     created() {
         socket.on('establecer_players', (players) => {
             this.players = players;
+        });
+        socket.on('updatear_bloques_cliente', (arr_jugadors) => {
+           
         });
 
     },
