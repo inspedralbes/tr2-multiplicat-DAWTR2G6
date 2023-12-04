@@ -78,17 +78,13 @@ export default {
             }
         },
         evento_respuestaEnviada(opcion) {
-
             const respuestaUsuarioTrimmed = opcion.trim();
             const respuestaCorrecta = this.preguntaActual.respuesta_correcta.trim();
 
             if (respuestaUsuarioTrimmed === respuestaCorrecta) {
                 // respuesta correcta
-                this.blocks -= 1;
 
-
-                socket.emit("enviar_bloques", this.socket.id);
-
+                socket.emit("enviar_bloques", socket.id);
 
                 if (this.blocks === 0) {
                     this.partidaAcabada();
@@ -147,7 +143,13 @@ export default {
             this.players = players;
         });
         socket.on('updatear_bloques_cliente', (arr_jugadors) => {
-           
+            // arr_jugadors[id].blocks  POL 5 
+            // arr_jugadors[id].blocks  JOSU 5
+            // POL RESPONDE BIEN
+            // arr_jugadors[id].blocks  POL 4
+            // Created escucha el evento updatear_bloques_cliente y actualiza el valor de blocks
+            // arr_jugadors[id].blocks  JOSU 6
+            this.blocks = arr_jugadors[socket.id].blocks;
         });
 
     },

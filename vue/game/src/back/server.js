@@ -50,7 +50,7 @@ io.on("connection", (socket) => {
     console.log("Contador Jug: " + cont_jugadors);
     if (cont_jugadors >= minJugsMult) {
       // EMPIEZA LA PARTIDA MULTIJUGADOR
-      
+
       console.log("Empieza la partida multijugador");
       io.emit("empezarJuego-mult");
     } else {
@@ -59,6 +59,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on('enviar_bloques', (id) => {
+
+    arr_jugadors[id].blocks -= 1;
 
     for (let socketId in arr_jugadors) {
       if (socketId !== id) {
@@ -77,6 +79,9 @@ io.on("connection", (socket) => {
     // UPDATEAR A LOS JUGADORES SOBRE LOS VACANTES
     io.emit("updatePlayers", Object.keys(arr_jugadors));
   });
+
+
+
 });
 
 //  CONF DEL SV
