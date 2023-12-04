@@ -6,22 +6,14 @@
       <p>{{ preguntaActual.enunciado }}</p>
 
       <div class="options">
-        <button
-          v-for="(opcion, index) in preguntaActual.opciones"
-          :key="index"
-          class="option"
-          @click="evento_respuestaEnviada(opcion)"
-        >
+        <button v-for="(opcion, index) in preguntaActual.opciones" :key="index" class="option"
+          @click="evento_respuestaEnviada(opcion)">
           {{ opcion }}
         </button>
       </div>
 
       <div class="tetris-container">
-        <BlockElement
-          v-for="blockIndex in blocks"
-          :key="blockIndex"
-          :cantidad="blockIndex"
-        />
+        <BlockElement v-for="blockIndex in blocks" :key="blockIndex" :cantidad="blockIndex" />
       </div>
 
       <p>{{ usuario_respuesta_preguntaActual }}</p>
@@ -49,6 +41,9 @@ export default {
       partida_usuario_respuestas: [],
       partida_preguntas: [],
       partida_respuestas: [],
+      modo: 'solitario',
+      players: [],
+
     };
   },
   methods: {
@@ -66,9 +61,9 @@ export default {
               this.data_preguntas["preguntas_unidades"][i],
               this.data_preguntas["preguntas_unidades"][j],
             ] = [
-              this.data_preguntas["preguntas_unidades"][j],
-              this.data_preguntas["preguntas_unidades"][i],
-            ];
+                this.data_preguntas["preguntas_unidades"][j],
+                this.data_preguntas["preguntas_unidades"][i],
+              ];
           }
           // para que no sean las mismas preguntas cada vez que se inicia el juego
 
@@ -83,28 +78,33 @@ export default {
       }
     },
     evento_respuestaEnviada(opcion) {
-      const respuestaUsuarioTrimmed = opcion.trim();
-      const respuestaCorrecta = this.preguntaActual.respuesta_correcta.trim();
+      if (this.modo === 'multiplayer') {
+        socket.emit('respuesta_enviada', opcion);
+      } else {
+        const respuestaUsuarioTrimmed = opcion.trim();
+        const respuestaCorrecta = this.preguntaActual.respuesta_correcta.trim();
 
-      if (respuestaUsuarioTrimmed === respuestaCorrecta) {
-        // respuesta correcta
-        this.blocks -= 1;
-        if (this.blocks === 0) {
-          this.partidaAcabada();
+        if (respuestaUsuarioTrimmed === respuestaCorrecta) {
+          // respuesta correcta
+          this.blocks -= 1;
+          if (this.blocks === 0) {
+            this.partidaAcabada();
+          }
+        } else {
+          // respuesta incorrecta
+          this.blocks += 1;
         }
-      } else {
-        // respuesta incorrecta
-        this.blocks += 1;
+
+        this.guardarRespuestasParaProfesor();
+
+        if (this.index < this.data_preguntas["preguntas_unidades"].length - 1) {
+          this.index++;
+          this.preguntaActual = this.getPreguntaActual();
+        } else {
+          console.log("No hay más preguntas disponibles");
+        }
       }
 
-      this.guardarRespuestasParaProfesor();
-
-      if (this.index < this.data_preguntas["preguntas_unidades"].length - 1) {
-        this.index++;
-        this.preguntaActual = this.getPreguntaActual();
-      } else {
-        console.log("No hay más preguntas disponibles");
-      }
     },
     getPreguntaActual() {
       return {
@@ -138,6 +138,15 @@ export default {
 
       this.$router.push("/scores");
     },
+  },
+  created() {
+    socket.on('establecer_multiplayer', (modo) => {
+      this.modo = modo;
+    });
+    socket.on('establecer_players', (players) => {
+      this.players = players;
+    });
+    
   },
   beforeDestroy() {
     socket.off("redirectPantallaJuego");

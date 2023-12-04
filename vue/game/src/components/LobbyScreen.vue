@@ -7,7 +7,8 @@
       <button @click="startMultiPlayerMode" class="btn btn-success">4 jugadores</button>
     </div>
     <div v-if="mode === 'multiPlayer'" class="player-info">
-      <p>{{ playersCount }} jugadores en la sala</p>
+      <p>{{ contador_jugadors }} jugadores en la sala</p>
+
     </div>
   </div>
 </template>
@@ -20,9 +21,10 @@ export default {
   data() {
     return {
       mode: null, // singlePlayer / multiPlayer
-      playersCount: 0,
+      contador_jugadors: 0,
       socket: null,
       players: [],
+
     };
   },
   methods: {
@@ -37,11 +39,21 @@ export default {
 
       socket.emit("check-mult-jugable");
     },
+    updatear_contador_jugadors(contador) {
+      this.contador_jugadors = contador;
+    }, 
+  },
+  created() {
+    socket.on('update_llista_jugadors', this.updatear_contador_jugadors);
+
   },
   beforeDestroy() {
     if (socket) {
       socket.disconnect();
     }
+    socket.off('update_llista_jugadors', this.updatear_contador_jugadors);
+
+
   },
 };
 
