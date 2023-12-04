@@ -31,14 +31,6 @@ const minJugsMult = 2;
 // QUANDO ALGUIEN SE UNE . . .
 io.on("connection", (socket) => {
 
-  //Contador jugadors
-
-
-  socket.on("empezarJuego-mult", () => {
-    // EMPEZAR MULT gameMode
-    io.emit("redirectPantallaJuego", cont_jugadors);
-  });
-
   // SOCKET RECIBE socket.emit('check-mult-jugable')
   socket.on("check-mult-jugable", () => {
     cont_jugadors += 1;
@@ -55,15 +47,28 @@ io.on("connection", (socket) => {
     io.emit("updatePlayers", Object.keys(arr_jugadors));
 
     // COMPROBAR QUE HAY SUFICIENTES JUGADORES CONECTADOS
-    console.log("somos " + cont_jugadors);
+    console.log("Contador Jug: " + cont_jugadors);
     if (cont_jugadors >= minJugsMult) {
       // EMPIEZA LA PARTIDA MULTIJUGADOR
-      //          cont_jugadors += Object.keys(arr_jugadors).length;
-      console.log("A JUGAR YA!!");
+      
+      console.log("Empieza la partida multijugador");
       io.emit("empezarJuego-mult");
     } else {
       console.log("Se requiren mas jugadores para una partida multijugador");
     }
+  });
+
+  socket.on("respuesta_enviada", (data) => {
+
+
+    arr_jugadors.forEach(element => {
+      if (element === socket.id) {
+        element.blocks -= 1;
+      } else {
+        element.blocks += 1;
+      }
+    });
+
   });
 
 

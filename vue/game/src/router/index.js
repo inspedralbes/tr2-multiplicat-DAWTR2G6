@@ -8,7 +8,7 @@ import GameScreen from '../components/GameScreen.vue';
 import LandingScreen from '../components/LandingScreen.vue';
 import LobbyScreen from '../components/LobbyScreen.vue';
 import ScoreScreen from '../components/ScoreScreen.vue';
-
+import GameScreenMult from '../components/GameScreenMult.vue';
 
 const router = createRouter({
   history: createWebHistory(
@@ -37,13 +37,17 @@ const router = createRouter({
     path: '/',
     name: 'landingpage',
     component: LandingScreen
-  }, {
+  },
+  {
     path: '/scores',
     name: 'ScoreScreen',
     component: ScoreScreen
-  }
-
-
+  },
+  {
+    path: '/GameScreenMult',
+    name: 'GameMult',
+    component: GameScreenMult
+  },
   ]
 })
 

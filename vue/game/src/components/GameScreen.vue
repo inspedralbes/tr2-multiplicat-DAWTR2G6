@@ -78,32 +78,30 @@ export default {
       }
     },
     evento_respuestaEnviada(opcion) {
-      if (this.modo === 'multiplayer') {
-        socket.emit('respuesta_enviada', opcion);
+
+      const respuestaUsuarioTrimmed = opcion.trim();
+      const respuestaCorrecta = this.preguntaActual.respuesta_correcta.trim();
+
+      if (respuestaUsuarioTrimmed === respuestaCorrecta) {
+        // respuesta correcta
+        this.blocks -= 1;
+        if (this.blocks === 0) {
+          this.partidaAcabada();
+        }
       } else {
-        const respuestaUsuarioTrimmed = opcion.trim();
-        const respuestaCorrecta = this.preguntaActual.respuesta_correcta.trim();
-
-        if (respuestaUsuarioTrimmed === respuestaCorrecta) {
-          // respuesta correcta
-          this.blocks -= 1;
-          if (this.blocks === 0) {
-            this.partidaAcabada();
-          }
-        } else {
-          // respuesta incorrecta
-          this.blocks += 1;
-        }
-
-        this.guardarRespuestasParaProfesor();
-
-        if (this.index < this.data_preguntas["preguntas_unidades"].length - 1) {
-          this.index++;
-          this.preguntaActual = this.getPreguntaActual();
-        } else {
-          console.log("No hay más preguntas disponibles");
-        }
+        // respuesta incorrecta
+        this.blocks += 1;
       }
+
+      this.guardarRespuestasParaProfesor();
+
+      if (this.index < this.data_preguntas["preguntas_unidades"].length - 1) {
+        this.index++;
+        this.preguntaActual = this.getPreguntaActual();
+      } else {
+        console.log("No hay más preguntas disponibles");
+      }
+
 
     },
     getPreguntaActual() {
@@ -140,13 +138,10 @@ export default {
     },
   },
   created() {
-    socket.on('establecer_multiplayer', (modo) => {
-      this.modo = modo;
-    });
     socket.on('establecer_players', (players) => {
       this.players = players;
     });
-    
+
   },
   beforeDestroy() {
     socket.off("redirectPantallaJuego");

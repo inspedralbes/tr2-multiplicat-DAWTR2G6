@@ -49,6 +49,12 @@ export default {
 
     },
   },
+  created() {
+    socket.on("empezarJuego-mult", () => {
+      console.log("Redireccionando a pantalla de juego");
+      this.$router.push('/GameScreenMult');
+    });
+  },
   beforeDestroy() {
     if (socket) {
       socket.disconnect();
