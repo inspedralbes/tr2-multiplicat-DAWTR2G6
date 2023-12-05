@@ -1,19 +1,21 @@
 <template>
-  <div class="login-container">
-    <h2 class="login-title mt-5">Iniciar sesión</h2>
+  <body>
+    <div class="login">
+      <form @submit.prevent="login" class="form">
+        <h2 class="title">Iniciar sessió</h2>
+        <div class="group">
+          <label for="email">Email</label>
+          <input type="email" class="inputbox" id="email" v-model="email" required>
+        </div>
+        <div class="group">
+          <label for="password">Contrasenya</label>
+          <input type="password" class="inputbox" id="password" v-model="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-login">Iniciar sessió</button>
+      </form>
+    </div>
 
-    <form @submit.prevent="login" class="login-form">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" v-model="email" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" class="form-control" id="password" v-model="password" required>
-      </div>
-      <button type="submit" class="btn btn-primary login-btn">Iniciar sesión</button>
-    </form>
-  </div>
+  </body>
 </template>
 
 <script>
@@ -42,7 +44,7 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           console.log('Success:', data);
-          
+
           if (data.status === 1) {
             this.$router.push('/lobby');
           } else {
@@ -59,46 +61,68 @@ export default {
 }
 </script>
 
-<!-- Styles remain the same -->
+
 
 <style scoped>
-.login-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap');
+
+* {
+  font-family: 'Anek Bangla', sans-serif;
+  border-radius: 15px;
+  margin: 0;
+}
+
+body {
+  background-color: rgba(226, 222, 222, 0.815);
+  /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)), url("/giphy.gif");*/
+}
+
+.login {
+  display: grid;
+  place-items: center;
   height: 100vh;
-  background-color: #f4f4f4;
 }
 
-.login-title {
-  font-family: 'Arial', sans-serif;
+.title {
+  font-size: 50px;
+
 }
 
-.login-form {
-  width: 300px;
+.form {
+  min-height: auto;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  text-align: center;
+  gap: 10px;
+  max-width: 400px;
+  background-color: #f5f5f5;
+  color: #1c1c1c;
+  padding: 80px;
+  width: 100%;
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
 
-.form-control {
+
+.inputbox {
+  margin-bottom: 20px;
+  outline: none;
   width: 100%;
   padding: 10px;
-  box-sizing: border-box;
 }
 
-.login-btn {
-  width: 100%;
+.btn-login {
   padding: 10px;
-  font-family: 'Arial', sans-serif;
-  border-radius: 5px;
-  transition: background-color 0.3s, transform 0.2s;
+  background-color: #1c1c1c;
+  color: #f5f5f5;
+  border: none;
+  cursor: pointer;
+  width: 106%;
+  margin-top: 20px;
+
+  transition: background-color 0.2s ease-out;
 }
 
-.login-btn:hover {
-  background-color: #3498db;
-  transform: scale(1.1);
+.btn-login:hover {
+  background-color: #000000;
 }
 </style>

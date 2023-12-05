@@ -1,22 +1,24 @@
 <template>
-  <div class="register-container">
-    <h2 class="register-title mt-5">Registrarse</h2>
-    <form @submit.prevent="register" class="register-form">
-      <div class="form-group">
-        <label for="name">Nombre de usuario</label>
-        <input type="text" class="form-control" id="name" v-model="name" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" v-model="email" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" class="form-control" id="password" v-model="password" required>
-      </div>
-      <button type="submit" class="btn btn-success register-btn">Registrarse</button>
-    </form>
-  </div>
+  <body>
+    <div class="register">
+      <form @submit.prevent="register" class="form">
+        <h2 class="title mt-5">Registrarse</h2>
+        <div class="group">
+          <label for="name">Nombre de usuario</label>
+          <input type="text" class="inputbox" id="name" v-model="name" required>
+        </div>
+        <div class="group">
+          <label for="email">Email</label>
+          <input type="email" class="inputbox" id="email" v-model="email" required>
+        </div>
+        <div class="group">
+          <label for="password">Contraseña</label>
+          <input type="password" class="inputbox" id="password" v-model="password" required>
+        </div>
+        <button type="submit" class="btn btn-success btn-register">Registrarse</button>
+      </form>
+    </div>
+  </body>
 </template>
 
 <script>
@@ -76,43 +78,63 @@ export default {
 </script>
 
 <style scoped>
-.register-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+/* Updated CSS for login template with styles from the provided CSS */
+@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap');
+
+* {
+  font-family: 'Anek Bangla', sans-serif;
+  border-radius: 15px;
+  margin: 0;
+}
+
+body {
+  background-color: rgba(226, 222, 222, 0.815);
+  /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)), url("/giphy.gif");*/
+}
+
+.register {
+  display: grid;
+  place-items: center;
   height: 100vh;
-  background-color: #f4f4f4;
 }
 
-.register-title {
-  font-family: 'Arial', sans-serif;
+.title {
+  font-size: 50px;
 }
 
-.register-form {
-  width: 300px;
+.form {
+  min-height: auto;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  text-align: center;
+  gap: 10px;
+  max-width: 400px;
+  background-color: #f5f5f5;
+  color: #1c1c1c;
+  padding: 80px;
+  width: 100%;
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-control {
+.inputbox {
+  margin-bottom: 20px;
+  outline: none;
   width: 100%;
   padding: 10px;
-  box-sizing: border-box;
 }
 
-.register-btn {
-  width: 100%;
+
+.btn-register {
   padding: 10px;
-  font-family: 'Arial', sans-serif;
-  border-radius: 5px;
-  transition: background-color 0.3s, transform 0.2s;
+  background-color: #1c1c1c;
+  color: #f5f5f5;
+  border: none;
+  cursor: pointer;
+  width: 106%;
+  margin-top: 20px;
+  transition: background-color 0.2s ease-out;
 }
 
-.register-btn:hover {
-  background-color: #2ecc71;
-  transform: scale(1.1);
+.btn-register:hover {
+  background-color: #000000;
 }
 </style>

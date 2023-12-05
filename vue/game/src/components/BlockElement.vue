@@ -1,9 +1,6 @@
 <template>
-  <div class="block-element-container">
-    <!-- Representación gráfica del bloque de Tetris -->
-    <div class="tetris-block">
-      <div class="tetris-piece"></div>
-    </div>
+  <div class="blocks-container">
+    <div class="block"></div>
   </div>
 </template>
 
@@ -17,24 +14,19 @@ export default {
 <style scoped>
 /* Estilos específicos para este componente */
 
-.block-element-container {
+.blocks-container {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  align-items: center;
+  margin-top: 60px;
 }
 
-.tetris-block {
-  display: flex;
+.block {
+  width: 100%;
+  height: 60px;
+  background-color: #1c1c1c;
+  border: 1px solid #dfdfdf;
 }
-
-.tetris-piece {
-  width: 70px;
-  height: 70px;
-  background-color: #3498db;
-  border: 1px solid #2980b9;
-  border-radius: 3px;
-  margin: 2px;
-}
-
-/* Puedes agregar estilos adicionales según sea necesario para otras piezas de Tetris */
 </style>
