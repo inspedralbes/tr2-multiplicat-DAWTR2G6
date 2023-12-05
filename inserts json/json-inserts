@@ -1,6 +1,6 @@
 -- Inserts para categoria
 INSERT INTO categoria (id, nombre_categoria) VALUES
-(1, massa), (2, volumen), (3, longitud), (4, capacitat), (5, superficie), (6, temps);
+(1, 'massa'), (2, 'volumen'), (3, 'longitud'), (4, 'capacitat'), (5, 'superficie'), (6, 'temps');
 
 
 -- Inserts para preguntas de la categoría "massa"
