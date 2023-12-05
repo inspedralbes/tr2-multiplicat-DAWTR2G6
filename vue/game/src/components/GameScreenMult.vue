@@ -1,7 +1,7 @@
 <template>
     <body>
         <div class="container">
-            <h2 class="title">Aguanta tot el que puguis!</h2>
+            <h2 class="title">Avança més rapid que els altres!</h2>
 
             <div class="panel-juego" v-if="preguntas_guardadas">
                 <p>{{ preguntaActual.enunciado }}</p>
