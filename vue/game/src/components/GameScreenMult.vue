@@ -16,7 +16,6 @@
                 <BlockElement v-for="blockIndex in blocks" :key="blockIndex" :cantidad="blockIndex" />
             </div>
 
-            <p>{{ usuario_respuesta_preguntaActual }}</p>
         </div>
     </div>
 </template>
@@ -37,7 +36,6 @@ export default {
             blocks: 5,
             preguntas_guardadas: false,
             preguntaActual: null,
-            usuario_respuesta_preguntaActual: "",
             partida_usuario_respuestas: [],
             partida_preguntas: [],
             partida_respuestas: [],
@@ -93,7 +91,7 @@ export default {
                 this.blocks += 1;
             }
 
-            this.guardarRespuestasParaProfesor();
+            this.guardarRespuestasParaProfesor(opcion);
 
             if (this.index < this.data_preguntas["preguntas_unidades"].length - 1) {
                 this.index++;
@@ -114,8 +112,8 @@ export default {
                     .respuesta_correcta,
             };
         },
-        guardarRespuestasParaProfesor() {
-            this.partida_usuario_respuestas.push(this.usuario_respuesta_preguntaActual.trim());
+        guardarRespuestasParaProfesor(opcion) {
+            this.partida_usuario_respuestas.push(opcion.trim());
             this.partida_preguntas.push(this.preguntaActual.enunciado.trim());
             this.partida_respuestas.push(this.preguntaActual.respuesta_correcta.trim());
         },
@@ -134,7 +132,8 @@ export default {
             );
             // return_sp_data.js  -------------------------------------------------------------------------------------------------------
 
-            this.$router.push("/scores");
+
+            socket.emit("empujar_todosJugs_pantallaScores", this.players);
         },
     },
     created() {
@@ -149,6 +148,9 @@ export default {
             // Created escucha el evento updatear_bloques_cliente y actualiza el valor de blocks
             // arr_jugadors[id].blocks  JOSU 6
             this.blocks = arr_jugadors[socket.id].blocks;
+        });
+        socket.on('empujar_a_pantallaScore', () => {
+            this.$router.push('/scores');
         });
 
     },

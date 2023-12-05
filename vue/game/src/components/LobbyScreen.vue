@@ -31,11 +31,15 @@ export default {
     startSinglePlayerMode() {
       // PONER EL MODO DE JUEGO EN 1 JUG
       this.mode = "singlePlayer";
-      this.$router.push('/GameScreen');
+      if (this.mode === "singlePlayer") {
+        this.$router.push('/GameScreen');
+      }
+
     },
     startMultiPlayerMode() {
       // PONER EL MODO DE JUEGO EN +1 JUG
       this.mode = "multiPlayer";
+
       this.updatear_players();
       socket.emit("check-mult-jugable");
     },
@@ -46,13 +50,15 @@ export default {
       socket.on("update_llista_jugadors", (players) => {
         this.contador_jugadors = players;
       });
-
     },
   },
   created() {
     socket.on("empezarJuego-mult", () => {
       console.log("Redireccionando a pantalla de juego");
-      this.$router.push('/GameScreenMult');
+      if (this.mode === "multiPlayer") {
+        this.$router.push('/GameScreenMult');
+      }
+
     });
   },
   beforeDestroy() {

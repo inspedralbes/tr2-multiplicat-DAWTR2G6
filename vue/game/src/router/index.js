@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import axios from 'axios';
 import LoginScreen from '../components/LoginScreen.vue';
 import RegisterScreen from '../components/RegisterScreen.vue';
 import GameScreen from '../components/GameScreen.vue';
@@ -7,7 +6,7 @@ import LandingScreen from '../components/LandingScreen.vue';
 import LobbyScreen from '../components/LobbyScreen.vue';
 import ScoreScreen from '../components/ScoreScreen.vue';
 import GameScreenMult from '../components/GameScreenMult.vue';
-
+import { useStore } from '../store';
 
 
 const router = createRouter({
@@ -55,9 +54,21 @@ const router = createRouter({
       name: 'GameMult',
       component: GameScreenMult,
 
-
     },
   ],
 });
+
+
+// router.beforeEach((to, from, next) => {
+//   const publicPages = ['/login', '/register', '/'];
+//   const authRequired = !publicPages.includes(to.path);
+//   const loggedIn = useStore().$state.isloggedIn;
+
+//   if (authRequired && !loggedIn) {
+//     return next('/login');
+//   }
+
+//   next();
+// });
 
 export default router;

@@ -17,6 +17,8 @@
 </template>
 
 <script>
+
+
 export default {
   name: 'LoginScreen',
   data() {
@@ -40,7 +42,7 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           console.log('Success:', data);
-
+          
           if (data.status === 1) {
             this.$router.push('/lobby');
           } else {

@@ -18,7 +18,7 @@
 </template>
 <script>
 import { useStore } from "../store";
-import { ref, onMounted } from 'vue';
+
 
 export default {
   name: "ScoreScreen",
@@ -52,5 +52,68 @@ export default {
   },
 }
 </script>
+<style scoped>
+.score-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
 
-<style scoped></style>
+.score-container h2 {
+  font-size: 1.5em;
+  color: #3498db;
+  margin-bottom: 20px;
+}
+
+.score-container button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-family: 'Arial', sans-serif;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.score-container button:hover {
+  background-color: #2980b9;
+  transform: scale(1.1);
+}
+
+.score-subtitle {
+  font-size: 1.2em;
+  color: #333;
+  margin-top: 20px;
+}
+
+.score-form {
+  margin-top: 10px;
+}
+
+.form-group {
+  list-style-type: none;
+  padding: 0;
+}
+
+.form-group li {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-group li p {
+  margin: 0;
+}
+</style>

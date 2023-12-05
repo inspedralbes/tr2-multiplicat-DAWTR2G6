@@ -70,6 +70,9 @@ io.on("connection", (socket) => {
     io.emit('updatear_bloques_cliente', arr_jugadors);
   });
 
+  socket.on("empujar_a_pantallaScore", () => {
+    socket.to(room).emit("ir_a_pantallaScore");
+  });
 
   // SE PIERDE UNA CONEXION
   socket.on("disconnect", () => {
