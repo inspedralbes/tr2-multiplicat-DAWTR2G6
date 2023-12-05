@@ -33,12 +33,18 @@ const router = createRouter({
       component: GameScreen,
 
       beforeEnter: async (to, from, next) => {
-        if (isAuthenticated()) {
-          next();
-        } else {
-          next('/login');
+        try {
+          if (await isAuthenticated()) {
+            next();
+          } else {
+            next('/login');
+          }
+        } catch (error) {
+          console.error('Authentication error:', error);
+          next('/login'); 
         }
       },
+
     },
     {
       path: '/register',
@@ -51,12 +57,18 @@ const router = createRouter({
       component: LobbyScreen,
 
       beforeEnter: async (to, from, next) => {
-        if (isAuthenticated()) {
-          next();
-        } else {
-          next('/login');
+        try {
+          if (await isAuthenticated()) {
+            next();
+          } else {
+            next('/login');
+          }
+        } catch (error) {
+          console.error('Authentication error:', error);
+          next('/login'); 
         }
       },
+
     },
     {
       path: '/',
@@ -69,12 +81,18 @@ const router = createRouter({
       component: ScoreScreen,
 
       beforeEnter: async (to, from, next) => {
-        if (isAuthenticated()) {
-          next();
-        } else {
-          next('/login');
+        try {
+          if (await isAuthenticated()) {
+            next();
+          } else {
+            next('/login');
+          }
+        } catch (error) {
+          console.error('Authentication error:', error);
+          next('/login'); 
         }
       },
+
     },
     {
       path: '/GameScreenMult',
@@ -82,12 +100,18 @@ const router = createRouter({
       component: GameScreenMult,
 
       beforeEnter: async (to, from, next) => {
-        if (isAuthenticated()) {
-          next();
-        } else {
-          next('/login');
+        try {
+          if (await isAuthenticated()) {
+            next();
+          } else {
+            next('/login');
+          }
+        } catch (error) {
+          console.error('Authentication error:', error);
+          next('/login'); 
         }
       },
+      
     },
   ],
 });
