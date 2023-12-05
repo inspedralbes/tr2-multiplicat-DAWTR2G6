@@ -40,15 +40,20 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           console.log('Success:', data);
-          // Redirigir a la sala de lobby después de un inicio de sesión exitoso
-          this.$router.push('/lobby');
+
+          if (data.status === 1) {
+            this.$router.push('/lobby');
+          } else {
+            alert('Inicio de sesión fallido. Verifica tus credenciales.');
+          }
         })
         .catch((error) => {
-          console.error('Error:', error);
           alert('Inicio de sesión fallido. Verifica tus credenciales.');
+          console.error('Error:', error);
         });
-    }
-  },
+    },
+  }
+
 }
 </script>
 

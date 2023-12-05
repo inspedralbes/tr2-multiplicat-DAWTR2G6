@@ -1,7 +1,5 @@
-import {
-  createRouter,
-  createWebHistory
-} from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
+import axios from 'axios';
 import LoginScreen from '../components/LoginScreen.vue';
 import RegisterScreen from '../components/RegisterScreen.vue';
 import GameScreen from '../components/GameScreen.vue';
@@ -10,45 +8,88 @@ import LobbyScreen from '../components/LobbyScreen.vue';
 import ScoreScreen from '../components/ScoreScreen.vue';
 import GameScreenMult from '../components/GameScreenMult.vue';
 
-const router = createRouter({
-  history: createWebHistory(
-    import.meta.env.BASE_URL),
-  routes: [{
-    path: '/login',
-    name: 'home',
-    component: LoginScreen
-  },
-  {
-    path: '/GameScreen',
-    name: 'game',
-    component: GameScreen
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: RegisterScreen
-  },
-  {
-    path: '/Lobby',
-    name: 'lobby',
-    component: LobbyScreen
-  },
-  {
-    path: '/',
-    name: 'landingpage',
-    component: LandingScreen
-  },
-  {
-    path: '/scores',
-    name: 'ScoreScreen',
-    component: ScoreScreen
-  },
-  {
-    path: '/GameScreenMult',
-    name: 'GameMult',
-    component: GameScreenMult
-  },
-  ]
-})
+const isAuthenticated = async () => {
+  try {
+    const response = await axios.get('http://localhost:8000/api/user-profile');
+    return response.status === 200;
+  } catch (error) {
+    console.error('Authentication error:', error);
+    return false;
+  }
+};
 
-export default router
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/login',
+      name: 'home',
+      component: LoginScreen,
+    },
+    {
+      path: '/GameScreen',
+      name: 'game',
+      component: GameScreen,
+
+      beforeEnter: async (to, from, next) => {
+        if (isAuthenticated()) {
+          next();
+        } else {
+          next('/login');
+        }
+      },
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: RegisterScreen,
+    },
+    {
+      path: '/Lobby',
+      name: 'lobby',
+      component: LobbyScreen,
+
+      beforeEnter: async (to, from, next) => {
+        if (isAuthenticated()) {
+          next();
+        } else {
+          next('/login');
+        }
+      },
+    },
+    {
+      path: '/',
+      name: 'landingpage',
+      component: LandingScreen,
+    },
+    {
+      path: '/scores',
+      name: 'ScoreScreen',
+      component: ScoreScreen,
+
+      beforeEnter: async (to, from, next) => {
+        if (isAuthenticated()) {
+          next();
+        } else {
+          next('/login');
+        }
+      },
+    },
+    {
+      path: '/GameScreenMult',
+      name: 'GameMult',
+      component: GameScreenMult,
+
+      beforeEnter: async (to, from, next) => {
+        if (isAuthenticated()) {
+          next();
+        } else {
+          next('/login');
+        }
+      },
+    },
+  ],
+});
+
+export default router;
