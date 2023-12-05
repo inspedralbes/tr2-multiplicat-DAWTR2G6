@@ -8,15 +8,6 @@ import LobbyScreen from '../components/LobbyScreen.vue';
 import ScoreScreen from '../components/ScoreScreen.vue';
 import GameScreenMult from '../components/GameScreenMult.vue';
 
-const isAuthenticated = async () => {
-  try {
-    const response = await axios.get('http://localhost:8000/api/user-profile');
-    return response.status === 200;
-  } catch (error) {
-    console.error('Authentication error:', error);
-    return false;
-  }
-};
 
 
 const router = createRouter({
@@ -26,48 +17,26 @@ const router = createRouter({
       path: '/login',
       name: 'home',
       component: LoginScreen,
+
+
     },
     {
       path: '/GameScreen',
       name: 'game',
       component: GameScreen,
 
-      beforeEnter: async (to, from, next) => {
-        try {
-          if (await isAuthenticated()) {
-            next();
-          } else {
-            next('/login');
-          }
-        } catch (error) {
-          console.error('Authentication error:', error);
-          next('/login'); 
-        }
-      },
-
     },
     {
       path: '/register',
       name: 'register',
       component: RegisterScreen,
+
+
     },
     {
       path: '/Lobby',
       name: 'lobby',
       component: LobbyScreen,
-
-      beforeEnter: async (to, from, next) => {
-        try {
-          if (await isAuthenticated()) {
-            next();
-          } else {
-            next('/login');
-          }
-        } catch (error) {
-          console.error('Authentication error:', error);
-          next('/login'); 
-        }
-      },
 
     },
     {
@@ -80,38 +49,13 @@ const router = createRouter({
       name: 'ScoreScreen',
       component: ScoreScreen,
 
-      beforeEnter: async (to, from, next) => {
-        try {
-          if (await isAuthenticated()) {
-            next();
-          } else {
-            next('/login');
-          }
-        } catch (error) {
-          console.error('Authentication error:', error);
-          next('/login'); 
-        }
-      },
-
     },
     {
       path: '/GameScreenMult',
       name: 'GameMult',
       component: GameScreenMult,
 
-      beforeEnter: async (to, from, next) => {
-        try {
-          if (await isAuthenticated()) {
-            next();
-          } else {
-            next('/login');
-          }
-        } catch (error) {
-          console.error('Authentication error:', error);
-          next('/login'); 
-        }
-      },
-      
+
     },
   ],
 });

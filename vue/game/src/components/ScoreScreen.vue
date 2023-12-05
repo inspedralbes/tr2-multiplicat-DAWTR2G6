@@ -1,6 +1,6 @@
 <template>
   <div class="score-container">
-    <h2>PUNTUACIO DE LA PARTIDA: {{ score }}/{{preguntas_filtradas.length }}</h2>
+    <h2>PUNTUACIO DE LA PARTIDA: {{ score }}/{{ preguntas_filtradas.length }}</h2>
     <button @click="$router.push('/lobby')">Ves'ne al Lobby</button>
     <button @click="$router.push('/ranking')">Mira com vas al rankings!</button>
   </div>
@@ -53,8 +53,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-
-
-</style>
+<style scoped></style>
