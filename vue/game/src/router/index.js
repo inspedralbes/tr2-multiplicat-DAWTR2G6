@@ -7,6 +7,11 @@ import RegisterScreen from '../components/RegisterScreen.vue';
 import GameScreen from '../components/GameScreen.vue';
 import LandingScreen from '../components/LandingScreen.vue';
 import LobbyScreen from '../components/LobbyScreen.vue';
+import ScoreScreen from '../components/ScoreScreen.vue';
+import GameScreenMult from '../components/GameScreenMult.vue';
+import {
+  useStore
+} from '../store';
 
 
 const router = createRouter({
@@ -15,31 +20,60 @@ const router = createRouter({
   routes: [{
       path: '/login',
       name: 'home',
-      component: LoginScreen
+      component: LoginScreen,
+
+
     },
     {
       path: '/GameScreen',
       name: 'game',
-      component: GameScreen
+      component: GameScreen,
+
     },
     {
       path: '/register',
       name: 'register',
-      component: RegisterScreen
+      component: RegisterScreen,
+
+
     },
     {
       path: '/Lobby',
       name: 'lobby',
-      component: LobbyScreen
+      component: LobbyScreen,
+
     },
     {
       path: '/',
       name: 'landingpage',
-      component: LandingScreen
-    }
+      component: LandingScreen,
+    },
+    {
+      path: '/scores',
+      name: 'ScoreScreen',
+      component: ScoreScreen,
+
+    },
+    {
+      path: '/GameScreenMult',
+      name: 'GameMult',
+      component: GameScreenMult,
+
+    },
+  ],
+});
 
 
-  ]
-})
+// router.beforeEach((to, from, next) => {
+//   const publicPages = ['/login', '/register', '/'];
+//   const authRequired = !publicPages.includes(to.path);
+//   const loggedIn = useStore().$state.isloggedIn;
 
-export default router
+//   if (authRequired && !loggedIn) {
+//     return next('/login');
+//   }
+
+//   next();
+// });
+
+export default router;

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400&display=swap" rel="stylesheet">
+</head>
+</head>
+
+<body>
+    <div class="login">
+
+
+        <form @submit.prevent="login" class="form">
+            <h2 class="title">Iniciar sessió</h2>
+            <div class="group">
+                <label for="email">Email</label>
+                <input type="email" class="inputbox" id="email" v-model="email" required>
+            </div>
+            <div class="group">
+                <label for="password">Contrasenya</label>
+                <input type="password" class="inputbox" id="password" v-model="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-login">Iniciar sessió</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

@@ -19,9 +19,9 @@ const io = new Server(server, {
 });
 
 // LISTA DE JUGADORES
-const players = {};
+const arr_jugadors = {};
 //Contador de jugadores
-let playersCount = 0;
+let cont_jugadors = 0;
 // LISTA DE PUNTOS A QUITARSE, QUANTOS MENOS MEJOR
 const numBloques = 5;
 
@@ -30,60 +30,61 @@ const minJugsMult = 2;
 
 // QUANDO ALGUIEN SE UNE . . .
 io.on("connection", (socket) => {
-  socket.on("empezarJuego-mult", () => {
-    // EMPEZAR MULT gameMode
-    io.emit("redirectPantallaJuego", playersCount);
-  });
 
   // SOCKET RECIBE socket.emit('check-mult-jugable')
   socket.on("check-mult-jugable", () => {
+    cont_jugadors += 1;
+    io.emit("update_llista_jugadors", cont_jugadors);
     // MENSAJE POR CONSOLA
-    console.log("Jugadors antes ", players);
+    console.log("Jugadors antes ", arr_jugadors);
     // NUEVO JUGADOR -> ASIGNAR NUMERO DE BLOCKS
-    players[socket.id] = {
+    arr_jugadors[socket.id] = {
       blocks: numBloques,
     };
-    console.log("Jugadors despues", players);
+    console.log("Jugadors despues", arr_jugadors);
 
     // NOTIFICAR A CADA JUGADOR SOBRE ESTA NUEVA CONEXION
-    io.emit("updatePlayers", Object.keys(players));
+    io.emit("updatePlayers", Object.keys(arr_jugadors));
 
     // COMPROBAR QUE HAY SUFICIENTES JUGADORES CONECTADOS
-    playersCount += 1;
-    console.log("somos " + playersCount);
-    if (playersCount >= minJugsMult) {
+    console.log("Contador Jug: " + cont_jugadors);
+    if (cont_jugadors >= minJugsMult) {
       // EMPIEZA LA PARTIDA MULTIJUGADOR
-      //          playersCount += Object.keys(players).length;
-      console.log("A JUGAR YA!!");
+
+      console.log("Empieza la partida multijugador");
       io.emit("empezarJuego-mult");
     } else {
       console.log("Se requiren mas jugadores para una partida multijugador");
     }
   });
 
-  /*
-  // SOCKET RECIBE socket.emit('answerQuestion')
-  socket.on("answerQuestion", (isCorrect) => {
-    if (isCorrect) {
-      // RESPUESTA CORRECTA, REDUCIR NUMERO DE BLOQUES
-      players[socket.id].blocks -= 1;
-      if (players[socket.id].blocks === 0) {
-        socket.emit("end-game--playerVictory");
-        console.log(players[socket.id] + "ha guanyat la partida!");
+  socket.on('enviar_bloques', (id) => {
+
+    arr_jugadors[id].blocks -= 1;
+
+    for (let socketId in arr_jugadors) {
+      if (socketId !== id) {
+        arr_jugadors[socketId].blocks += 1;
       }
-    } else {
-      // RESPUESTA INCORRECTA, AUGMENTAR NUMERO DE BLOQUES
-      players[socket.id].blocks += 1;
     }
+    io.emit('updatear_bloques_cliente', arr_jugadors);
   });
-*/
+
+  socket.on("empujar_a_pantallaScore", () => {
+    socket.to(room).emit("ir_a_pantallaScore");
+  });
 
   // SE PIERDE UNA CONEXION
   socket.on("disconnect", () => {
-    delete players[socket.id];
+    delete arr_jugadors[socket.id];
+    cont_jugadors -= 1;
+    io.emit("update_llista_jugadors", cont_jugadors);
     // UPDATEAR A LOS JUGADORES SOBRE LOS VACANTES
-    io.emit("updatePlayers", Object.keys(players));
+    io.emit("updatePlayers", Object.keys(arr_jugadors));
   });
+
+
+
 });
 
 //  CONF DEL SV

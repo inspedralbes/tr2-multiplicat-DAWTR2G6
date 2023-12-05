@@ -15,7 +15,7 @@ class userController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed'
+            'password' => 'required'
         ]);
 
         $user = new User();
@@ -43,7 +43,7 @@ class userController extends Controller
         if (isset($user->id)) {
             if (Hash::check($request->password, $user->password)) {
               
-                $token = $user->createToken("auth_token", ['expires_in' => 100000])->plainTextToken;
+                $token = $user->createToken("auth_token")->plainTextToken;
 
                 //si esta todo bien
                 return response()->json([
