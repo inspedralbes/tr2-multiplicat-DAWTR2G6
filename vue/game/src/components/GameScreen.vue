@@ -16,13 +16,12 @@
         <BlockElement v-for="blockIndex in blocks" :key="blockIndex" :cantidad="blockIndex" />
       </div>
 
-      <p>{{ usuario_respuesta_preguntaActual }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import { guardar_sp_data } from "../return_sp_data"; // importar guardar_sp_data de guardar_sp_data.js
+import { useStore } from "../store"; // importar useStore de useStore.js
 import { socket } from "../socket.js";
 import BlockElement from "@/components/BlockElement.vue"; // Ajusta la ruta según la ubicación real de tu componente
 export default {
@@ -37,7 +36,6 @@ export default {
       blocks: 5,
       preguntas_guardadas: false,
       preguntaActual: null,
-      usuario_respuesta_preguntaActual: "",
       partida_usuario_respuestas: [],
       partida_preguntas: [],
       partida_respuestas: [],
@@ -93,7 +91,7 @@ export default {
         this.blocks += 1;
       }
 
-      this.guardarRespuestasParaProfesor();
+      this.guardarRespuestasParaProfesor(opcion);
 
       if (this.index < this.data_preguntas["preguntas_unidades"].length - 1) {
         this.index++;
@@ -114,16 +112,16 @@ export default {
           .respuesta_correcta,
       };
     },
-    guardarRespuestasParaProfesor() {
-      this.partida_usuario_respuestas.push(this.usuario_respuesta_preguntaActual.trim());
+    guardarRespuestasParaProfesor(opcion) {
+      this.partida_usuario_respuestas.push(opcion.trim());
       this.partida_preguntas.push(this.preguntaActual.enunciado.trim());
       this.partida_respuestas.push(this.preguntaActual.respuesta_correcta.trim());
     },
     partidaAcabada() {
       console.log("Game Over!");
 
-      // return_sp_data.js :: guardando para luego usar en ScoreScreen -------------------------------------------------------------------------------------------------------
-      const store = guardar_sp_data(); // referencia a return_sp_data.js
+      // store.js :: guardando para luego usar en ScoreScreen -------------------------------------------------------------------------------------------------------
+      const store = useStore(); // referencia a store.js
       store.setPartidaUsuarioRespuestas(this.partida_usuario_respuestas);
       store.setPartidaPreguntas(this.partida_preguntas);
       store.setPartidaRespuestas(this.partida_respuestas);
@@ -132,7 +130,7 @@ export default {
         this.partida_respuestas,
         this.partida_usuario_respuestas
       );
-      // return_sp_data.js  -------------------------------------------------------------------------------------------------------
+      // store.js  -------------------------------------------------------------------------------------------------------
 
       this.$router.push("/scores");
     },

@@ -22,7 +22,7 @@
 </template>
   
 <script>
-import { guardar_sp_data } from "../return_sp_data"; // importar guardar_sp_data de guardar_sp_data.js
+import { useStore } from "../store"; // importar useStore de useStore.js
 import { socket } from "../socket.js";
 import BlockElement from "@/components/BlockElement.vue"; // Ajusta la ruta según la ubicación real de tu componente
 export default {
@@ -43,7 +43,6 @@ export default {
             partida_respuestas: [],
             modo: 'mutiplayer',
             players: [],
-
         };
     },
     methods: {
@@ -124,7 +123,7 @@ export default {
             console.log("Game Over!");
 
             // return_sp_data.js :: guardando para luego usar en ScoreScreen -------------------------------------------------------------------------------------------------------
-            const store = guardar_sp_data(); // referencia a return_sp_data.js
+            const store = useStore(); // referencia a return_sp_data.js
             store.setPartidaUsuarioRespuestas(this.partida_usuario_respuestas);
             store.setPartidaPreguntas(this.partida_preguntas);
             store.setPartidaRespuestas(this.partida_respuestas);

@@ -1,11 +1,11 @@
 <template>
   <div class="login-container">
     <h2 class="login-title mt-5">Iniciar sesión</h2>
-    <!-- Formulario de inicio de sesión -->
+
     <form @submit.prevent="login" class="login-form">
       <div class="form-group">
-        <label for="username">Nombre de usuario</label>
-        <input type="text" class="form-control" id="username" v-model="username" required>
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" v-model="email" required>
       </div>
       <div class="form-group">
         <label for="password">Contraseña</label>
@@ -21,26 +21,38 @@ export default {
   name: 'LoginScreen',
   data() {
     return {
-      username: '',
+      email: '',
       password: ''
     };
   },
   methods: {
     login() {
-      // hacer una solicitud al servidor para verificar credenciales
-      const loginSuccessful = true;
-
-      if (loginSuccessful) {
-        // Redirigir a la sala de lobby después de un inicio de sesión exitoso
-        this.$router.push('/lobby');
-      } else {
-        // Manejar el caso en que el inicio de sesión no sea exitoso
-        alert('Inicio de sesión fallido. Verifica tus credenciales.');
-      }
+      fetch('http://localhost:8000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: this.email.trim(),
+          password: this.password.trim(),
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Success:', data);
+          // Redirigir a la sala de lobby después de un inicio de sesión exitoso
+          this.$router.push('/lobby');
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          alert('Inicio de sesión fallido. Verifica tus credenciales.');
+        });
     }
-  }
-};
+  },
+}
 </script>
+
+<!-- Styles remain the same -->
 
 <style scoped>
 .login-container {

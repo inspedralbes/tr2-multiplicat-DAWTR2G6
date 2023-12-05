@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 
-export const guardar_sp_data = defineStore({
-  id: 'sp_data',
+export const useStore = defineStore({
+  id: 'main',
   state: () => ({
     partida_preguntas: [],
     partida_respuestas: [],
@@ -29,4 +29,7 @@ export const guardar_sp_data = defineStore({
       this.partida_usuario_respuestas.push(usuario_respuestas);
     }
   },
-});
+},
+
+
+);

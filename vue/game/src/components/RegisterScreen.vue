@@ -1,11 +1,14 @@
 <template>
   <div class="register-container">
     <h2 class="register-title mt-5">Registrarse</h2>
-    <!-- Formulario de registro -->
     <form @submit.prevent="register" class="register-form">
       <div class="form-group">
-        <label for="username">Nombre de usuario</label>
-        <input type="text" class="form-control" id="username" v-model="username" required>
+        <label for="name">Nombre de usuario</label>
+        <input type="text" class="form-control" id="name" v-model="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" v-model="email" required>
       </div>
       <div class="form-group">
         <label for="password">Contraseña</label>
@@ -21,23 +24,52 @@ export default {
   name: 'RegisterScreen',
   data() {
     return {
-      username: '',
-      password: ''
+      name: '',
+      password: '',
+      email: ''
     };
   },
   methods: {
     register() {
-      // Aquí deberías realizar la lógica de registro
-      // hacer una solicitud al servidor para crear un nuevo usuario
-      const registrationSuccessful = true;
+      fetch('http://localhost:8000/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: this.name.trim(),
+          password: this.password.trim(),
+          email: this.email.trim(),
+        }),
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then(text => {
+          try {
+            return JSON.parse(text);
+          } catch (error) {
+            console.error('Could not parse JSON:', text);
+            throw error;
+          }
+        })
+        .then(data => {
 
-      if (registrationSuccessful) {
-        // Redirigir a la sala de lobby después de un registro exitoso
-        this.$router.push('/lobby');
-      } else {
-        // Manejar el caso en que el registro no sea exitoso
-        alert('Registro fallido. Inténtalo de nuevo.');
-      }
+          if (data.error) {
+            alert(data.error);
+            return;
+          } else {
+            alert('Usuario registrado correctamente');
+            this.$router.push('/lobby');
+          }
+
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     }
   }
 };

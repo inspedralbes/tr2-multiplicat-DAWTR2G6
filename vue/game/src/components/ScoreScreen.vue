@@ -6,47 +6,53 @@
       <button @click="$router.push('/ranking')">Mira com vas al rankings!</button>
     </div>
     <h3 class="score-subtitle">Revisa les teves respostes incorrectes aqui!:</h3>
+
     <div class="score-form">
       <ul class="form-group">
-        <li
-          v-for="(question, index) in preguntas_falladas"
-          :key="index"
-          class="form-control"
-        >
-          <p><strong>Pregunta:</strong> {{ question }}</p>
-          <p>
-            <strong>Tu Respuesta</strong> {{ store.partida_usuario_respuestas[index] }}
-          </p>
-          <p>
-            <strong>Respuesta Correcta:</strong> {{ store.partida_respuestas[index] }}
-          </p>
+        <li v-for="(pregunta, index) in preguntas_filtradas" :key="index">
+          <p>{{ pregunta.pregunta }}</p>
+          <p>Resposta correcta: {{ pregunta.respuesta_correcta }}</p>
+          <p>La teva resposta: {{ pregunta.user_respuesta }}</p>
         </li>
       </ul>
     </div>
   </div>
 </template>
-
 <script>
-import { guardar_sp_data } from "../return_sp_data"; // import the store function
+import { useStore } from "../store";
+import { ref, onMounted } from 'vue';
 
 export default {
   name: "ScoreScreen",
-  // setup() sirve para acceder a los datos que hay en el mismo desde otros componentes
   setup() {
-    const store = guardar_sp_data(); // referencia a return_sp_data.js
+    const score = ref(0);
+    const preguntas_filtradas = ref([]);
+    const store = useStore();
 
-    // acceder a los metodos (aquello dentro de state en return_sp_data.js)
-    const preguntas = store.partida_preguntas;
-    const respuestas = store.partida_respuestas;
-    const usuarioRespuestas = store.partida_usuario_respuestas;
+    onMounted(() => {
+      let preguntas = store.partida_preguntas;
+      let respuestas = store.partida_respuestas;
+      let usuarioRespuestas = store.partida_usuario_respuestas;
+
+      for (let i = 0; i < preguntas.length; i++) {
+        if (respuestas[i] !== usuarioRespuestas[i]) {
+          preguntas_filtradas.value.push({
+            pregunta: preguntas[i],
+            respuesta_correcta: respuestas[i],
+            user_respuesta: usuarioRespuestas[i],
+          });
+        } else {
+          score.value++;
+        }
+      }
+    });
 
     return {
-      preguntas,
-      respuestas,
-      usuarioRespuestas,
+      score,
+      preguntas_filtradas
     };
   },
-};
+}
 </script>
 
 <style scoped>
