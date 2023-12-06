@@ -1,6 +1,10 @@
 import express from "express";
-import { createServer } from "http";
-import { Server } from "socket.io";
+import {
+  createServer
+} from "http";
+import {
+  Server
+} from "socket.io";
 import cors from "cors";
 
 const app = express();
@@ -24,10 +28,10 @@ const arr_jugadors = {};
 let cont_jugadors = 0;
 // LISTA DE PUNTOS A QUITARSE, QUANTOS MENOS MEJOR
 const numBloques = 5;
-
 // MIN NUM DE JUGADORES PARA CHECKMULTIPLAYER DEVUELVA empezarJuego-mult
 const minJugsMult = 2;
-
+// ROOM PARA MULTIJUGADOR 
+let rooms = [];
 // QUANDO ALGUIEN SE UNE . . .
 io.on("connection", (socket) => {
 
@@ -59,7 +63,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on('enviar_bloques', (id) => {
-
+    console.log('Jugador ' + socket.id + 'responde correctamente')
     arr_jugadors[id].blocks -= 1;
 
     for (let socketId in arr_jugadors) {
@@ -70,8 +74,17 @@ io.on("connection", (socket) => {
     io.emit('updatear_bloques_cliente', arr_jugadors);
   });
 
-  socket.on("empujar_a_pantallaScore", () => {
-    socket.to(room).emit("ir_a_pantallaScore");
+  socket.on('unirse_room', (room) => {
+    socket.join(room);
+    // guarda la id de la sala en la que se encuentra el jugador en el array rooms
+    rooms[socket.id] = room;
+    console.log('Jugador ' + socket.id + ' se ha unido a la sala ' + room);
+  });
+
+  socket.on("partida_acabada", () => {
+    let room = rooms[socket.id]; 
+    console.log('Redirigiendo a la sala ' + room + ' a la pantalla de scores');
+    socket.broadcast.to(room).emit("mover_sala_a_scores");
   });
 
   // SE PIERDE UNA CONEXION

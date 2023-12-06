@@ -82,26 +82,24 @@ export default {
 
             if (respuestaUsuarioTrimmed === respuestaCorrecta) {
                 // respuesta correcta
-
+                // emitir evento para actualizar los bloques de los demas jugadores
                 socket.emit("enviar_bloques", socket.id);
+                // emitir evento para mandar efectos visuales a los demas jugadores, todos menos aquel que manda la instancia de socket
+                // socket.broadcast.to(room).emit('enviar_popUps', socket.id);
 
                 if (this.blocks === 0) {
                     this.partidaAcabada();
                 }
-            } else {
-                // respuesta incorrecta
-                this.blocks += 1;
+
+                this.guardarRespuestasParaProfesor(opcion);
+
+                if (this.index < this.data_preguntas["preguntas_unidades"].length - 1) {
+                    this.index++;
+                    this.preguntaActual = this.getPreguntaActual();
+                } else {
+                    console.log("No hay más preguntas disponibles");
+                }
             }
-
-            this.guardarRespuestasParaProfesor(opcion);
-
-            if (this.index < this.data_preguntas["preguntas_unidades"].length - 1) {
-                this.index++;
-                this.preguntaActual = this.getPreguntaActual();
-            } else {
-                console.log("No hay más preguntas disponibles");
-            }
-
 
         },
         getPreguntaActual() {
@@ -135,7 +133,7 @@ export default {
             // return_sp_data.js  -------------------------------------------------------------------------------------------------------
 
 
-            socket.emit("empujar_todosJugs_pantallaScores", this.players);
+            socket.emit("partida_acabada", this.players);
         },
     },
     created() {
@@ -151,7 +149,8 @@ export default {
             // arr_jugadors[id].blocks  JOSU 6
             this.blocks = arr_jugadors[socket.id].blocks;
         });
-        socket.on('empujar_a_pantallaScore', () => {
+        socket.on('mover_sala_a_scores', () => {
+            console.log("Redireccionando a pantalla de puntuaciones, socket.on('mover_sala_a_scores')");
             this.$router.push('/scores');
         });
 
@@ -259,7 +258,7 @@ button {
     height: auto;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
     .container {
         margin: 20px;
         min-width: auto;

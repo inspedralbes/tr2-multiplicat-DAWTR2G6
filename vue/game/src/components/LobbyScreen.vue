@@ -8,7 +8,12 @@
         <button @click="startMultiPlayerMode" class="btn">Multijugador</button>
       </div>
       <div v-if="mode === 'multiPlayer'" class="player-info">
-        <p>{{ contador_jugadors }} jugadores en la sala</p>
+        <div v-if="contador_jugadors > 1">
+          <p>{{ contador_jugadors }} jugadores en la sala</p>
+        </div>
+        <div v-if="contador_jugadors === 1">
+          <p>{{ contador_jugadors }} jugador en la sala</p>
+        </div>
       </div>
     </div>
 
@@ -28,7 +33,7 @@ export default {
       contador_jugadors: 0,
       socket: null,
       players: [],
-
+      roomId: 0,
     };
   },
   methods: {
@@ -43,8 +48,12 @@ export default {
     startMultiPlayerMode() {
       // PONER EL MODO DE JUEGO EN +1 JUG
       this.mode = "multiPlayer";
-
+      // UPDATEAR EL CONTADOR DE JUGADORES
       this.updatear_players();
+      // EMITIR EVENTO DE QUE EL JUGADOR SE HA UNIDO A UNA SALA
+      socket.emit("unirse_room", this.roomId);
+      this.roomId++;
+      // EMITIR EVENTO DE SUFICIENTES JUGADORES ?
       socket.emit("check-mult-jugable");
     },
     updatear_contador_jugadors(contador) {
@@ -133,7 +142,7 @@ div p {
   margin-top: 20px;
   transition: background-color 0.4s ease-out, font-size 0.2s ease-out;
   font-size: 25px;
- 
+
 
 }
 

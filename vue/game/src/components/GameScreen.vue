@@ -246,8 +246,8 @@ button {
   height: auto;
 }
 
-/* Media Queries for Mobile Design */
-@media (max-width: 600px) {
+
+@media (max-width: 1000px) {
   .container {
     margin: 20px;
     min-width: auto;
