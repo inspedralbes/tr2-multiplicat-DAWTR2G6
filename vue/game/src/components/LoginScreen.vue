@@ -101,8 +101,6 @@ body {
   width: 100%;
 }
 
-
-
 .inputbox {
   margin-bottom: 20px;
   outline: none;
@@ -125,4 +123,6 @@ body {
 .btn-login:hover {
   background-color: #000000;
 }
+
+
 </style>

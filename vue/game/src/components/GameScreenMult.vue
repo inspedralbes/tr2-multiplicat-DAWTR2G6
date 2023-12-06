@@ -98,6 +98,7 @@ export default {
                     this.preguntaActual = this.getPreguntaActual();
                 } else {
                     console.log("No hay más preguntas disponibles");
+                    this.partidaAcabada();
                 }
             }
 

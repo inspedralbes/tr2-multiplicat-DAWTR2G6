@@ -34,6 +34,7 @@ export default {
       socket: null,
       players: [],
       roomId: 0,
+      catergoria: null,
     };
   },
   methods: {
@@ -158,5 +159,27 @@ div p {
   margin-top: 20px;
   text-align: center;
 
+}
+
+@media (max-width: 1000px) {
+
+  * {
+    margin: 5%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .lobby-title {
+  
+    font-size: 60px;
+  }
+
+  .btn {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+   
+  }
 }
 </style>
