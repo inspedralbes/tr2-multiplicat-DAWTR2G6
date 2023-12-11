@@ -1,10 +1,9 @@
 <template>
   <body>
     <div class="score-container">
-      <h2>PUNTUACIO DE LA PARTIDA: {{ score }}/{{ }}</h2>
-      <button @click="$router.push('/lobby')">Ves'ne al Lobby</button>
-      <button @click="$router.push('/ranking')">Mira com vas al rankings!</button>
-
+      <h2>PUNTUACIO DE LA PARTIDA: {{ score }}/{{ totalQuestions }}</h2>
+      <button @click="$router.push('/lobby')">Ves al Lobby</button>
+      <button @click="$router.push('/ranking')">Mira com vas al ranking!</button>
     </div>
 
     <h3>Revisa les teves respostes incorrectes aqui!:</h3>
@@ -15,19 +14,22 @@
         <p>La teva resposta: {{ pregunta.user_respuesta }}</p>
       </div>
     </div>
-
-
+    <div class="ScoreGrafico">
+    <canvas id="scoreChart"></canvas>
+</div>
   </body>
 </template>
+
 <script>
 import { useStore } from "../store";
-
+import Chart from 'chart.js/auto';
 import { onMounted, ref } from "vue";
 export default {
   name: "ScoreScreen",
   setup() {
     const score = ref(0);
     const preguntas_filtradas = ref([]);
+    const totalQuestions = ref(0); // Declare totalQuestions here
     const store = useStore();
 
     onMounted(() => {
@@ -46,12 +48,38 @@ export default {
           score.value++;
         }
       }
+
+  // Calculate totalQuestions
+  totalQuestions.value = preguntas.length;
+  const canvas = document.getElementById('scoreChart');
+
+      // Check if the canvas element is available
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+
+        // Create a pie chart
+        new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: ['Correctes  ', 'Incorrectes'],
+            datasets: [{
+              data: [score.value, totalQuestions.value - score.value],
+              backgroundColor: ['#80D483', '#FF6C6C'],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            
+          }
+        });
+      }
     });
 
-    return {
-      score,
-      preguntas_filtradas
-    };
+return {
+  score,
+  preguntas_filtradas,
+  totalQuestions,
+};
   },
 }
 </script>
@@ -73,6 +101,10 @@ body {
   letter-spacing: 0.1rem;
 }
 
+.ScoreGrafico{
+  width: 200px;
+  height: 200px;
+}
 .score-container {
 
   display: grid;
@@ -83,7 +115,7 @@ body {
   font-size: 30px;
   text-align: center;
   border: 2px solid #1c1c1c;
-  background-color: #dfdfdf;
+  background-color: rgb(223, 223, 223);
   z-index: 1;
 }
 
