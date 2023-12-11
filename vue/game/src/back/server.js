@@ -84,7 +84,7 @@ io.on("connection", (socket) => {
   socket.on("partida_acabada", () => {
     let room = rooms[socket.id]; 
     console.log('Redirigiendo a la sala ' + room + ' a la pantalla de scores');
-    io.to(room).emit("mover_sala_a_scores");
+    io.to(room).emit("mover_sala_a_scores", room);
     
   });
 

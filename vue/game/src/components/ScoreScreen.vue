@@ -14,7 +14,7 @@
         <p>Resposta correcta: {{ pregunta.respuesta_correcta }}</p>
         <p>La teva resposta: {{ pregunta.user_respuesta }}</p>
       </div>
-      
+
     </div>
 
 
@@ -23,12 +23,12 @@
 <script>
 import { socket } from "../socket";
 import { useStore } from "../store";
+import { useRoute } from 'vue-router';
 
 import { onMounted, ref } from "vue";
 export default {
   data() {
     return {
-      playerId: socket.id,
     };
   },
   name: "ScoreScreen",
@@ -36,13 +36,15 @@ export default {
     const score = ref(0);
     const preguntas_filtradas = ref([]);
     const store = useStore();
+    const route = useRoute();
+    const socketId = route.params.id;
 
     onMounted(() => {
-      console.log(socket.id);
-      let preguntas = store.partida_preguntas[this.playerId];
-      let respuestas = store.partida_respuestas[this.playerId];
-      let usuarioRespuestas = store.partida_usuario_respuestas[this.playerId];
-      
+
+      let preguntas = store.partida_preguntas[socketId];
+      let respuestas = store.partida_respuestas[socketId];
+      let usuarioRespuestas = store.partida_usuario_respuestas[socketId];
+
       for (let i = 0; i < preguntas.length; i++) {
         if (respuestas[i] !== usuarioRespuestas[i]) {
           preguntas_filtradas.value.push({

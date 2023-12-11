@@ -159,7 +159,9 @@ export default {
         });
         socket.on('mover_sala_a_scores', () => {
             console.log("Redireccionando a pantalla de puntuaciones, socket.on('mover_sala_a_scores')");
-            this.$router.push('/scores');
+            // this.$router.push('/scores');
+            this.$router.push({ name: 'scores', params: { id: socket.id } });
+
         });
 
     },
