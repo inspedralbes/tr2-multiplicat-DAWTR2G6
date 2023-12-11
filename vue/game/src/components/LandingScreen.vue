@@ -9,7 +9,7 @@
 
 
     <div class="container">
-      <section @click="mover_a_lobby('tiempo')" id="temps">
+      <section @click="mover_a_lobby('tiemps')" id="temps">
         <h2> Temps</h2>
       </section>
 
@@ -53,6 +53,7 @@ export default {
   methods: {
     mover_a_lobby(categoria) {
       const store = useStore();
+      store.resetCategoria();
       store.setCategoria(categoria);
       this.$router.push('/GameScreen');
     },

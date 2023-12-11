@@ -85,21 +85,22 @@ export default {
                 // emitir evento para actualizar los bloques de los demas jugadores
                 socket.emit("enviar_bloques", socket.id);
                 // emitir evento para mandar efectos visuales a los demas jugadores, todos menos aquel que manda la instancia de socket
-                // socket.broadcast.to(room).emit('enviar_popUps', socket.id);
+               
 
-                if (this.blocks === 0) {
-                    this.partidaAcabada();
-                }
+            } else {
+                // respuesta incorrecta
+                this.blocks += 1;
+            }
 
-                this.guardarRespuestasParaProfesor(opcion);
 
-                if (this.index < this.data_preguntas["preguntas_unidades"].length - 1) {
-                    this.index++;
-                    this.preguntaActual = this.getPreguntaActual();
-                } else {
-                    console.log("No hay más preguntas disponibles");
-                    this.partidaAcabada();
-                }
+            this.guardarRespuestasParaProfesor(opcion);
+
+            if (this.index < this.data_preguntas["preguntas_unidades"].length - 1) {
+                this.index++;
+                this.preguntaActual = this.getPreguntaActual();
+            } else {
+                console.log("No hay más preguntas disponibles");
+                this.partidaAcabada();
             }
 
         },
@@ -123,13 +124,15 @@ export default {
 
             // return_sp_data.js :: guardando para luego usar en ScoreScreen -------------------------------------------------------------------------------------------------------
             const store = useStore(); // referencia a return_sp_data.js
-            store.setPartidaUsuarioRespuestas(this.partida_usuario_respuestas);
-            store.setPartidaPreguntas(this.partida_preguntas);
-            store.setPartidaRespuestas(this.partida_respuestas);
+            // store.setPartidaUsuarioRespuestas(this.partida_usuario_respuestas);
+            // store.setPartidaPreguntas(this.partida_preguntas);
+            // store.setPartidaRespuestas(this.partida_respuestas);
             store.guardar_sp_allData(
+                socket.id,
                 this.partida_preguntas,
                 this.partida_respuestas,
-                this.partida_usuario_respuestas
+                this.partida_usuario_respuestas,
+
             );
             // return_sp_data.js  -------------------------------------------------------------------------------------------------------
 
@@ -149,6 +152,10 @@ export default {
             // Created escucha el evento updatear_bloques_cliente y actualiza el valor de blocks
             // arr_jugadors[id].blocks  JOSU 6
             this.blocks = arr_jugadors[socket.id].blocks;
+            if (this.blocks === 0) {
+                console.log("Over!");
+                this.partidaAcabada();
+            }
         });
         socket.on('mover_sala_a_scores', () => {
             console.log("Redireccionando a pantalla de puntuaciones, socket.on('mover_sala_a_scores')");

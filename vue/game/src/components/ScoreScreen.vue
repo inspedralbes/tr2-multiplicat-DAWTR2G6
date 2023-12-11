@@ -14,16 +14,23 @@
         <p>Resposta correcta: {{ pregunta.respuesta_correcta }}</p>
         <p>La teva resposta: {{ pregunta.user_respuesta }}</p>
       </div>
+      
     </div>
 
 
   </body>
 </template>
 <script>
+import { socket } from "../socket";
 import { useStore } from "../store";
 
 import { onMounted, ref } from "vue";
 export default {
+  data() {
+    return {
+      playerId: socket.id,
+    };
+  },
   name: "ScoreScreen",
   setup() {
     const score = ref(0);
@@ -31,10 +38,11 @@ export default {
     const store = useStore();
 
     onMounted(() => {
-      let preguntas = store.partida_preguntas;
-      let respuestas = store.partida_respuestas;
-      let usuarioRespuestas = store.partida_usuario_respuestas;
-
+      console.log(socket.id);
+      let preguntas = store.partida_preguntas[this.playerId];
+      let respuestas = store.partida_respuestas[this.playerId];
+      let usuarioRespuestas = store.partida_usuario_respuestas[this.playerId];
+      
       for (let i = 0; i < preguntas.length; i++) {
         if (respuestas[i] !== usuarioRespuestas[i]) {
           preguntas_filtradas.value.push({
@@ -42,8 +50,6 @@ export default {
             respuesta_correcta: respuestas[i],
             user_respuesta: usuarioRespuestas[i],
           });
-        } else {
-          score.value++;
         }
       }
     });
@@ -134,11 +140,13 @@ h3 {
   text-align: center;
   font-weight: 900;
 }
+
 .score-preguntas-incorrectas p:nth-child(1) {
   grid-area: pregunta;
   font-size: 18px;
 
 }
+
 .score-preguntas-incorrectas p:nth-child(2) {
   margin: 10px;
   color: rgb(100, 128, 0);
