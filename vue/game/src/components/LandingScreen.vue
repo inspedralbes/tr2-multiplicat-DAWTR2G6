@@ -35,21 +35,21 @@ export default {
       categories: [
         {
           id: 'volumen',
-          image: 'https://blog.nekomath.com/wp-content/uploads/2022/10/Imagen5.jpg',
+          image:'./public/VOLUM.jpg',
           alt: 'Volumen matemático',
           title: 'Volum',
           description: 'Explora conceptos matemáticos relacionados con el volumen. Descubre fórmulas y propiedades fascinantes',
         },
         {
           id: 'masa',
-          image: 'https://img.freepik.com/vector-gratis/simbolo-escalas-justicia-aislado-sobre-fondo-blanco_1308-116006.jpg',
+          image: './public/MASA.jpg',
           alt: 'Masa',
           title: 'Massa',
           description: 'Explora conceptos matemáticos relacionados con la masa. Descubre fórmulas y propiedades fascinantes',
         },
         {
           id: 'capacitat',
-          image: 'https://agora.xtec.cat/escfrancescarenes/wp-content/uploads/usu674/2019/05/litre.gif',
+          image: './public/CAPACIDAD.jpg',
           alt: 'Capacitat',
           title: 'Capacitat',
           description: 'Explora conceptos matemáticos relacionados con la capacidad. Descubre fórmulas y propiedades fascinantes',
@@ -57,7 +57,7 @@ export default {
 
         {
           id: 'temps',
-          image: 'https://img.ccma.cat/multimedia/jpg/5/6/1671801440765_670x378.jpg',
+          image: './public/TIEMPO.jpg',
           alt: 'Temps',
           title: 'Temps',
           description: 'Explora conceptos matemáticos relacionados con el tiempo. Descubre fórmulas y propiedades fascinantes',
@@ -66,7 +66,7 @@ export default {
 
         {
           id: 'superficie',
-          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh2ZC1ZFY55XMZ1J2CLH77lADCAmT7Ag5z02Ag73h00P6hLlBZyzFKxB3Vh8k6gGmYyAw&usqp=CAU',
+          image: './public/SUPERFICIE.jpg',
           alt: 'Superficie',
           title: 'Superficie',
           description: 'Explora conceptos matemáticos relacionados con la superficie. Descubre fórmulas y propiedades fascinantes',
@@ -75,7 +75,7 @@ export default {
 
         {
           id: 'longitut',
-          image: 'https://www.fagorprofessional.com/blog/wp-content/uploads/2014/05/12-unidades-medida.jpg',
+          image: './public/LONGITUT.jpg',
           alt: 'Longitut',
           title: 'Longitut',
           description: 'Explora conceptos matemáticos relacionados con la longitud. Descubre fórmulas y propiedades fascinantes',
@@ -171,7 +171,7 @@ header a:hover {
   flex-wrap: wrap;
   justify-content: space-around; /* Para distribuir las tarjetas uniformemente */
   align-items: center; /* Para centrar verticalmente las tarjetas */
-  max-width: 1500px;
+  max-width: 1700px;
   margin: 0 auto;
   z-index: 1;
 }
@@ -192,11 +192,6 @@ header a:hover {
 
 h1:hover {
   transform: scale(1.1);
-}
-
-.category:nth-child(3n) {
-  margin-bottom: 20px;
-  /* Add margin to every third card (starting from the first) */
 }
 
 .login-register-btn:hover {
