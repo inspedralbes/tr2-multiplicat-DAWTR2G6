@@ -65,6 +65,7 @@ export default {
             datasets: [{
               data: [score.value, totalQuestions.value - score.value],
               backgroundColor: ['#80D483', '#FF6C6C'],
+              color: 'white',
               borderWidth: 1
             }]
           },
@@ -88,10 +89,9 @@ return {
 @import url('https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap');
 
 body {
-  padding: 0;
-  margin: 0;
-}
+  padding: 20px; /* Add some padding for better overall layout */
 
+}
 * {
   font-family: 'Anek Bangla', sans-serif;
   z-index: -1;
@@ -99,26 +99,37 @@ body {
   margin: 0;
   box-sizing: border-box;
   letter-spacing: 0.1rem;
+
 }
 
-.ScoreGrafico{
-  width: 200px;
-  height: 200px;
+.ScoreGrafico {
+  background-image: url('https://cdn.dribbble.com/users/2475489/screenshots/9239848/media/ff48675e4dd24c950af1dda5ac3c6019.gif'); /* Reemplaza 'url_de_tu_imagen.jpg' con la ruta de tu imagen */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 212px;
+    height: 188px;
+    margin: 20px auto;
+    position: fixed;
+    top: 10%;
+    z-index: 2;
+    left: 43%;
+    color: #e4e0e0;
 }
 .score-container {
-
   display: grid;
-  position: sticky;
-  width: 100%;
-  top: 0px;
-  padding: 1%;
-  font-size: 30px;
-  text-align: center;
-  border: 2px solid #1c1c1c;
-  background-color: rgb(223, 223, 223);
-  z-index: 1;
+    position: sticky;
+    width: 100%;
+    top: 0px;
+    padding: 1%;
+    font-size: 24px;
+    text-align: center;
+    border: 2px solid #1c1c1c;
+    background-color: #f0f0f0;
+    z-index: 1;
+    position: relative;
+    height: 282px;
 }
-
 h3 {
   text-align: center;
   font-size: 30px;
@@ -126,20 +137,36 @@ h3 {
   margin: 10px;
 }
 
-.score-container button:nth-child(2),
+.score-container button:nth-child(2){
+/* Ajusta este valor según sea necesario para la posición derecha */
+  margin: 10px;
+  padding: 12px;
+  font-weight: 600;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+  left: 10px;
+}
 .score-container button:nth-child(3) {
   margin: 10px;
-  padding: 8px;
-  font-weight: 400;
-  background-color: #1c1c1c1a;
-  color: #1c1c1c;
-  box-shadow: 1px 1px 1px 1px black;
-  font-size: 20px;
+  padding: 12px;
+  font-weight: 600;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+right: 10px;
 }
 
 .score-container button:nth-child(2):hover,
 .score-container button:nth-child(3):hover {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  background-color: #45a049;
 }
 
 .preguntas-incorrectas-container {
