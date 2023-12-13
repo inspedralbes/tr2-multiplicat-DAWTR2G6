@@ -44,12 +44,6 @@ export default {
     const socketId = route.params.id;
 
     onMounted(() => {
-      console.log("Datos de preguntas:", store.partida_preguntas);
-      console.log("Datos de respuestas:", store.partida_respuestas);
-      console.log(
-        "Datos de respuestas de usuario:",
-        store.partida_usuario_respuestas
-      );
       if (
         store.partida_preguntas &&
         store.partida_respuestas &&
