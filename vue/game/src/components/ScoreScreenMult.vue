@@ -1,7 +1,7 @@
 <template>
     <body>
       <div class="score-container">
-        <h2>PUNTUACIO DE LA PARTIDA:{{ score }} de {{ preguntas_filtradas.length }}
+        <h2>PUNTUACIO DE LA PARTIDA:{{ score }} / {{ preguntas_filtradas.length+score }}
         </h2>
         <button @click="$router.push('/lobby')">Ves'ne al Lobby</button>
         <button @click="$router.push('/ranking')">Mira com vas al rankings!</button>

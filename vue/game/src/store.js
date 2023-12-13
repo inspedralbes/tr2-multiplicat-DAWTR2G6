@@ -33,19 +33,10 @@ export const useStore = defineStore({
       return this.usuario_respuestas[socketId];
     },
     guardar_allData(socketId, preguntas, respuestas, usuario_respuestas) {
-      return new Promise((resolve, reject) => {
-        try {
-          this.preguntas[socketId] = preguntas;
-          this.respuestas[socketId] = respuestas;
-          this.usuario_respuestas[socketId] = usuario_respuestas;
-          resolve();
-        } catch (error) {
-          reject(error);
-        }
-      });
+      this.preguntas[socketId] = preguntas;
+      this.respuestas[socketId] = respuestas;
+      this.usuario_respuestas[socketId] = usuario_respuestas;
     },
-
-
     setPartidaUsuarioRespuestas(usuarioRespuestas) {
       this.usuario_respuestas_sp = usuarioRespuestas;
     },

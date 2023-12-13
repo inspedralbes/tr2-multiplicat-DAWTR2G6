@@ -44,7 +44,7 @@ export default {
     startSinglePlayerMode() {
       // PONER EL MODO DE JUEGO EN 1 JUG
       if (this.mode === 'multiPlayer') {
-        socket.emit('leaveMultiPlayer'); // tell the server to remove the player from the multiplayer game
+        socket.emit('salirdeMultijugador');
       }
       this.mode = "singlePlayer";
       if (this.mode === "singlePlayer") {
@@ -53,7 +53,7 @@ export default {
 
     },
     startMultiPlayerMode() {
-      this.multiplayerBtn_desabilitado = true; 
+     // this.multiplayerBtn_desabilitado = true; 
 
       // PONER EL MODO DE JUEGO EN +1 JUG
       this.mode = "multiPlayer";

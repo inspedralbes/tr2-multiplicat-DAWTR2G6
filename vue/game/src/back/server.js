@@ -1,4 +1,5 @@
 import express from "express";
+
 import {
   createServer
 } from "http";
@@ -6,6 +7,7 @@ import {
   Server
 } from "socket.io";
 import cors from "cors";
+
 
 const app = express();
 
@@ -57,6 +59,7 @@ io.on("connection", (socket) => {
 
       console.log("Empieza la partida multijugador");
       io.emit("empezarJuego-mult");
+      io.emit("establecerJugadores", Object.keys(arr_jugadors));
     } else {
       console.log("Se requiren mas jugadores para una partida multijugador");
     }
@@ -77,11 +80,24 @@ io.on("connection", (socket) => {
   });
 
 
+
+  socket.on("solicitud_acabar_partida", () => {
+    io.emit("guardar_datos_partida_multi");
+  });
+
   socket.on("partida_acabada", () => {
-    let room = rooms[socket.id]; 
+    let room = rooms[socket.id];
     console.log('Redirigiendo a la sala ' + room + ' a la pantalla de scores');
     io.to(room).emit("mover_sala_a_scores", room);
     
+    // limpia el array de jugadores
+    //arr_jugadors = {};
+    //cont_jugadors=0;
+    delete arr_jugadors[socket.id];
+    cont_jugadors -= 1;
+    io.emit("update_llista_jugadors", cont_jugadors);
+    // UPDATEAR A LOS JUGADORES SOBRE LOS VACANTES
+    io.emit("updatePlayers", Object.keys(arr_jugadors));
   });
 
 
@@ -99,11 +115,12 @@ io.on("connection", (socket) => {
 
   // SE PIERDE UNA CONEXION
   socket.on("disconnect", () => {
-    delete arr_jugadors[socket.id];
-    cont_jugadors -= 1;
+   // delete arr_jugadors[socket.id];
+    //cont_jugadors -= 1;
+  /*  console.log("ESTOY ELIMINANDO JUGADORES!!!")
     io.emit("update_llista_jugadors", cont_jugadors);
     // UPDATEAR A LOS JUGADORES SOBRE LOS VACANTES
-    io.emit("updatePlayers", Object.keys(arr_jugadors));
+    io.emit("updatePlayers", Object.keys(arr_jugadors));*/
   });
 
 
