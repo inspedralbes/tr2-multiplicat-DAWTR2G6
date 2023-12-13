@@ -52,7 +52,7 @@ const router = createRouter({
       component: LandingScreen,
     },
     {
-      path: '/scores',
+      path: '/scores/:id',
       name: 'ScoreScreen',
       component: ScoreScreen,
       props: true,

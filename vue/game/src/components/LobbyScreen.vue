@@ -3,7 +3,9 @@
     <div class="lobby-container">
       <h2 class="lobby-title">Sala de Lobby</h2>
       <div class="lobby-options">
-        <p>Selecciona el modo de juego:</p>
+        <div class="lobby-game">
+          <p>Selecciona el modo de juego:</p>
+        </div>
         <button @click="startSinglePlayerMode" class="btn">Vs Tu Mateix!</button>
         <button @click="startMultiPlayerMode" class="btn">Multijugador</button>
       </div>
@@ -104,9 +106,10 @@ body {
   overflow-y: hidden;
   letter-spacing: 0.3rem;
   font-weight: lighter;
-  background-color: rgba(226, 222, 222, 0.815);
-  /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)), url("/giphy.gif");*/
-
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(102, 102, 102, 0.13)), url("/public/fons1.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 * {
@@ -117,12 +120,17 @@ body {
   display: grid;
   align-items: center;
   justify-content: center;
-  color: #1c1c1c;
+  color: #ebebeb;
 }
+.lobby-game{
+  text-shadow: 2px 2px 4px black;
+}
+
+
 
 .lobby-title {
   font-size: 100px;
-
+  text-shadow: 2px 2px 4px black;
 }
 
 .lobby-options {
