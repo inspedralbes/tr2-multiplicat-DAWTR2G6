@@ -8,6 +8,7 @@ export const useStore = defineStore({
     partida_respuestas: [],
     partida_usuario_respuestas: [],
     isLoggedIn: false,
+    categoria: '',
   }),
   // metodos que se pueden llamar desde cualquier 
   // componente o  con  guar
@@ -21,6 +22,15 @@ export const useStore = defineStore({
     },
     setPartidaUsuarioRespuestas(usuario_respuestas) {
       this.partida_usuario_respuestas = usuario_respuestas;
+    },
+    setCategoria(categoria) {
+      this.categoria = categoria;
+    },
+    returnCategoria() {
+      return this.categoria;
+    },
+    resetCategoria() {
+      this.categoria = '';
     },
     // para guardar todos los datos de todas las partidas para el profesor // hacer un grafico luego ?
     // filtrar preguntas incorrectas contar las categorias y mostrarlas en un grafico

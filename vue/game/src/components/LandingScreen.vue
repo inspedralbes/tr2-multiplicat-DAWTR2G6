@@ -9,33 +9,28 @@
 
 
     <div class="container">
-      <section id="temps">
-        <h2>Temps</h2>
-
+      <section @click="mover_a_lobby('temps')" id="temps">
+        <h2> Temps</h2>
       </section>
 
-      <section id="volumen">
-        <h2>Volumen</h2>
+      <section @click="mover_a_lobby('volumen')" id="volumen">
+        <h2> Volumen</h2>
       </section>
 
-      <section id="longitud">
-        <h2>Longitud</h2>
-
+      <section @click="mover_a_lobby('longitud')" id="longitud">
+        <h2> Longitud</h2>
       </section>
 
-      <section id="capacitat">
-        <h2>Capacitat</h2>
-
+      <section @click="mover_a_lobby('capacitat')" id="capacitat">
+        <h2> Capacitat</h2>
       </section>
 
-      <section id="superficie">
-        <h2>Superficie</h2>
-
+      <section @click="mover_a_lobby('superficie')" id="superficie">
+        <h2> Superficie</h2>
       </section>
 
-      <section id="massa">
-        <h2>Massa</h2>
-
+      <section @click="mover_a_lobby('massa')" id="massa">
+        <h2> Massa</h2>
       </section>
     </div>
 
@@ -47,9 +42,22 @@
 </template>
 
 <script>
+import { useStore } from "../store.js";
 export default {
-  name: 'LandingScreen'
-};
+  name: 'LandingScreen',
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+    mover_a_lobby(categoria) {
+      const store = useStore();
+      store.setCategoria(categoria);
+      this.$router.push('/GameScreen');
+    },
+  },
+}
 </script>
 
 <style scoped>
@@ -129,6 +137,8 @@ section:hover {
   background-blend-mode: darken;
   border-left: 6px solid #f5f5f5;
   color: #f5f5f5;
+  cursor:pointer;
+  transform: scale(1.03);
 }
 
 section:nth-child(1):hover {
