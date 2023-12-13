@@ -62,6 +62,8 @@ io.on("connection", (socket) => {
     }
   });
 
+  // ------------------------------------------------------------------------------------
+
   socket.on('enviar_bloques', (id) => {
     console.log('Jugador ' + socket.id + 'responde correctamente')
     arr_jugadors[id].blocks -= 1;
@@ -74,12 +76,6 @@ io.on("connection", (socket) => {
     io.emit('updatear_bloques_cliente', arr_jugadors);
   });
 
-  socket.on('unirse_room', (room) => {
-    socket.join(room);
-    // guarda la id de la sala en la que se encuentra el jugador en el array rooms
-    rooms[socket.id] = room;
-    console.log('Jugador ' + socket.id + ' se ha unido a la sala ' + room);
-  });
 
   socket.on("partida_acabada", () => {
     let room = rooms[socket.id]; 
@@ -87,6 +83,19 @@ io.on("connection", (socket) => {
     io.to(room).emit("mover_sala_a_scores", room);
     
   });
+
+
+  // ------------------------------------------------------------------------------------
+
+  socket.on('unirse_room', (room) => {
+    socket.join(room);
+    // guarda la id de la sala en la que se encuentra el jugador en el array rooms
+    rooms[socket.id] = room;
+    console.log('Jugador ' + socket.id + ' se ha unido a la sala ' + room);
+  });
+
+
+
 
   // SE PIERDE UNA CONEXION
   socket.on("disconnect", () => {

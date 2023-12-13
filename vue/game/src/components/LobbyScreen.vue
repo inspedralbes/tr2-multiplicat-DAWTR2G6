@@ -35,11 +35,15 @@ export default {
       players: [],
       roomId: 0,
       catergoria: null,
+      multiplayerBtn_desabilitado: false,
     };
   },
   methods: {
     startSinglePlayerMode() {
       // PONER EL MODO DE JUEGO EN 1 JUG
+      if (this.mode === 'multiPlayer') {
+        socket.emit('leaveMultiPlayer'); // tell the server to remove the player from the multiplayer game
+      }
       this.mode = "singlePlayer";
       if (this.mode === "singlePlayer") {
         this.$router.push('/GameScreen');
@@ -47,6 +51,8 @@ export default {
 
     },
     startMultiPlayerMode() {
+      this.multiplayerBtn_desabilitado = true; 
+
       // PONER EL MODO DE JUEGO EN +1 JUG
       this.mode = "multiPlayer";
       // UPDATEAR EL CONTADOR DE JUGADORES

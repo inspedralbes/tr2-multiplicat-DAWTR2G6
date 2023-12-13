@@ -85,7 +85,6 @@ export default {
                 // emitir evento para actualizar los bloques de los demas jugadores
                 socket.emit("enviar_bloques", socket.id);
                 // emitir evento para mandar efectos visuales a los demas jugadores, todos menos aquel que manda la instancia de socket
-               
 
             } else {
                 // respuesta incorrecta
@@ -119,50 +118,47 @@ export default {
             this.partida_preguntas.push(this.preguntaActual.enunciado.trim());
             this.partida_respuestas.push(this.preguntaActual.respuesta_correcta.trim());
         },
-        partidaAcabada() {
-            console.log("Game Over!");
+        // ------------------------------------------------------------------------------------
+        async partidaAcabada() {
+            console.log("Paso por partidaAcabada()");
 
-            // return_sp_data.js :: guardando para luego usar en ScoreScreen -------------------------------------------------------------------------------------------------------
-            const store = useStore(); // referencia a return_sp_data.js
-            // store.setPartidaUsuarioRespuestas(this.partida_usuario_respuestas);
-            // store.setPartidaPreguntas(this.partida_preguntas);
-            // store.setPartidaRespuestas(this.partida_respuestas);
-            store.guardar_sp_allData(
-                socket.id,
-                this.partida_preguntas,
-                this.partida_respuestas,
-                this.partida_usuario_respuestas,
+            const store = useStore();
 
-            );
-            // return_sp_data.js  -------------------------------------------------------------------------------------------------------
+            try {
+                await store.guardar_allData(
+                    socket.id,
+                    this.partida_preguntas,
+                    this.partida_respuestas,
+                    this.partida_usuario_respuestas,
+                );
 
+                console.log(socket.id);
 
-            socket.emit("partida_acabada", this.players);
+                socket.emit("partida_acabada", this.players);
+            } catch (error) {
+                console.error("Error saving data:", error);
+            }
         },
+        // ------------------------------------------------------------------------------------
     },
     created() {
         socket.on('establecer_players', (players) => {
             this.players = players;
         });
+        // ------------------------------------------------------------------------------------
         socket.on('updatear_bloques_cliente', (arr_jugadors) => {
-            // arr_jugadors[id].blocks  POL 5 
-            // arr_jugadors[id].blocks  JOSU 5
-            // POL RESPONDE BIEN
-            // arr_jugadors[id].blocks  POL 4
-            // Created escucha el evento updatear_bloques_cliente y actualiza el valor de blocks
-            // arr_jugadors[id].blocks  JOSU 6
             this.blocks = arr_jugadors[socket.id].blocks;
             if (this.blocks === 0) {
-                console.log("Over!");
+                console.log("Paso por updatear_bloques_cliente en el IF");
                 this.partidaAcabada();
             }
         });
         socket.on('mover_sala_a_scores', () => {
-            console.log("Redireccionando a pantalla de puntuaciones, socket.on('mover_sala_a_scores')");
-            // this.$router.push('/scores');
-            this.$router.push({ name: 'scores', params: { id: socket.id } });
-
+            console.log("Paso por mover_sala_a_scores");
+            console.log("socket.id", socket.id);
+            this.$router.push({ name: 'scoresMulti', params: { id: socket.id } });
         });
+        // ------------------------------------------------------------------------------------
 
     },
     beforeDestroy() {

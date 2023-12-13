@@ -115,10 +115,10 @@ export default {
     partidaAcabada() {
 
       const store = useStore();
-      store.setPartidaUsuarioRespuestas(this.partida_usuario_respuestas);
-      store.setPartidaPreguntas(this.partida_preguntas);
-      store.setPartidaRespuestas(this.partida_respuestas);
-      store.guardar_sp_allData(
+      store.setPartidaUsuarioRespuestas_sp(this.partida_usuario_respuestas);
+      store.setPartidaPregunta_sp(this.partida_preguntas);
+      store.setPartidaRespuestas_sp(this.partida_respuestas);
+      store.guardar_sp_data(
         this.partida_preguntas,
         this.partida_respuestas,
         this.partida_usuario_respuestas

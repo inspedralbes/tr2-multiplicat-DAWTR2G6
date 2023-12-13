@@ -1,13 +1,15 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
+
 
 export const useStore = defineStore({
   id: 'main',
   state: () => ({
-    partida_preguntas: {},
-    partida_respuestas: {},
-    partida_usuario_respuestas: {},
-    isLoggedIn: false,
+    preguntas: [],
+    respuestas: [],
+    usuario_respuestas: [],
+    preguntas_sp: [],
+    respuestas_sp: [],
+    usuario_respuestas_sp: [],
     categoria: '',
   }),
 
@@ -21,21 +23,59 @@ export const useStore = defineStore({
     resetCategoria() {
       this.categoria = '';
     },
-    guardar_sp_allData({ playerId, preguntas, respuestas, usuario_respuestas }) {
-      this.partida_preguntas[playerId] = preguntas;
-      this.partida_respuestas[playerId] = respuestas;
-      this.partida_usuario_respuestas[playerId] = usuario_respuestas;
+    returnPreguntas(socketId) {
+      return this.preguntas[socketId];
+    },
+    returnRespuestas(socketId) {
+      return this.respuestas[socketId];
+    },
+    returnUsuarioRespuestas(socketId) {
+      return this.usuario_respuestas[socketId];
+    },
+    guardar_allData(socketId, preguntas, respuestas, usuario_respuestas) {
+      return new Promise((resolve, reject) => {
+        try {
+          this.preguntas[socketId] = preguntas;
+          this.respuestas[socketId] = respuestas;
+          this.usuario_respuestas[socketId] = usuario_respuestas;
+          resolve();
+        } catch (error) {
+          reject(error);
+        }
+      });
+    },
+
+
+    setPartidaUsuarioRespuestas(usuarioRespuestas) {
+      this.usuario_respuestas_sp = usuarioRespuestas;
+    },
+    setPartidaPregunta_sp(preguntas) {
+      this.preguntas_sp = preguntas;
+    },
+    setPartidaRespuestas_sp(respuestas) {
+      this.respuestas_sp = respuestas;
+    },
+    setPartidaUsuarioRespuestas_sp(usuarioRespuestas) {
+      this.usuario_respuestas_sp = usuarioRespuestas;
+    },
+    returnPreguntas_sp() {
+      return this.preguntas_sp;
+    },
+    returnRespuestas_sp() {
+      return this.respuestas_sp;
+    },
+    returnUsuarioRespuestas_sp() {
+      return this.usuario_respuestas_sp;
+    },
+    guardar_sp_data(preguntas, respuestas, usuario_respuestas) {
+
+      this.preguntas_sp = preguntas;
+      this.respuestas_sp = respuestas;
+      this.usuario_respuestas_sp = usuario_respuestas;
     },
   },
+
+
 });
-
-
-
-
-
-
-
-
-
 
 

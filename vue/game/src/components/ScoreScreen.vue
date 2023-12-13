@@ -1,7 +1,8 @@
 <template>
   <body>
     <div class="score-container">
-      <h2>PUNTUACIO DE LA PARTIDA: {{ score }}/{{ }}</h2>
+      <h2>PUNTUACIO DE LA PARTIDA:{{ score }} de {{ preguntas_filtradas.length }}
+      </h2>
       <button @click="$router.push('/lobby')">Ves'ne al Lobby</button>
       <button @click="$router.push('/ranking')">Mira com vas al rankings!</button>
 
@@ -21,11 +22,10 @@
   </body>
 </template>
 <script>
-import { socket } from "../socket";
 import { useStore } from "../store";
-import { useRoute } from 'vue-router';
 
 import { onMounted, ref } from "vue";
+
 export default {
   data() {
     return {
@@ -36,17 +36,21 @@ export default {
     const score = ref(0);
     const preguntas_filtradas = ref([]);
     const store = useStore();
-    const route = useRoute();
-    const socketId = route.params.id;
+
 
     onMounted(() => {
 
-      let preguntas = store.partida_preguntas[socketId];
-      let respuestas = store.partida_respuestas[socketId];
-      let usuarioRespuestas = store.partida_usuario_respuestas[socketId];
+      let preguntas = store.returnPreguntas_sp();
+      let respuestas = store.returnRespuestas_sp();
+      let usuarioRespuestas = store.returnUsuarioRespuestas_sp();
+      console.log("preguntas", preguntas);
+      console.log("respuestas", respuestas);
+      console.log("usuarioRespuestas", usuarioRespuestas);
 
       for (let i = 0; i < preguntas.length; i++) {
-        if (respuestas[i] !== usuarioRespuestas[i]) {
+        if (respuestas[i] === usuarioRespuestas[i]) {
+          score.value++;
+        } else {
           preguntas_filtradas.value.push({
             pregunta: preguntas[i],
             respuesta_correcta: respuestas[i],
