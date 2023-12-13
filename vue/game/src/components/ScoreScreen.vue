@@ -39,24 +39,10 @@ export default {
     const score = ref(0);
     const preguntas_filtradas = ref([]);
     const store = useStore();
-    console.log("Estado Inicial del Store:", store.state);
     const route = useRoute();
     const socketId = route.params.id;
 
     onMounted(() => {
-      if (
-        store.partida_preguntas &&
-        store.partida_respuestas &&
-        store.partida_usuario_respuestas &&
-        store.partida_preguntas.hasOwnProperty(socketId) &&
-        Array.isArray(store.partida_preguntas[socketId]) &&
-        Array.isArray(store.partida_respuestas[socketId]) &&
-        Array.isArray(store.partida_usuario_respuestas[socketId]) &&
-        store.partida_preguntas[socketId].length ===
-          store.partida_respuestas[socketId].length &&
-        store.partida_respuestas[socketId].length ===
-          store.partida_usuario_respuestas[socketId].length
-      ) {
         let preguntas = store.partida_preguntas[socketId];
         let respuestas = store.partida_respuestas[socketId];
         let usuarioRespuestas = store.partida_usuario_respuestas[socketId];
@@ -73,11 +59,6 @@ export default {
 
         // Calcular el puntaje (puedes ajustar esta lógica según tus reglas de puntuación)
         score.value = preguntas.length - preguntas_filtradas.value.length;
-      } else {
-        console.error(
-          "Datos de juego no válidos o no existen para el socketId proporcionado."
-        );
-      }
     });
 
     return {

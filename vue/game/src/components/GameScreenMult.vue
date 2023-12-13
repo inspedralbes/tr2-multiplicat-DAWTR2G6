@@ -60,7 +60,6 @@ export default {
         );
         this.data_preguntas = await response.json();
 
-        console.log("Respuesta del servidor:", this.data_preguntas);
 
         if (
           this.data_preguntas &&
@@ -82,8 +81,6 @@ export default {
           this.preguntaActual = this.getPreguntaActual();
           this.preguntas_guardadas = true;
 
-          console.log("Preguntas:", this.data_preguntas);
-          console.log("Pregunta actual:", this.preguntaActual);
           
         } else {
           console.error("preguntas_unidades is not an array or is undefined.");
