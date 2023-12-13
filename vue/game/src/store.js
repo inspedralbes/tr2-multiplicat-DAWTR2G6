@@ -7,7 +7,7 @@ export const useStore = defineStore({
     partida_preguntas: [],
     partida_respuestas: [],
     partida_usuario_respuestas: [],
-    isLoggedIn: false,
+    //isLoggedIn: false,
     categoria: '',
   }),
   // metodos que se pueden llamar desde cualquier 

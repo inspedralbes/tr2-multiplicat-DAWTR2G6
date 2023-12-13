@@ -48,6 +48,7 @@ export default {
     };
   },
   methods: {
+
     async cargarPreguntas() {
       try {
         const store = useStore();

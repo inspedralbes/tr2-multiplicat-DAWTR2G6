@@ -32,29 +32,38 @@ export default {
   methods: {
     login() {
       fetch('http://localhost:8000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: this.email.trim(),
-          password: this.password.trim(),
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Success:', data);
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: this.email.trim(),
+        password: this.password.trim(),
+      }),
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log('Success:', data);
 
-          if (data.status === 1) {
-            this.$router.push('/lobby');
-          } else {
-            alert('Inicio de sesión fallido. Verifica tus credenciales.');
-          }
-        })
-        .catch((error) => {
-          alert('Inicio de sesión fallido. Verifica tus credenciales.');
-          console.error('Error:', error);
-        });
+      if (data.status === 1) {
+        // Almacenar el token (puedes usar localStorage, cookies, etc.)
+        // Ejemplo con localStorage:
+        localStorage.setItem('authToken', data.access_token);
+        // Redirigir al usuario a la página deseada
+        this.$router.push('/lobby');
+      } else {
+        alert('Inicio de sesión fallido. Verifica tus credenciales.');
+      }
+    })
+    .catch((error) => {
+      alert('Hubo un problema durante el inicio de sesión. Inténtalo de nuevo más tarde.');
+      console.error('Error:', error);
+    });
     },
   }
 
