@@ -3,15 +3,14 @@
     <div class="overlay"></div>
 
     <header>
-      <ul>
-        <li><a href="#categoria-volumen">Volumen</a></li>
-        <li><a href="#categoria-masa">Masa</a></li>
-        <li><a href="#categoria-capacidad">Capacidad</a></li>
-        <li><a href="#categoria-temps">Temps</a></li>
-        <li><a href="#categoria-superficie">Superficie</a></li>
-        <li><a href="#categoria-longitut">Longitut</a></li>
-      </ul>
-      <div class="login-register-btn">Login/Register</div>
+      <div class="login-register-btn">
+        <router-link to="/login" class="routerlink">
+          <button class="login-btn">Iniciar Sesión</button>
+        </router-link>
+        <router-link to="/register" class="routerlink">
+          <button class="register-btn">Registrarse</button>
+        </router-link>
+      </div>
     </header>
 
     <div class="container">
@@ -35,7 +34,7 @@ export default {
       categories: [
         {
           id: 'volumen',
-          image:'./public/VOLUM.jpg',
+          image: './public/VOLUM.jpg',
           alt: 'Volumen matemático',
           title: 'Volum',
           description: 'Explora conceptos matemáticos relacionados con el volumen. Descubre fórmulas y propiedades fascinantes',
@@ -104,6 +103,19 @@ body {
   color: #fff;
   overflow: hidden;
   position: relative;
+  z-index: 0; /* Establece un z-index menor que las tarjetas */
+}
+body::before,
+body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://images.vexels.com/media/users/3/152648/isolated/preview/93eaeec7d007682e38e8fd9b2f95878a-icono-plano-nave-espacial.png') repeat-x; /* Reemplaza con la ruta de tu imagen de nave espacial */
+  z-index: -1; /* Establece un z-index menor que las tarjetas para que estén detrás de ellas */
+  animation: moveSpaceships 20s linear infinite; /* Personaliza la animación según tus necesidades */
 }
 
 .overlay {
@@ -112,19 +124,18 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.151);
   z-index: -1;
 }
 
 header {
-  background-color: #33333300;
-  overflow: hidden;
-  padding: 20px;
-  /* Añadido padding */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    background-color: #33333300;
+    overflow: hidden;
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Centrar elementos horizontalmente */
+    align-items: center; /* Centrar elementos verticalmente */
+  }
 
 header ul {
   list-style-type: none;
@@ -139,6 +150,9 @@ header li {
   display: flex;
   align-items: center;
 }
+header a, .login-register-btn button, .category {
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
 
 header a {
   color: #bb7ff3ee;
@@ -151,42 +165,79 @@ header a:hover {
   color: #C9F0FD;
 }
 
-.login-register-btn {
-  background: none;
+.login-register-btn button {
+  background: linear-gradient(90deg, #8e44ad, #3498db, #ffffff, #3498db, #8e44ad);
+  background-size: 1200% 100%;
+  /* Ajusta el tamaño del gradiente */
+  background-repeat: repeat;
+  /* Evita que se repita el gradiente */
   border: none;
   display: inline-block;
-  padding: 10px 0;
+  padding: 10px 15px;
   cursor: pointer;
   font-size: 1.2em;
-  background: linear-gradient(90deg, #3498db, #e74c3c, #f39c12, #2ecc71, #3498db);
-  background-size: 500% 100%;
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
   animation: gradient 5s infinite linear;
   transition: color 0.3s ease-in-out;
+  margin-right: 10px;
+  /* Agrega espacio entre los botones */
 }
+
+.login-register-btn button:hover {
+  color: #fff;
+}
+
+.login-register-btn {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  /* This pushes the buttons to the right */
+}
+
+.login-register-btn .register-btn {
+  margin-right: 0;
+  /* Elimina el espacio derecho para el último botón */
+}
+
+/* Estilos para el enlace del router-link */
+.routerlink {
+  text-decoration: none;
+  color: inherit;
+  /* hereda el color del texto del padre */
+}
+
+.routerlink:hover {
+  color: #C9F0FD;
+  /* Cambia el color al pasar el ratón sobre los enlaces */
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around; /* Para distribuir las tarjetas uniformemente */
-  align-items: center; /* Para centrar verticalmente las tarjetas */
+  justify-content: space-around;
+  /* Para distribuir las tarjetas uniformemente */
+  align-items: center;
+  /* Para centrar verticalmente las tarjetas */
   max-width: 1700px;
   margin: 0 auto;
   z-index: 1;
 }
+
 .category {
   width: calc(30% - 20px);
   margin: 10px;
   overflow: hidden;
   position: relative;
+  z-index: 1;
   border: 3px solid #3498db;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease-in-out;
   box-sizing: border-box;
   border: 3px solid #e2b8f3;
-  flex: 0 0 calc(30% - 20px); /* Fuerza el ancho deseado y permite que se ajuste según el tamaño de la pantalla */
+  /* Fuerza el ancho deseado y permite que se ajuste según el tamaño de la pantalla */
 }
 
 
@@ -207,37 +258,87 @@ h1:hover {
     background-position: 100% 50%;
   }
 }
+@keyframes moveSpaceships {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-200%);
+  }
+}
+
+/* Existing styles above */
 
 @media only screen and (max-width: 600px) {
+  body, html {
+    overflow-y: auto; /* Añadir overflow-y a body y html solo en pantallas más pequeñas */
+  }
   header {
-    padding: 10px 10px;
-    /* Ajusta el relleno según tus necesidades */
-    flex-direction: column;
-    align-items: flex-start;
+    background-color: #33333300;
+    overflow: hidden;
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Centrar elementos horizontalmente */
+    align-items: center; /* Centrar elementos verticalmente */
   }
 
-  header ul {
-    flex-direction: column;
-    align-items: flex-start;
+  .login-register-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .login-register-btn button {
     width: 100%;
   }
 
-  header li {
-    margin: 10px 0;
-    /* Ajusta el margen según tus necesidades */
+  .container {
+    max-height: 100vh;
+    overflow-y: auto;
+    max-width: 40%;
   }
 
   .category {
-    width: calc(100% - 20px);
+    width: calc(50% - 20px);
+    margin-right: 40px 0;
+    margin-bottom: 50px;
+  }
+  .category img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
   }
 
+  .category-content {
+    padding: 15px;
+    text-align: center; /* Centrar el texto dentro de las tarjetas */
+  }
 
+  .category h2 {
+    color: #af6dec;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    text-align: center; /* Centrar el texto dentro de las tarjetas */
+  }
 
-  .login-register-btn {
-    order: -1;
-    /* Mueve el botón Login/Register al inicio */
+  .category p {
+    font-size: 16px;
+    line-height: 1.4;
+    color: #A9A9A9;
+    text-align: center; /* Centrar el texto dentro de las tarjetas */
   }
 }
+@media only screen and (max-width: 400px) {
+  .category {
+    width: calc(100% - 20px); /* Una tarjeta por fila en pantallas más pequeñas */
+    margin:20px;
+  }
+}
+
 
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
   .category {
@@ -270,6 +371,7 @@ h1 {
 .category:hover {
   transform: scale(1.05);
   box-shadow: 0 0 15px rgba(234, 0, 255, 0.6);
+  
   /* Cambiamos el color de la sombra al pasar el ratón sobre las tarjetas */
 }
 
@@ -296,5 +398,4 @@ h1 {
   color: #A9A9A9;
   /* Cambiamos el color del texto de las tarjetas */
 
-}
-</style>
+}</style>
