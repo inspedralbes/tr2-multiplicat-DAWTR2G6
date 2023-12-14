@@ -12,8 +12,7 @@
         </router-link>
       </div>
     </header>
-
-    <div class="container">
+    <div class="container" v-if="!isLoading">
       <h1>Selecciona una Categoría</h1>
 
       <div v-for="(category, index) in categories" :key="index" class="category" @click="selectCategory(category.id)">
@@ -103,19 +102,7 @@ body {
   color: #fff;
   overflow: hidden;
   position: relative;
-  z-index: 0; /* Establece un z-index menor que las tarjetas */
-}
-body::before,
-body::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('https://images.vexels.com/media/users/3/152648/isolated/preview/93eaeec7d007682e38e8fd9b2f95878a-icono-plano-nave-espacial.png') repeat-x; /* Reemplaza con la ruta de tu imagen de nave espacial */
-  z-index: -1; /* Establece un z-index menor que las tarjetas para que estén detrás de ellas */
-  animation: moveSpaceships 20s linear infinite; /* Personaliza la animación según tus necesidades */
+  z-index: 0;
 }
 
 .overlay {
@@ -128,14 +115,15 @@ body::after {
   z-index: -1;
 }
 
+
 header {
-    background-color: #33333300;
-    overflow: hidden;
-    padding: 20px;
-    display: flex;
-    justify-content: center; /* Centrar elementos horizontalmente */
-    align-items: center; /* Centrar elementos verticalmente */
-  }
+  background-color: #33333300;
+  overflow: hidden;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 header ul {
   list-style-type: none;
@@ -217,14 +205,11 @@ header a:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  /* Para distribuir las tarjetas uniformemente */
   align-items: center;
-  /* Para centrar verticalmente las tarjetas */
   max-width: 1700px;
   margin: 0 auto;
   z-index: 1;
 }
-
 .category {
   width: calc(30% - 20px);
   margin: 10px;
@@ -237,7 +222,6 @@ header a:hover {
   transition: transform 0.3s ease-in-out;
   box-sizing: border-box;
   border: 3px solid #e2b8f3;
-  /* Fuerza el ancho deseado y permite que se ajuste según el tamaño de la pantalla */
 }
 
 
@@ -258,14 +242,7 @@ h1:hover {
     background-position: 100% 50%;
   }
 }
-@keyframes moveSpaceships {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-200%);
-  }
-}
+
 
 /* Existing styles above */
 
@@ -343,9 +320,7 @@ h1:hover {
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
   .category {
     width: 48%;
-    /* O ajusta el ancho según tus necesidades */
     margin: 10px 1%;
-    /* O ajusta el margen según tus necesidades */
   }
 }
 
@@ -371,8 +346,6 @@ h1 {
 .category:hover {
   transform: scale(1.05);
   box-shadow: 0 0 15px rgba(234, 0, 255, 0.6);
-  
-  /* Cambiamos el color de la sombra al pasar el ratón sobre las tarjetas */
 }
 
 .category img {
@@ -396,6 +369,5 @@ h1 {
   font-size: 16px;
   line-height: 1.4;
   color: #A9A9A9;
-  /* Cambiamos el color del texto de las tarjetas */
-
-}</style>
+}
+</style>
