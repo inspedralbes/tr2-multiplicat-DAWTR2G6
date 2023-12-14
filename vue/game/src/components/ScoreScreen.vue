@@ -118,18 +118,15 @@ body {
 }
 
 .ScoreGrafico {
-  background-image: url('https://cdn.dribbble.com/users/2475489/screenshots/9239848/media/ff48675e4dd24c950af1dda5ac3c6019.gif'); /* Reemplaza 'url_de_tu_imagen.jpg' con la ruta de tu imagen */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 212px;
-    height: 188px;
+  width: 147px;
+    height: 132px;
     margin: 20px auto;
     position: fixed;
-    top: 10%;
+    top: 1%;
     z-index: 2;
     left: 43%;
     color: #e4e0e0;
+    left: 86%;
 }
 .score-container {
   display: grid;
@@ -143,7 +140,7 @@ body {
     background-color: #f0f0f0;
     z-index: 1;
     position: relative;
-    height: 282px;
+    height: 153px;
 }
 h3 {
   text-align: center;
@@ -153,29 +150,33 @@ h3 {
 }
 
 .score-container button:nth-child(2){
-/* Ajusta este valor según sea necesario para la posición derecha */
   margin: 10px;
-  padding: 12px;
-  font-weight: 600;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  position: absolute;
-  left: 10px;
+    padding: 12px;
+    font-weight: 600;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: absolute;
+    left: -63px;
+    margin-left: 85px;
+    width: 115px;
+
 }
 .score-container button:nth-child(3) {
   margin: 10px;
-  padding: 12px;
-  font-weight: 600;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  position: absolute;
-right: 10px;
+    padding: 12px;
+    font-weight: 600;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: absolute;
+    left: 12px;
+    top: 36%;
+    width: 115px;
 }
 
 .score-container button:nth-child(2):hover,

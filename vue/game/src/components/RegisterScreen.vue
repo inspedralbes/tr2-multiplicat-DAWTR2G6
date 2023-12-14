@@ -28,7 +28,7 @@ export default {
     return {
       name: '',
       password: '',
-      email: ''
+      email: '',
     };
   },
   methods: {
@@ -59,7 +59,6 @@ export default {
           }
         })
         .then(data => {
-
           if (data.error) {
             alert(data.error);
             return;
@@ -67,15 +66,15 @@ export default {
             alert('Usuario registrado correctamente');
             this.$router.push('/lobby');
           }
-
         })
         .catch((error) => {
           console.error('Error:', error);
         });
-    }
-  }
+    },
+  },
 };
 </script>
+
 
 <style scoped>
 /* Updated CSS for login template with styles from the provided CSS */

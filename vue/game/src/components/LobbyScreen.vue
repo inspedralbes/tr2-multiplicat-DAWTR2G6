@@ -3,11 +3,11 @@
     <div class="lobby-container">
       <h2 class="lobby-title">Sala de Lobby</h2>
       <div class="lobby-options">
-        <div class="lobby-game">
-          <p>Selecciona el modo de juego:</p>
-        </div>
-        <button @click="startSinglePlayerMode" class="btn">Vs Tu Mateix!</button>
-        <button @click="startMultiPlayerMode" class="btn">Multijugador</button>
+        <p>Selecciona el modo de juego:</p>
+        <button @click="startSinglePlayerMode" class="btn" :disabled="loading">Vs Tu Mateix!</button>
+        <button @click="startMultiPlayerMode" class="btn" :disabled="loading">
+          {{ loading ? 'Cargando...' : 'Multijugador' }}
+        </button>
       </div>
       <div v-if="mode === 'multiPlayer'" class="player-info">
         <div v-if="contador_jugadors > 1">
@@ -31,7 +31,8 @@ export default {
   name: "LobbyScreen",
   data() {
     return {
-      mode: null, // singlePlayer / multiPlayer
+      loading: false,
+      mode: null,
       contador_jugadors: 0,
       socket: null,
       players: [],
@@ -43,9 +44,7 @@ export default {
   methods: {
     startSinglePlayerMode() {
       // PONER EL MODO DE JUEGO EN 1 JUG
-      if (this.mode === 'multiPlayer') {
-        socket.emit('salirdeMultijugador');
-      }
+      this.loading = true;
       this.mode = "singlePlayer";
       if (this.mode === "singlePlayer") {
         this.$router.push('/GameScreen');
@@ -53,7 +52,11 @@ export default {
 
     },
     startMultiPlayerMode() {
-     // this.multiplayerBtn_desabilitado = true; 
+      if (this.loading) {
+        // Prevent starting the game if already loading
+        return;
+      }
+      this.loading = true;
 
       // PONER EL MODO DE JUEGO EN +1 JUG
       this.mode = "multiPlayer";
@@ -80,17 +83,14 @@ export default {
       if (this.mode === "multiPlayer") {
         this.$router.push('/GameScreenMult');
       }
-
     });
   },
   beforeDestroy() {
     if (socket) {
       socket.disconnect();
     }
-
   },
 };
-
 </script>
 
 <style scoped>
@@ -185,7 +185,7 @@ div p {
   }
 
   .lobby-title {
-  
+
     font-size: 60px;
   }
 
@@ -193,7 +193,7 @@ div p {
     display: flex;
     margin-left: auto;
     margin-right: auto;
-   
+
   }
 }
 </style>

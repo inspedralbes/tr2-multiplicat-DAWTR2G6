@@ -6,9 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use \Illuminate\Database\Eloquent\Relations\MorphMany;
 
-class userController extends Controller
+class UserController extends Controller
 {
     public function register(Request $request)
     {
@@ -25,9 +24,12 @@ class userController extends Controller
 
         $user->save();
 
+        $token = $user->createToken("auth_token")->plainTextToken;
+
         return response()->json([
             "status" => 1,
             "msg" => "Registro exitoso",
+            "access_token" => $token,
         ]);
     }
 
@@ -36,44 +38,46 @@ class userController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
-
         ]);
+
         $user = User::where("email", "=", $request->email)->first();
 
-        if (isset($user->id)) {
-            if (Hash::check($request->password, $user->password)) {
-              
-                $token = $user->createToken("auth_token")->plainTextToken;
+        if ($user && Hash::check($request->password, $user->password)) {
+            $token = $user->createToken("auth_token")->plainTextToken;
 
-                //si esta todo bien
-                return response()->json([
-                    "status" => 1,
-                    "msg" => "Usuario logeado  exitosamente",
-                    "access_token" => $token
+            // Log the token for debugging
+            info("Generated Token: " . $token);
 
-                ]);
-            } else {
+            if ($token === null) {
                 return response()->json([
                     "status" => 0,
-                    "msg" => "La password es incorrecta",
-
-                ], 404);
+                    "msg" => "No se pudo generar el token",
+                ]);
             }
+
+            return response()->json([
+                "status" => 1,
+                "tu_token" => $token,
+                "msg" => "Usuario logeado exitosamente",
+                "access_token" => $token
+            ]);
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Usuario no registrado",
-            ], 404);
+                "msg" => "Credenciales inválidas",
+            ], 401);
         }
     }
+
     public function userProfile()
     {
         return response()->json([
-            "status" => 0,
+            "status" => 1,
             "msg" => "Perfil del usuario",
             "data" => auth()->user()
         ]);
     }
+
     public function logout()
     {
         if (auth()->check()) {
@@ -88,5 +92,10 @@ class userController extends Controller
             "status" => 0,
             "msg" => "Usuario no autenticado",
         ], 401);
+    }
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only('userProfile');
     }
 }
