@@ -53,6 +53,7 @@ export default {
   methods: {
     mover_a_lobby(categoria) {
       const store = useStore();
+      store.resetCategoria();
       store.setCategoria(categoria);
       this.$router.push('/GameScreen');
     },

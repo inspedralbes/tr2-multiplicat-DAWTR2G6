@@ -16,12 +16,11 @@
                 <div class="tetris-container">
                     <BlockElement v-for="blockIndex in blocks" :key="blockIndex" :cantidad="blockIndex" />
                 </div>
-
             </div>
         </div>
     </body>
 </template>
-  
+
 <script>
 import { useStore } from "../store"; // importar useStore de useStore.js
 import { socket } from "../socket.js";
@@ -41,36 +40,42 @@ export default {
             partida_usuario_respuestas: [],
             partida_preguntas: [],
             partida_respuestas: [],
-            modo: 'mutiplayer',
+            modo: "mutiplayer",
             players: [],
         };
     },
     methods: {
         async cargarPreguntas() {
             try {
-                const response = await fetch("http://localhost:8000/api/recibir-preguntas-todas");
+                const response = await fetch(
+                    "http://localhost:8000/api/recibir-preguntas-todas"
+                );
                 this.data_preguntas = await response.json();
 
-                // para que no sean las mismas preguntas cada vez que se inicia el juego
-                if (Array.isArray(this.data_preguntas["preguntas_unidades"])) {
+
+                if (
+                    this.data_preguntas &&
+                    this.data_preguntas["preguntas_unidades"] &&
+                    Array.isArray(this.data_preguntas["preguntas_unidades"])
+                ) {
+                    const preguntasUnidades = this.data_preguntas["preguntas_unidades"];
+
                     // Fisher-Yates shuffle ....
-                    for (let i = this.data_preguntas["preguntas_unidades"].length - 1; i > 0; i--) {
+                    for (let i = preguntasUnidades.length - 1; i > 0; i--) {
                         const j = Math.floor(Math.random() * (i + 1));
-                        [
-                            this.data_preguntas["preguntas_unidades"][i],
-                            this.data_preguntas["preguntas_unidades"][j],
-                        ] = [
-                                this.data_preguntas["preguntas_unidades"][j],
-                                this.data_preguntas["preguntas_unidades"][i],
-                            ];
+                        [preguntasUnidades[i], preguntasUnidades[j]] = [
+                            preguntasUnidades[j],
+                            preguntasUnidades[i],
+                        ];
                     }
-                    // para que no sean las mismas preguntas cada vez que se inicia el juego
 
                     // getPreguntaActual = preguntaActual {pregunta=..., opciones=...., respuesta_correcta=....}
                     this.preguntaActual = this.getPreguntaActual();
                     this.preguntas_guardadas = true;
+
+
                 } else {
-                    console.error("preguntas_unidades is not an array.");
+                    console.error("preguntas_unidades is not an array or is undefined.");
                 }
             } catch (error) {
                 console.error("Error al cargar la pregunta:", error);
@@ -85,21 +90,21 @@ export default {
                 // emitir evento para actualizar los bloques de los demas jugadores
                 socket.emit("enviar_bloques", socket.id);
                 // emitir evento para mandar efectos visuales a los demas jugadores, todos menos aquel que manda la instancia de socket
-                // socket.broadcast.to(room).emit('enviar_popUps', socket.id);
 
-                if (this.blocks === 0) {
-                    this.partidaAcabada();
-                }
+            } else {
+                // respuesta incorrecta
+                this.blocks += 1;
+            }
 
-                this.guardarRespuestasParaProfesor(opcion);
 
-                if (this.index < this.data_preguntas["preguntas_unidades"].length - 1) {
-                    this.index++;
-                    this.preguntaActual = this.getPreguntaActual();
-                } else {
-                    console.log("No hay más preguntas disponibles");
-                    this.partidaAcabada();
-                }
+            this.guardarRespuestasParaProfesor(opcion);
+
+            if (this.index < this.data_preguntas["preguntas_unidades"].length - 1) {
+                this.index++;
+                this.preguntaActual = this.getPreguntaActual();
+            } else {
+                console.log("No hay más preguntas disponibles");
+                this.partidaAcabada();
             }
 
         },
@@ -118,42 +123,51 @@ export default {
             this.partida_preguntas.push(this.preguntaActual.enunciado.trim());
             this.partida_respuestas.push(this.preguntaActual.respuesta_correcta.trim());
         },
+        // ------------------------------------------------------------------------------------
         partidaAcabada() {
-            console.log("Game Over!");
+            console.log("Paso por partidaAcabada()");
+            console.log("this.players", this.players);
+            const store = useStore();
 
-            // return_sp_data.js :: guardando para luego usar en ScoreScreen -------------------------------------------------------------------------------------------------------
-            const store = useStore(); // referencia a return_sp_data.js
-            store.setPartidaUsuarioRespuestas(this.partida_usuario_respuestas);
-            store.setPartidaPreguntas(this.partida_preguntas);
-            store.setPartidaRespuestas(this.partida_respuestas);
-            store.guardar_sp_allData(
-                this.partida_preguntas,
-                this.partida_respuestas,
-                this.partida_usuario_respuestas
-            );
-            // return_sp_data.js  -------------------------------------------------------------------------------------------------------
+            store.guardar_allData(socket.id, this.partida_preguntas, this.partida_respuestas, this.partida_usuario_respuestas);
 
+            socket.emit("partida_acabada", this.players, socket.id);
 
-            socket.emit("partida_acabada", this.players);
         },
+        // ------------------------------------------------------------------------------------
     },
     created() {
-        socket.on('establecer_players', (players) => {
+        socket.on('establecerJugadores', (players) => {
             this.players = players;
         });
+
+
+        socket.on('guardar_datos_partida_multi', () => {
+            console.log("Paso por guardar_datos_partida_multi");
+            this.partidaAcabada();
+        });
+        // ------------------------------------------------------------------------------------
         socket.on('updatear_bloques_cliente', (arr_jugadors) => {
-            // arr_jugadors[id].blocks  POL 5 
-            // arr_jugadors[id].blocks  JOSU 5
-            // POL RESPONDE BIEN
-            // arr_jugadors[id].blocks  POL 4
-            // Created escucha el evento updatear_bloques_cliente y actualiza el valor de blocks
-            // arr_jugadors[id].blocks  JOSU 6
             this.blocks = arr_jugadors[socket.id].blocks;
+            if (this.blocks === 0) {
+                console.log("Paso por updatear_bloques_cliente en el IF");
+                //envio al servidor una solicitud para acabar
+                socket.emit("solicitud_acabar_partida");
+            }
         });
         socket.on('mover_sala_a_scores', () => {
-            console.log("Redireccionando a pantalla de puntuaciones, socket.on('mover_sala_a_scores')");
-            this.$router.push('/scores');
+            console.log("Paso por mover_sala_a_scores");
+            console.log("socket.id", socket.id);
+
+            this.$router.push({ name: 'scoresMulti', params: { id: socket.id } });
         });
+
+
+
+
+
+
+        // ------------------------------------------------------------------------------------
 
     },
     beforeDestroy() {
@@ -167,14 +181,14 @@ export default {
     },
 };
 </script>
-  
+
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap");
 
 body {
     padding: 0;
     margin: -10px;
-    font-family: 'Anek Bangla', sans-serif;
+    font-family: "Anek Bangla", sans-serif;
     height: 100vh;
     background-repeat: repeat;
     overflow-x: hidden;
@@ -183,7 +197,6 @@ body {
     font-weight: lighter;
     background-color: rgba(226, 222, 222, 0.815);
     /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)), url("/giphy.gif");*/
-
 }
 
 * {

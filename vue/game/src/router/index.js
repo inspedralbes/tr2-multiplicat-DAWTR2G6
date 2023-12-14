@@ -8,10 +8,9 @@ import GameScreen from '../components/GameScreen.vue';
 import LandingScreen from '../components/LandingScreen.vue';
 import LobbyScreen from '../components/LobbyScreen.vue';
 import ScoreScreen from '../components/ScoreScreen.vue';
+import ScoreScreeMult from '../components/ScoreScreenMult.vue';
 import GameScreenMult from '../components/GameScreenMult.vue';
-import {
-  useStore
-} from '../store';
+
 
 
 const router = createRouter({
@@ -21,8 +20,12 @@ const router = createRouter({
       path: '/login',
       name: 'home',
       component: LoginScreen,
-
-
+    },
+    {
+      path: '/scoresMult/:id',
+      name: 'scoresMulti',
+      component: ScoreScreeMult,
+      props: true,
     },
     {
       path: '/GameScreen',
@@ -49,10 +52,10 @@ const router = createRouter({
       component: LandingScreen,
     },
     {
-      path: '/scores',
+      path: '/scores/:id',
       name: 'ScoreScreen',
       component: ScoreScreen,
-
+      props: true,
     },
     {
       path: '/GameScreenMult',
