@@ -106,7 +106,7 @@ body {
   overflow-y: hidden;
   letter-spacing: 0.3rem;
   font-weight: lighter;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(102, 102, 102, 0.13)), url("/public/fons1.jpg");
+  background: url("/public/f2.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -120,7 +120,7 @@ body {
   display: grid;
   align-items: center;
   justify-content: center;
-  color: #ebebeb;
+  color: white;
 }
 .lobby-game{
   text-shadow: 2px 2px 4px black;
