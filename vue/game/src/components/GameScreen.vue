@@ -43,36 +43,29 @@ export default {
       partida_respuestas: [],
       modo: 'solitario',
       players: [],
-
+      categoria: '',
     };
   },
   methods: {
     async cargarPreguntas() {
       try {
-        const response = await fetch("http://localhost:8000/api/recibir-preguntas-todas");
-        this.data_preguntas = await response.json();
+        const store = useStore();
+        this.categoria = store.returnCategoria();
+        if (this.categoria === '') {
+          const response = await fetch("http://localhost:8000/api/recibir-preguntas-todas");
+          this.data_preguntas = await response.json();
 
-        // para que no sean las mismas preguntas cada vez que se inicia el juego
-        if (Array.isArray(this.data_preguntas["preguntas_unidades"])) {
-          // Fisher-Yates shuffle ....
-          for (let i = this.data_preguntas["preguntas_unidades"].length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [
-              this.data_preguntas["preguntas_unidades"][i],
-              this.data_preguntas["preguntas_unidades"][j],
-            ] = [
-                this.data_preguntas["preguntas_unidades"][j],
-                this.data_preguntas["preguntas_unidades"][i],
-              ];
-          }
-          // para que no sean las mismas preguntas cada vez que se inicia el juego
-
-          // getPreguntaActual = preguntaActual {pregunta=..., opciones=...., respuesta_correcta=....}
-          this.preguntaActual = this.getPreguntaActual();
-          this.preguntas_guardadas = true;
         } else {
-          console.error("preguntas_unidades is not an array.");
+          const response = await fetch("http://localhost:8000/api/recibir-preguntas-porCategoria/" + this.categoria);
+          this.data_preguntas = await response.json();
         }
+
+        this.aleatorizarPreguntas();
+
+        // ++index, iterar por data_preguntas, establecer enunciadom opciones y respuesta_correcta
+        this.preguntaActual = this.getPreguntaActual();
+        this.preguntas_guardadas = true;
+
       } catch (error) {
         console.error("Error al cargar la pregunta:", error);
       }
@@ -100,9 +93,9 @@ export default {
         this.preguntaActual = this.getPreguntaActual();
       } else {
         console.log("No hay más preguntas disponibles");
+        this.partidaAcabada();
       }
-
-
+      
     },
     getPreguntaActual() {
       return {
@@ -120,21 +113,36 @@ export default {
       this.partida_respuestas.push(this.preguntaActual.respuesta_correcta.trim());
     },
     partidaAcabada() {
-      console.log("Game Over!");
 
-      // store.js :: guardando para luego usar en ScoreScreen -------------------------------------------------------------------------------------------------------
-      const store = useStore(); // referencia a store.js
-      store.setPartidaUsuarioRespuestas(this.partida_usuario_respuestas);
-      store.setPartidaPreguntas(this.partida_preguntas);
-      store.setPartidaRespuestas(this.partida_respuestas);
-      store.guardar_sp_allData(
+      const store = useStore();
+      store.setPartidaUsuarioRespuestas_sp(this.partida_usuario_respuestas);
+      store.setPartidaPregunta_sp(this.partida_preguntas);
+      store.setPartidaRespuestas_sp(this.partida_respuestas);
+      store.guardar_sp_data(
         this.partida_preguntas,
         this.partida_respuestas,
         this.partida_usuario_respuestas
       );
-      // store.js  -------------------------------------------------------------------------------------------------------
+      this.categoria = '';
+
 
       this.$router.push("/scores");
+    },
+    aleatorizarPreguntas() {
+      if (Array.isArray(this.data_preguntas["preguntas_unidades"])) {
+        for (let i = this.data_preguntas["preguntas_unidades"].length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [
+            this.data_preguntas["preguntas_unidades"][i],
+            this.data_preguntas["preguntas_unidades"][j],
+          ] = [
+              this.data_preguntas["preguntas_unidades"][j],
+              this.data_preguntas["preguntas_unidades"][i],
+            ];
+        }
+      } else {
+        console.error("preguntas_unidades is not an array.");
+      }
     },
   },
   created() {
@@ -246,8 +254,8 @@ button {
   height: auto;
 }
 
-/* Media Queries for Mobile Design */
-@media (max-width: 600px) {
+
+@media (max-width: 1000px) {
   .container {
     margin: 20px;
     min-width: auto;

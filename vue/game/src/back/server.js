@@ -1,7 +1,13 @@
 import express from "express";
-import { createServer } from "http";
-import { Server } from "socket.io";
+
+import {
+  createServer
+} from "http";
+import {
+  Server
+} from "socket.io";
 import cors from "cors";
+
 
 const app = express();
 
@@ -24,10 +30,10 @@ const arr_jugadors = {};
 let cont_jugadors = 0;
 // LISTA DE PUNTOS A QUITARSE, QUANTOS MENOS MEJOR
 const numBloques = 5;
-
 // MIN NUM DE JUGADORES PARA CHECKMULTIPLAYER DEVUELVA empezarJuego-mult
 const minJugsMult = 2;
-
+// ROOM PARA MULTIJUGADOR 
+let rooms = [];
 // QUANDO ALGUIEN SE UNE . . .
 io.on("connection", (socket) => {
 
@@ -53,13 +59,16 @@ io.on("connection", (socket) => {
 
       console.log("Empieza la partida multijugador");
       io.emit("empezarJuego-mult");
+      io.emit("establecerJugadores", Object.keys(arr_jugadors));
     } else {
       console.log("Se requiren mas jugadores para una partida multijugador");
     }
   });
 
-  socket.on('enviar_bloques', (id) => {
+  // ------------------------------------------------------------------------------------
 
+  socket.on('enviar_bloques', (id) => {
+    console.log('Jugador ' + socket.id + 'responde correctamente')
     arr_jugadors[id].blocks -= 1;
 
     for (let socketId in arr_jugadors) {
@@ -70,17 +79,48 @@ io.on("connection", (socket) => {
     io.emit('updatear_bloques_cliente', arr_jugadors);
   });
 
-  socket.on("empujar_a_pantallaScore", () => {
-    socket.to(room).emit("ir_a_pantallaScore");
+
+
+  socket.on("solicitud_acabar_partida", () => {
+    io.emit("guardar_datos_partida_multi");
   });
 
-  // SE PIERDE UNA CONEXION
-  socket.on("disconnect", () => {
+  socket.on("partida_acabada", () => {
+    let room = rooms[socket.id];
+    console.log('Redirigiendo a la sala ' + room + ' a la pantalla de scores');
+    io.to(room).emit("mover_sala_a_scores", room);
+    
+    // limpia el array de jugadores
+    //arr_jugadors = {};
+    //cont_jugadors=0;
     delete arr_jugadors[socket.id];
     cont_jugadors -= 1;
     io.emit("update_llista_jugadors", cont_jugadors);
     // UPDATEAR A LOS JUGADORES SOBRE LOS VACANTES
     io.emit("updatePlayers", Object.keys(arr_jugadors));
+  });
+
+
+  // ------------------------------------------------------------------------------------
+
+  socket.on('unirse_room', (room) => {
+    socket.join(room);
+    // guarda la id de la sala en la que se encuentra el jugador en el array rooms
+    rooms[socket.id] = room;
+    console.log('Jugador ' + socket.id + ' se ha unido a la sala ' + room);
+  });
+
+
+
+
+  // SE PIERDE UNA CONEXION
+  socket.on("disconnect", () => {
+   // delete arr_jugadors[socket.id];
+    //cont_jugadors -= 1;
+  /*  console.log("ESTOY ELIMINANDO JUGADORES!!!")
+    io.emit("update_llista_jugadors", cont_jugadors);
+    // UPDATEAR A LOS JUGADORES SOBRE LOS VACANTES
+    io.emit("updatePlayers", Object.keys(arr_jugadors));*/
   });
 
 

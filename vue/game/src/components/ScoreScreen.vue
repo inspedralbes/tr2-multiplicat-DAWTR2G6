@@ -1,63 +1,80 @@
 <template>
   <body>
     <div class="score-container">
-      <h2>PUNTUACIO DE LA PARTIDA: {{ score }}/{{ }}</h2>
+      <h2>PUNTUACIO DE LA PARTIDA:{{ score }} de {{ preguntas_filtradas.length }}
+      </h2>
       <button @click="$router.push('/lobby')">Ves'ne al Lobby</button>
-      <button @click="$router.push('/ranking')">Mira com vas al rankings!</button>
-
+      <button @click="$router.push('/ranking')">
+        Mira com vas al rankings!
+      </button>
     </div>
 
     <h3>Revisa les teves respostes incorrectes aqui!:</h3>
-    <div class="preguntas-incorrectas-container">
-      <div v-for="(pregunta, index) in preguntas_filtradas" :key="index" class="score-preguntas-incorrectas">
+    <div class="preguntas-incorrectas-container" v-if="preguntas_filtradas.length > 0">
+      <div
+        v-for="(pregunta, index) in preguntas_filtradas"
+        :key="index"
+        class="score-preguntas-incorrectas"
+      >
         <p>{{ pregunta.pregunta }}</p>
         <p>Resposta correcta: {{ pregunta.respuesta_correcta }}</p>
         <p>La teva resposta: {{ pregunta.user_respuesta }}</p>
       </div>
     </div>
-
-
   </body>
 </template>
 <script>
 import { useStore } from "../store";
 
 import { onMounted, ref } from "vue";
+
 export default {
+  data() {
+    return {};
+  },
   name: "ScoreScreen",
   setup() {
+  
     const score = ref(0);
     const preguntas_filtradas = ref([]);
     const store = useStore();
 
+
     onMounted(() => {
-      let preguntas = store.partida_preguntas;
-      let respuestas = store.partida_respuestas;
-      let usuarioRespuestas = store.partida_usuario_respuestas;
+
+      let preguntas = store.returnPreguntas_sp();
+      let respuestas = store.returnRespuestas_sp();
+      let usuarioRespuestas = store.returnUsuarioRespuestas_sp();
+      console.log("preguntas", preguntas);
+      console.log("respuestas", respuestas);
+      console.log("usuarioRespuestas", usuarioRespuestas);
 
       for (let i = 0; i < preguntas.length; i++) {
-        if (respuestas[i] !== usuarioRespuestas[i]) {
+        if (respuestas[i] === usuarioRespuestas[i]) {
+          score.value++;
+        } else {
           preguntas_filtradas.value.push({
             pregunta: preguntas[i],
             respuesta_correcta: respuestas[i],
             user_respuesta: usuarioRespuestas[i],
           });
-        } else {
-          score.value++;
         }
       }
     });
 
     return {
       score,
-      preguntas_filtradas
+      preguntas_filtradas,
+      totalPreguntas: store.partida_preguntas[socketId]
+        ? store.partida_preguntas[socketId].length
+        : 0,
     };
   },
-}
+};
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap");
 
 body {
   padding: 0;
@@ -65,7 +82,7 @@ body {
 }
 
 * {
-  font-family: 'Anek Bangla', sans-serif;
+  font-family: "Anek Bangla", sans-serif;
   z-index: -1;
   padding: 0;
   margin: 0;
@@ -74,7 +91,6 @@ body {
 }
 
 .score-container {
-
   display: grid;
   position: sticky;
   width: 100%;
@@ -113,8 +129,6 @@ h3 {
 .preguntas-incorrectas-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-
-
 }
 
 .score-preguntas-incorrectas {
@@ -125,7 +139,6 @@ h3 {
     "pregunta"
     "respuesta_correcta"
     "user_respuesta";
-  ;
   background-color: #dfdfdf;
   border: 2px solid black;
   height: 200px;
@@ -134,11 +147,12 @@ h3 {
   text-align: center;
   font-weight: 900;
 }
+
 .score-preguntas-incorrectas p:nth-child(1) {
   grid-area: pregunta;
   font-size: 18px;
-
 }
+
 .score-preguntas-incorrectas p:nth-child(2) {
   margin: 10px;
   color: rgb(100, 128, 0);
