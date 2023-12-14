@@ -1,36 +1,38 @@
 <template>
-  <body>
-    <div class="login">
-      <form @submit.prevent="login" class="form">
-        <h2 class="title">Iniciar sessió</h2>
-        <div class="group">
-          <label for="email">Email</label>
-          <input type="email" class="inputbox" id="email" v-model="email" required>
-        </div>
-        <div class="group">
-          <label for="password">Contrasenya</label>
-          <input type="password" class="inputbox" id="password" v-model="password" required>
-        </div>
-        <button type="submit" class="btn btn-primary btn-login">Iniciar sessió</button>
-      </form>
-    </div>
-
-  </body>
+  <div class="login">
+    
+    <form @submit.prevent="login" class="form">
+      <h6 ><router-link to="/register">No tienes cuenta?</router-link></h6>
+      <h2 class="title">Iniciar sesión</h2>
+      <div class="group">
+        <label for="email">Email</label>
+        <input type="email" class="inputbox" id="email" v-model="email" required>
+      </div>
+      <div class="group">
+        <label for="password">Contraseña</label>
+        <input type="password" class="inputbox" id="password" v-model="password" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-login" :disabled="isLoading">
+        {{ isLoading ? 'Iniciando sesión...' : 'Iniciar sesión' }}
+      </button>
+    </form>
+  </div>
 </template>
 
 <script>
-
-
 export default {
   name: 'LoginScreen',
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      isLoading: false,
     };
   },
   methods: {
     login() {
+      this.isLoading = true;
+
       fetch('http://localhost:8000/api/login', {
         method: 'POST',
         headers: {
@@ -41,25 +43,34 @@ export default {
           password: this.password.trim(),
         }),
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
         .then((data) => {
           console.log('Success:', data);
 
           if (data.status === 1) {
+            localStorage.setItem('authToken', data.access_token);
             this.$router.push('/lobby');
           } else {
             alert('Inicio de sesión fallido. Verifica tus credenciales.');
           }
         })
         .catch((error) => {
-          alert('Inicio de sesión fallido. Verifica tus credenciales.');
+          alert('Hubo un problema durante el inicio de sesión. Inténtalo de nuevo más tarde.');
           console.error('Error:', error);
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
-  }
-
-}
+  },
+};
 </script>
+
 
 
 
@@ -100,7 +111,13 @@ body {
   padding: 80px;
   width: 100%;
 }
-
+.form h6{
+    text-decoration: underline;
+    position: relative;
+    left: -50%;
+    top: -44px;
+    font-size: 15px;
+}
 .inputbox {
   margin-bottom: 20px;
   outline: none;

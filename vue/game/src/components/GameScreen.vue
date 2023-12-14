@@ -202,7 +202,7 @@ body {
   text-align: center;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  color: #1c1c1c;
+  color: #9e9797;
 }
 
 h2 {

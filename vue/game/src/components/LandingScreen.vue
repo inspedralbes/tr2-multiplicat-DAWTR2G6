@@ -12,14 +12,15 @@
         </router-link>
       </div>
     </header>
-    <div class="container" v-if="!isLoading">
+    <div class="container">
       <h1>Selecciona una Categoría</h1>
 
       <div v-for="(category, index) in categories" :key="index" class="category" @click="selectCategory(category.id)">
         <img :src="category.image" :alt="category.alt">
-        <div class="category-content">
-          <h2>{{ category.title }}</h2>
+        <div   class="category-content">
+          <h2 >{{ category.title }}</h2>
           <p>{{ category.description }}</p>
+         
         </div>
       </div>
     </div>
@@ -27,7 +28,8 @@
 </template>
 
 <script>
-export default {
+import  { useStore } from '../store';
+export default { 
   data() {
     return {
       categories: [
@@ -39,7 +41,7 @@ export default {
           description: 'Explora conceptos matemáticos relacionados con el volumen. Descubre fórmulas y propiedades fascinantes',
         },
         {
-          id: 'masa',
+          id: 'massa',
           image: './public/MASA.jpg',
           alt: 'Masa',
           title: 'Massa',
@@ -85,8 +87,13 @@ export default {
     selectCategory(categoryId) {
       // Lógica para manejar la selección de categoría
       console.log('Selected category:', categoryId);
+      const store = useStore();
+      store.resetCategoria();
+      store.setCategoria(categoryId);
+      this.$router.push('/GameScreen');
       // Puedes agregar más lógica según tus necesidades, como navegar a otra página, etc.
     },
+    
   },
 };
 </script>
