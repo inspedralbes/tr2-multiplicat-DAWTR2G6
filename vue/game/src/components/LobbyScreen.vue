@@ -33,7 +33,7 @@ export default {
     return {
       mode: null, // singlePlayer / multiPlayer
       contador_jugadors: 0,
-      socket: null,
+      socket: socket.id,
       players: [],
       roomId: 0,
       catergoria: null,
