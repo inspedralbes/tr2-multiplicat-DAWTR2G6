@@ -21,4 +21,3 @@ socket.on('updatePlayers', (players) => {
   console.log('Llista de jugadors:', players);
   // Handle the updated player list in your Vue component
 });
-
