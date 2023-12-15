@@ -41,7 +41,7 @@ export default {
             partida_preguntas: [],
             partida_respuestas: [],
             modo: "mutiplayer",
-            players: [],
+            players: {},
         };
     },
     methods: {
@@ -123,7 +123,7 @@ export default {
             this.partida_preguntas.push(this.preguntaActual.enunciado.trim());
             this.partida_respuestas.push(this.preguntaActual.respuesta_correcta.trim());
         },
-        // ------------------------------------------------------------------------------------
+
         partidaAcabada() {
             console.log("Paso por partidaAcabada()");
             console.log("this.players", this.players);
@@ -131,10 +131,9 @@ export default {
 
             store.guardar_allData(socket.id, this.partida_preguntas, this.partida_respuestas, this.partida_usuario_respuestas);
 
-            socket.emit("partida_acabada", this.players, socket.id);
+            socket.emit("partida_acabada");
 
         },
-        // ------------------------------------------------------------------------------------
     },
     created() {
         socket.on('establecerJugadores', (players) => {
@@ -146,13 +145,16 @@ export default {
             console.log("Paso por guardar_datos_partida_multi");
             this.partidaAcabada();
         });
-        // ------------------------------------------------------------------------------------
+
         socket.on('updatear_bloques_cliente', (arr_jugadors) => {
+
+            console.log(arr_jugadors);
+            console.log(arr_jugadors[socket.id]);
             this.blocks = arr_jugadors[socket.id].blocks;
             if (this.blocks === 0) {
-                console.log("Paso por updatear_bloques_cliente en el IF");
+                console.log("Voy a madnar solicitud de acabar partida (emit)");
                 //envio al servidor una solicitud para acabar
-                socket.emit("solicitud_acabar_partida");
+                socket.emit("solicitud_acabar_partida",);
             }
         });
         socket.on('mover_sala_a_scores', () => {
