@@ -9,7 +9,7 @@
 
 
     <div class="container">
-      <section @click="mover_a_lobby('tiemps')" id="temps">
+      <section @click="mover_a_lobby('temps')" id="temps">
         <h2> Temps</h2>
       </section>
 

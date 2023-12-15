@@ -1,17 +1,11 @@
 import express from "express";
-
-import {
-  createServer
-} from "http";
-import {
-  Server
-} from "socket.io";
+import { createServer } from "http";
+import { Server } from "socket.io";
 import cors from "cors";
 
 
 const app = express();
 
-//Permite enviar solicitudes cors, de ese puerto
 const corsOptions = {
   origin: "http://localhost:5173",
   methods: ["GET", "POST"],
@@ -24,110 +18,131 @@ const io = new Server(server, {
   cors: corsOptions,
 });
 
-// LISTA DE JUGADORES
-const arr_jugadors = {};
-//Contador de jugadores
+// obj con room (id, wi32eq) i blocks: (valor inicial 5)
+const todos_los_jugadores = {};
 let cont_jugadors = 0;
-// LISTA DE PUNTOS A QUITARSE, QUANTOS MENOS MEJOR
 const numBloques = 5;
-// MIN NUM DE JUGADORES PARA CHECKMULTIPLAYER DEVUELVA empezarJuego-mult
 const minJugsMult = 2;
-// ROOM PARA MULTIJUGADOR 
+const maxJugsMult = 4;
+// obj con id, jugadores, en_progreso
 let rooms = [];
-// QUANDO ALGUIEN SE UNE . . .
+
 io.on("connection", (socket) => {
+  console.log('on conection console log');
 
-  // SOCKET RECIBE socket.emit('check-mult-jugable')
-  socket.on("check-mult-jugable", () => {
+  socket.on("comprobar_suficientes_jugadores", () => {
     cont_jugadors += 1;
-    io.emit("update_llista_jugadors", cont_jugadors);
-    // MENSAJE POR CONSOLA
-    console.log("Jugadors antes ", arr_jugadors);
-    // NUEVO JUGADOR -> ASIGNAR NUMERO DE BLOCKS
-    arr_jugadors[socket.id] = {
-      blocks: numBloques,
-    };
-    console.log("Jugadors despues", arr_jugadors);
 
-    // NOTIFICAR A CADA JUGADOR SOBRE ESTA NUEVA CONEXION
-    io.emit("updatePlayers", Object.keys(arr_jugadors));
+    let room = rooms.find(
+      (room) =>
+        room.jugadores.length < maxJugsMult &&
+        !room.en_progreso
+    );
+    if (!room) {
+      room = { id: Math.random().toString(36).substring(7), jugadores: [], en_progreso: false };
+      rooms.push(room);
+      console.log(`Se ha creado la sala ${room.id}`);
+    }
 
-    // COMPROBAR QUE HAY SUFICIENTES JUGADORES CONECTADOS
-    console.log("Contador Jug: " + cont_jugadors);
-    if (cont_jugadors >= minJugsMult) {
-      // EMPIEZA LA PARTIDA MULTIJUGADOR
+    room.jugadores.push(socket.id);
+    socket.join(room.id);
 
-      console.log("Empieza la partida multijugador");
-      io.emit("empezarJuego-mult");
-      io.emit("establecerJugadores", Object.keys(arr_jugadors));
+    todos_los_jugadores[socket.id] = { room: room.id, blocks: numBloques };
+
+
+    console.log(`Contador de jugadores de la sala ${room.id}: ${room.jugadores.length}`);
+    console.log(`Jugador ${socket.id} se ha conectado a la sala ${room.id}`);
+
+    if (cont_jugadors >= minJugsMult && cont_jugadors <= maxJugsMult && !room.en_progreso) {
+      console.log(`Empieza la partida multijugador, enviando señal a los jugadores de la sala ${room.id}`);
+
+
+      io.to(room.id).emit("empezarJuego-mult");
+      io.to(room.id).emit("establecerJugadores", room.jugadores);
+      io.to(room.id).emit("array jugadors", room.jugadores);
+
+
+      room.en_progreso = true;
     } else {
       console.log("Se requiren mas jugadores para una partida multijugador");
     }
+
   });
 
-  // ------------------------------------------------------------------------------------
+  socket.on('enviar_bloques', (sockedID) => {
+    let room = rooms.find((room) => room.jugadores.includes(socket.id));
+    if (room) {
+      console.log(room.jugadores);
+      console.log(room.id);
 
-  socket.on('enviar_bloques', (id) => {
-    console.log('Jugador ' + socket.id + 'responde correctamente')
-    arr_jugadors[id].blocks -= 1;
 
-    for (let socketId in arr_jugadors) {
-      if (socketId !== id) {
-        arr_jugadors[socketId].blocks += 1;
+      todos_los_jugadores[sockedID].blocks -= 2;
+      console.log(`Jugador ${sockedID} responde correctamente, numBlocks: ` + todos_los_jugadores[sockedID].blocks);
+      for (let id in todos_los_jugadores) {
+        if (todos_los_jugadores[id].room === room.id) {
+
+          todos_los_jugadores[id].blocks += 1;
+
+          console.log(`Se le pasa un bloque de ${sockedID} a ${id} tiene ahora: ${todos_los_jugadores[id].blocks} bloques`);
+        }
+
       }
+      console.log(`Jugador ${sockedID} actualización bloques, numBlocks: ` + todos_los_jugadores[sockedID].blocks);
+      io.to(room.id).emit('updatear_bloques_cliente', todos_los_jugadores);
+
+    } else {
+      console.log('No se ha encontrado la sala');
     }
-    io.emit('updatear_bloques_cliente', arr_jugadors);
   });
-
-
 
   socket.on("solicitud_acabar_partida", () => {
-    io.emit("guardar_datos_partida_multi");
+    console.log('Estoy dentro de solicitud_acabar_partida');
+    let room = rooms.find((room) => room.jugadores.includes(socket.id));
+    if (room) {
+      io.to(room.id).emit("guardar_datos_partida_multi");
+    } else {
+      console.log('No se ha encontrado la sala');
+    }
   });
 
   socket.on("partida_acabada", () => {
-    let room = rooms[socket.id];
-    console.log('Redirigiendo a la sala ' + room + ' a la pantalla de scores');
-    io.to(room).emit("mover_sala_a_scores", room);
-    
-    // limpia el array de jugadores
-    //arr_jugadors = {};
-    //cont_jugadors=0;
-    delete arr_jugadors[socket.id];
-    cont_jugadors -= 1;
-    io.emit("update_llista_jugadors", cont_jugadors);
-    // UPDATEAR A LOS JUGADORES SOBRE LOS VACANTES
-    io.emit("updatePlayers", Object.keys(arr_jugadors));
+    console.log('Estoy dentro de partida_acabada');
+    let room = rooms.find((room) => room.jugadores.includes(socket.id));
+    if (room) {
+      console.log(`Redirigiendo a la sala ${room.id} a la pantalla de scores`);
+      io.to(room.id).emit("mover_sala_a_scores", room.id);
+
+      room.jugadores = room.jugadores.filter((player) => player.id !== socket.id);
+      delete todos_los_jugadores[socket.id];
+      cont_jugadors -= 1;
+      delete rooms[socket.id];
+      io.emit("update_llista_jugadors", cont_jugadors);
+      io.emit("updatejugadores", Object.keys(todos_los_jugadores));
+    } else {
+      console.log('No se ha encontrado la sala');
+    }
   });
 
 
-  // ------------------------------------------------------------------------------------
-
-  socket.on('unirse_room', (room) => {
-    socket.join(room);
-    // guarda la id de la sala en la que se encuentra el jugador en el array rooms
-    rooms[socket.id] = room;
-    console.log('Jugador ' + socket.id + ' se ha unido a la sala ' + room);
-  });
-
-
-
-
-  // SE PIERDE UNA CONEXION
   socket.on("disconnect", () => {
-   // delete arr_jugadors[socket.id];
-    //cont_jugadors -= 1;
-  /*  console.log("ESTOY ELIMINANDO JUGADORES!!!")
-    io.emit("update_llista_jugadors", cont_jugadors);
-    // UPDATEAR A LOS JUGADORES SOBRE LOS VACANTES
-    io.emit("updatePlayers", Object.keys(arr_jugadors));*/
+    console.log(`El jugador ${socket.id} se ha desconectado`);
+
+    const sala_del_jugadorDesconectado = rooms.find((room) =>
+      room.jugadores.includes(socket.id)
+    );
+
+    if (sala_del_jugadorDesconectado) {
+      sala_del_jugadorDesconectado.jugadores = sala_del_jugadorDesconectado.jugadores.filter(
+        (player) => player !== socket.id
+      );
+    }
+
+    delete todos_los_jugadores[socket.id];
+
+    cont_jugadors -= 1;
   });
-
-
-
 });
 
-//  CONF DEL SV
 const PORT = process.env.PORT || 3333;
 server.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);

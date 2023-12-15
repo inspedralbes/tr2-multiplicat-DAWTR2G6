@@ -31,20 +31,19 @@ export default {
   name: "LobbyScreen",
   data() {
     return {
-      mode: null, // singlePlayer / multiPlayer
+      mode: null, 
       contador_jugadors: 0,
-      socket: null,
       players: [],
-      roomId: 0,
       catergoria: null,
       multiplayerBtn_desabilitado: false,
     };
   },
   methods: {
     startSinglePlayerMode() {
-      // PONER EL MODO DE JUEGO EN 1 JUG
+
       if (this.mode === 'multiPlayer') {
         socket.emit('salirdeMultijugador');
+
       }
       this.mode = "singlePlayer";
       if (this.mode === "singlePlayer") {
@@ -53,19 +52,14 @@ export default {
 
     },
     startMultiPlayerMode() {
-     // this.multiplayerBtn_desabilitado = true; 
-
-      // PONER EL MODO DE JUEGO EN +1 JUG
+      this.contador_jugadors++;
       this.mode = "multiPlayer";
-      // UPDATEAR EL CONTADOR DE JUGADORES
       this.updatear_players();
-      // EMITIR EVENTO DE QUE EL JUGADOR SE HA UNIDO A UNA SALA
-      socket.emit("unirse_room", this.roomId);
-      this.roomId++;
-      // EMITIR EVENTO DE SUFICIENTES JUGADORES ?
-      socket.emit("check-mult-jugable");
+
+      socket.emit("comprobar_suficientes_jugadores");
     },
     updatear_contador_jugadors(contador) {
+    
       this.contador_jugadors = contador;
     },
     updatear_players() {
@@ -122,7 +116,8 @@ body {
   justify-content: center;
   color: white;
 }
-.lobby-game{
+
+.lobby-game {
   text-shadow: 2px 2px 4px black;
 }
 
@@ -185,7 +180,7 @@ div p {
   }
 
   .lobby-title {
-  
+
     font-size: 60px;
   }
 
@@ -193,7 +188,7 @@ div p {
     display: flex;
     margin-left: auto;
     margin-right: auto;
-   
+
   }
 }
 </style>
