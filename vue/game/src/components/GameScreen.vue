@@ -1,7 +1,6 @@
 <template>
   <body>
     <div class="container">
-      <h2 class="title">Aguanta tot el que puguis!</h2>
 
       <div class="panel-juego" v-if="preguntas_guardadas">
         <p>{{ preguntaActual.enunciado }}</p>
@@ -164,32 +163,17 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
 body {
-  padding: 0;
-  margin: -10px;
-  font-family: 'Anek Bangla', sans-serif;
-  height: 100vh;
-  background-repeat: repeat;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  letter-spacing: 0.3rem;
-  font-weight: lighter;
-  background-color: rgba(226, 222, 222, 0.815);
-  /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)), url("/giphy.gif");*/
-
-}
-
-* {
-  border-radius: 15px;
-}
-
-.tetris-container {
-  display: grid;
+  display: flex;
+  font-family: 'Audiowide', cursive;
   align-items: center;
   justify-content: center;
-  color: #1c1c1c;
+  height: 100vh;
+  margin: 0;
+  color: #ffffff;
+  background: url("/space_background.jpg") center/cover no-repeat; /* Reemplaza con tu imagen espacial */
 }
 
 .container {
@@ -200,60 +184,64 @@ body {
   margin-top: 5%;
   padding: 40px;
   text-align: center;
-  border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  color: #9e9797;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
-h2 {
-  font-size: 2em;
-}
-
-p {
-  font-size: 2em;
-}
 
 .options {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .option {
-  margin: 0 25px;
-  padding: 30px;
+  margin: 0 20px;
+  padding: 20px 40px;
   width: auto;
-  height: auto;
-  border: 3px solid rgba(0, 0, 0, 0.719);
-  border-radius: 6px;
+  border: 3px solid #67a4e1; /* Color del borde azul espacial */
+  background-color: #203142; /* Color de fondo más oscuro */
+  color: #ffffff;
+  border-radius: 25px;
   cursor: pointer;
-  background-color: #dfdfdf;
-  color: #1c1c1ca4;
-  font-size: 25px;
-  box-shadow: 4px 4px rgb(0, 0, 0);
-  transition: box-shadow 0.2s ease-in-out;
+  font-size: 20px;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0 0 15px rgba(108, 17, 253, 0.5);
 }
 
-button {
-  width: auto;
-  height: auto;
-  padding: 10px 20px;
-  letter-spacing: 0.3rem;
+.option:hover,
+.option:focus {
+  background-color: #2c394b; /* Cambio de color al pasar el ratón para resaltar */
+  color: #67a4e1;
+  box-shadow: 0 0 20px rgba(103, 164, 225, 0.7); /* Efecto de sombra al pasar el ratón */
 }
 
-.option:hover {
-  box-shadow: 0 0 0 0 rgb(255, 255, 255);
+.option:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(rgba(255, 255, 255, 0.2), transparent);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  z-index: -1;
+}
+
+.option:hover:before,
+.option:focus:before {
+  opacity: 1;
+  transform: scale(1.2);
 }
 
 .tetris-container {
   display: flex;
-  align-content: stretch;
-  justify-content: space-between;
-  justify-items: stretch;
-  width: auto;
-  height: auto;
+  align-items: center;
+  justify-content: center;
 }
-
 
 @media (max-width: 1000px) {
   .container {
@@ -264,33 +252,25 @@ button {
     padding: 20px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: 10px;
+    grid-gap: 20px;
   }
 
-  h2 {
-    font-size: 1.5em;
-  }
-
-  p {
-    font-size: 1.5em;
+  .title {
+    font-size: 3em;
   }
 
   .options {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 30px;
   }
 
   .option {
-    margin: 10px;
-    padding: 20px;
-    font-size: 20px;
+    margin: 15px;
+    padding: 25px 40px;
+    font-size: 22px;
     width: 100%;
-  }
-
-  button {
-    padding: 5px 10px;
   }
 }
 </style>
