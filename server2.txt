@@ -1,0 +1,103 @@
+Server 2
+
+
+
+import express from "express";
+import { createServer } from "http";
+import { Server } from "socket.io";
+import cors from "cors";
+
+const app = express();
+const server = createServer(app);
+const io = new Server(server);
+
+const corsOptions = {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+    credentials: true,
+};
+app.use(cors(corsOptions));
+
+const arr_jugadors = {};
+let cont_jugadors = 0;
+const numBloques = 5;
+const minJugsMult = 2;
+const maxJugsMult = 4;
+let rooms = [];
+
+io.on("connection", (socket) => {
+    console.log('on conection console log');
+
+    socket.on("comprobar_suficient_jugadors", () => {
+        cont_jugadors += 1;
+        console.log('22222222222222222');
+
+        let room = rooms.find((room) => room.players.length < maxJugsMult);
+        if (!room) {
+            room = { id: Math.random().toString(36).substring(7), players: [] };
+            rooms.push(room);
+            console.log('33333333333333333333');
+        }
+        // players.push(socket.id);
+        room.players.push(socket.id);
+        socket.join(room.id);
+       
+        arr_jugadors[socket.id] = { room: room.id, blocks: numBloques };
+      
+        io.emit("updatePlayers", Object.keys(arr_jugadors));
+        console.log(`Contador Jug: ${cont_jugadors}`);
+
+        if (cont_jugadors >= minJugsMult && cont_jugadors <= maxJugsMult) {
+            console.log("Empieza la partida multijugador");
+            io.emit("empezarJuego-mult");
+            io.emit("establecerJugadores", Object.keys(arr_jugadors));
+        } else {
+            console.log("Se requiren mas jugadores para una partida multijugador");
+        }
+    });
+
+    socket.on('enviar_bloques', (id) => {
+        console.log(`Jugador ${socket.id} responde correctamente`);
+        arr_jugadors[id].blocks -= 1;
+
+        for (let socketId in arr_jugadors) {
+            if (socketId !== id) {
+                arr_jugadors[socketId].blocks += 1;
+            }
+        }
+        io.emit('updatear_bloques_cliente', arr_jugadors);
+    });
+
+    socket.on("solicitud_acabar_partida", () => {
+        let room = rooms.find((room) => room.players.some((player) => player.id === socket.id));
+        if (room) {
+            io.to(room.id).emit("guardar_datos_partida_multi");
+        }
+    });
+
+    socket.on("partida_acabada", () => {
+        let room = rooms.find((room) => room.players.some((player) => player.id === socket.id));
+        if (room) {
+            console.log(`Redirigiendo a la sala ${room.id} a la pantalla de scores`);
+            io.to(room.id).emit("mover_sala_a_scores", room.id);
+
+            room.players = room.players.filter((player) => player.id !== socket.id);
+            delete arr_jugadors[socket.id];
+            cont_jugadors -= 1;
+            delete rooms[socket.id];
+            io.emit("update_llista_jugadors", cont_jugadors);
+            io.emit("updatePlayers", Object.keys(arr_jugadors));
+        }
+    });
+
+   
+
+    socket.on("disconnect", () => {
+        // Handle disconnection if needed
+    });
+});
+
+const PORT = process.env.PORT || 3333;
+server.listen(PORT, () => {
+    console.log(`Servidor escuchando en el puerto ${PORT}`);
+});
