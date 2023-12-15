@@ -1,7 +1,4 @@
-import {
-  createRouter,
-  createWebHistory
-} from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import LoginScreen from '../components/LoginScreen.vue';
 import RegisterScreen from '../components/RegisterScreen.vue';
 import GameScreen from '../components/GameScreen.vue';
@@ -12,39 +9,18 @@ import ScoreScreeMult from '../components/ScoreScreenMult.vue';
 import GameScreenMult from '../components/GameScreenMult.vue';
 
 
+const isAuthenticated = () => {
+  const authToken = localStorage.getItem('authToken');
+  return authToken !== null;
+};
 
 const router = createRouter({
-  history: createWebHistory(
-    import.meta.env.BASE_URL),
-  routes: [{
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
       path: '/login',
-      name: 'home',
+      name: 'login',
       component: LoginScreen,
-    },
-    {
-      path: '/scoresMult/:id',
-      name: 'scoresMulti',
-      component: ScoreScreeMult,
-      props: true,
-    },
-    {
-      path: '/GameScreen',
-      name: 'game',
-      component: GameScreen,
-
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: RegisterScreen,
-
-
-    },
-    {
-      path: '/Lobby',
-      name: 'lobby',
-      component: LobbyScreen,
-
     },
     {
       path: '/',
@@ -52,31 +28,47 @@ const router = createRouter({
       component: LandingScreen,
     },
     {
-      path: '/scores/:id',
+      path: '/register',
+      name: 'register',
+      component: RegisterScreen,
+    },
+    {
+      path: '/scores',
       name: 'ScoreScreen',
       component: ScoreScreen,
-      props: true,
+      props: true,      meta: { requiresAuth: true },
+    },
+    {
+      path: '/lobby',
+      name: 'lobby',
+      component: LobbyScreen,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/GameScreen',
+      name: 'game',
+      component: GameScreen,
+      meta: { requiresAuth: true },
     },
     {
       path: '/GameScreenMult',
       name: 'GameMult',
       component: GameScreenMult,
-
+      meta: { requiresAuth: true },
     },
   ],
 });
 
-
-// router.beforeEach((to, from, next) => {
-//   const publicPages = ['/login', '/register', '/'];
-//   const authRequired = !publicPages.includes(to.path);
-//   const loggedIn = useStore().$state.isloggedIn;
-
-//   if (authRequired && !loggedIn) {
-//     return next('/login');
-//   }
-
-//   next();
-// });
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (!isAuthenticated()) {
+      next({ name: 'login' });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
 
 export default router;

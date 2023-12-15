@@ -33,6 +33,7 @@ export default {
   },
   data() {
     return {
+      
       data_preguntas: [],
       index: 0,
       blocks: 5,
@@ -47,6 +48,7 @@ export default {
     };
   },
   methods: {
+
     async cargarPreguntas() {
       try {
         const store = useStore();
@@ -98,6 +100,7 @@ export default {
       
     },
     getPreguntaActual() {
+      
       return {
         enunciado: this.data_preguntas["preguntas_unidades"][this.index].pregunta,
         opciones: JSON.parse(
