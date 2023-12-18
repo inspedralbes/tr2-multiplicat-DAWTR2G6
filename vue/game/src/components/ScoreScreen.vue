@@ -1,9 +1,10 @@
 <template>
   <body>
+    <div>
     <div class="score-container">
-      <h2>PUNTUACIO DE LA PARTIDA: {{ score }}/{{ }}</h2>
-      <button @click="$router.push('/lobby')">Ves'ne al Lobby</button>
-      <button @click="$router.push('/ranking')">Mira com vas al rankings!</button>
+      <h2>PUNTUACIO DE LA PARTIDA: {{ score }}/{{ totalQuestions }}</h2>
+      <button @click="$router.push('/lobby')">Ves al Lobby</button>
+      <button @click="$router.push('/ranking')">Mira com vas al ranking!</button>
 
     </div>
 
@@ -15,19 +16,23 @@
         <p>La teva resposta: {{ pregunta.user_respuesta }}</p>
       </div>
     </div>
-
-
+    <div class="ScoreGrafico">
+      <canvas id="scoreChart"></canvas>
+    </div>
+</div>
   </body>
 </template>
+
 <script>
 import { useStore } from "../store";
-
+import Chart from 'chart.js/auto';
 import { onMounted, ref } from "vue";
 export default {
   name: "ScoreScreen",
   setup() {
     const score = ref(0);
     const preguntas_filtradas = ref([]);
+    const totalQuestions = ref(0);
     const store = useStore();
 
     onMounted(() => {
@@ -46,11 +51,38 @@ export default {
           score.value++;
         }
       }
+
+      // Calculate totalQuestions
+      totalQuestions.value = preguntas.length;
+      const canvas = document.getElementById('scoreChart');
+
+      // Check if the canvas element is available
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+
+        // Create a pie chart
+        new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: ['Correctes  ', 'Incorrectes'],
+            datasets: [{
+              data: [score.value, totalQuestions.value - score.value],
+              backgroundColor: ['#80D483', '#FF6C6C'],
+              color: 'white',
+              borderWidth: 1
+            }]
+          },
+          options: {
+
+          }
+        });
+      }
     });
 
     return {
       score,
-      preguntas_filtradas
+      preguntas_filtradas,
+      totalQuestions,
     };
   },
 }
@@ -60,31 +92,46 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap');
 
 body {
-  padding: 0;
-  margin: 0;
+  padding: 20px;
+  /* Add some padding for better overall layout */
+
 }
 
 * {
   font-family: 'Anek Bangla', sans-serif;
-  z-index: -1;
+
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   letter-spacing: 0.1rem;
+
+}
+
+.ScoreGrafico {
+  width: 147px;
+  height: 132px;
+  margin: 20px auto;
+  position: fixed;
+  top: 1%;
+  z-index: 2;
+  left: 43%;
+  color: #e4e0e0;
+  left: 86%;
 }
 
 .score-container {
-
   display: grid;
   position: sticky;
   width: 100%;
   top: 0px;
   padding: 1%;
-  font-size: 30px;
+  font-size: 24px;
   text-align: center;
   border: 2px solid #1c1c1c;
-  background-color: #dfdfdf;
+  background-color: #f0f0f0;
   z-index: 1;
+  position: relative;
+  height: 153px;
 }
 
 h3 {
@@ -94,20 +141,41 @@ h3 {
   margin: 10px;
 }
 
-.score-container button:nth-child(2),
+.score-container button:nth-child(2) {
+  margin: 10px;
+  padding: 12px;
+  font-weight: 600;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+  left: -63px;
+  margin-left: 85px;
+  width: 115px;
+
+}
+
 .score-container button:nth-child(3) {
   margin: 10px;
-  padding: 8px;
-  font-weight: 400;
-  background-color: #1c1c1c1a;
-  color: #1c1c1c;
-  box-shadow: 1px 1px 1px 1px black;
-  font-size: 20px;
+  padding: 12px;
+  font-weight: 600;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+  left: 12px;
+  top: 36%;
+  width: 115px;
 }
 
 .score-container button:nth-child(2):hover,
 .score-container button:nth-child(3):hover {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  background-color: #45a049;
 }
 
 .preguntas-incorrectas-container {
@@ -134,11 +202,13 @@ h3 {
   text-align: center;
   font-weight: 900;
 }
+
 .score-preguntas-incorrectas p:nth-child(1) {
   grid-area: pregunta;
   font-size: 18px;
 
 }
+
 .score-preguntas-incorrectas p:nth-child(2) {
   margin: 10px;
   color: rgb(100, 128, 0);
@@ -148,5 +218,4 @@ h3 {
 .score-preguntas-incorrectas p:nth-child(3) {
   color: rgba(255, 8, 0, 0.911);
   grid-area: user_respuesta;
-}
-</style>
+}</style>

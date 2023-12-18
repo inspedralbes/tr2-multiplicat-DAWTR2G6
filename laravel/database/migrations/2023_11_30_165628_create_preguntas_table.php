@@ -18,6 +18,7 @@ return new class extends Migration
             $table->json('opciones');
             $table->string('respuesta_correcta');
             $table->timestamps();
+
         });
     }
 

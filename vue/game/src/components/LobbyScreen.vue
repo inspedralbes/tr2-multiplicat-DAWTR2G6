@@ -1,89 +1,89 @@
-<template>
-  <body>
-    <div class="lobby-container">
-      <h2 class="lobby-title">Sala de Lobby</h2>
-      <div class="lobby-options">
-        <p>Selecciona el modo de juego:</p>
-        <button @click="startSinglePlayerMode" class="btn">Vs Tu Mateix!</button>
-        <button @click="startMultiPlayerMode" class="btn">Multijugador</button>
-      </div>
-      <div v-if="mode === 'multiPlayer'" class="player-info">
-        <div v-if="contador_jugadors > 1">
-          <p>{{ contador_jugadors }} jugadores en la sala</p>
+  <template>
+    <body>
+      <div class="lobby-container">
+        <h2 class="lobby-title">Sala de Lobby</h2>
+        <div class="lobby-options">
+          <p>Selecciona el modo de juego:</p>
+          <button @click="startSinglePlayerMode" class="btn">Vs Tu Mateix!</button>
+          <button @click="startMultiPlayerMode" class="btn">Multijugador</button>
         </div>
-        <div v-if="contador_jugadors === 1">
-          <p>{{ contador_jugadors }} jugador en la sala</p>
+        <div v-if="mode === 'multiPlayer'" class="player-info">
+          <div v-if="contador_jugadors > 1">
+            <p>{{ contador_jugadors }} jugadores en la sala</p>
+          </div>
+          <div v-if="contador_jugadors === 1">
+            <p>{{ contador_jugadors }} jugador en la sala</p>
+          </div>
         </div>
       </div>
-    </div>
 
-  </body>
-</template>
+    </body>
+  </template>
 
-<script>
+  <script>
 
 
-import { socket } from "../socket.js";
+  import { socket } from "../socket.js";
 
-export default {
-  name: "LobbyScreen",
-  data() {
-    return {
-      mode: null, // singlePlayer / multiPlayer
-      contador_jugadors: 0,
-      socket: null,
-      players: [],
-      roomId: 0,
-      catergoria: null,
-    };
-  },
-  methods: {
-    startSinglePlayerMode() {
-      // PONER EL MODO DE JUEGO EN 1 JUG
-      this.mode = "singlePlayer";
-      if (this.mode === "singlePlayer") {
-        this.$router.push('/GameScreen');
-      }
-
+  export default {
+    name: "LobbyScreen",
+    data() {
+      return {
+        mode: null, // singlePlayer / multiPlayer
+        contador_jugadors: 0,
+        socket: null,
+        players: [],
+        roomId: 0,
+        catergoria: null,
+      };
     },
-    startMultiPlayerMode() {
-      // PONER EL MODO DE JUEGO EN +1 JUG
-      this.mode = "multiPlayer";
-      // UPDATEAR EL CONTADOR DE JUGADORES
-      this.updatear_players();
-      // EMITIR EVENTO DE QUE EL JUGADOR SE HA UNIDO A UNA SALA
-      socket.emit("unirse_room", this.roomId);
-      this.roomId++;
-      // EMITIR EVENTO DE SUFICIENTES JUGADORES ?
-      socket.emit("check-mult-jugable");
+    methods: {
+      startSinglePlayerMode() {
+        // PONER EL MODO DE JUEGO EN 1 JUG
+        this.mode = "singlePlayer";
+        if (this.mode === "singlePlayer") {
+          this.$router.push('/GameScreen');
+        }
+
+      },
+      startMultiPlayerMode() {
+        // PONER EL MODO DE JUEGO EN +1 JUG
+        this.mode = "multiPlayer";
+        // UPDATEAR EL CONTADOR DE JUGADORES
+        this.updatear_players();
+        // EMITIR EVENTO DE QUE EL JUGADOR SE HA UNIDO A UNA SALA
+        socket.emit("unirse_room", this.roomId);
+        this.roomId++;
+        // EMITIR EVENTO DE SUFICIENTES JUGADORES ?
+        socket.emit("check-mult-jugable");
+      },
+      updatear_contador_jugadors(contador) {
+        this.contador_jugadors = contador;
+      },
+      updatear_players() {
+        socket.on("update_llista_jugadors", (players) => {
+          this.contador_jugadors = players;
+        });
+      },
     },
-    updatear_contador_jugadors(contador) {
-      this.contador_jugadors = contador;
-    },
-    updatear_players() {
-      socket.on("update_llista_jugadors", (players) => {
-        this.contador_jugadors = players;
+    created() {
+      socket.on("empezarJuego-mult", () => {
+        console.log("Redireccionando a pantalla de juego");
+        if (this.mode === "multiPlayer") {
+          this.$router.push('/GameScreenMult');
+        }
+
       });
     },
-  },
-  created() {
-    socket.on("empezarJuego-mult", () => {
-      console.log("Redireccionando a pantalla de juego");
-      if (this.mode === "multiPlayer") {
-        this.$router.push('/GameScreenMult');
+    beforeDestroy() {
+      if (socket) {
+        socket.disconnect();
       }
 
-    });
-  },
-  beforeDestroy() {
-    if (socket) {
-      socket.disconnect();
-    }
+    },
+  };
 
-  },
-};
-
-</script>
+  </script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap');
