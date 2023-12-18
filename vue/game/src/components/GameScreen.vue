@@ -1,30 +1,33 @@
 <template>
-  <body>
-    <div class="container">
+  <div class="game-container">
+    <div class="panel-juego" v-if="preguntas_guardadas">
+      <div class="progress-container">
+        <div :class="{ 'progress-bar': true, 'fire-animation': mostrarAnimacionFuego }" :style="{ width: progresoPreguntas + '%' }"></div>
+      </div>
 
-      <div class="panel-juego" v-if="preguntas_guardadas">
-        <p>{{ preguntaActual.enunciado }}</p>
+      <div class="question-container">
+        <p class="pregunta-destacada">{{ preguntaActual.enunciado }}</p>
+      </div>
 
-        <div class="options">
-          <button v-for="(opcion, index) in preguntaActual.opciones" :key="index" class="option"
-            @click="evento_respuestaEnviada(opcion)">
-            {{ opcion }}
-          </button>
-        </div>
+      <div class="options">
+        <button v-for="(opcion, index) in preguntaActual.opciones" :key="index" class="option"
+          @click="evento_respuestaEnviada(opcion)">
+          {{ opcion }}
+        </button>
+      </div>
 
-        <div class="tetris-container">
-          <BlockElement v-for="blockIndex in blocks" :key="blockIndex" :cantidad="blockIndex" />
-        </div>
-
+      <div class="tetris-container">
+        <BlockElement v-for="blockIndex in blocks" :key="blockIndex" :cantidad="blockIndex" />
       </div>
     </div>
-  </body>
+  </div>
 </template>
 
 <script>
-import { useStore } from "../store"; // importar useStore de useStore.js
+import { useStore } from "../store";
 import { socket } from "../socket.js";
-import BlockElement from "@/components/BlockElement.vue"; // Ajusta la ruta según la ubicación real de tu componente
+import BlockElement from "@/components/BlockElement.vue";
+
 export default {
   name: "GameScreen",
   components: {
@@ -43,7 +46,19 @@ export default {
       modo: 'solitario',
       players: [],
       categoria: '',
+      preguntasRespondidas: 0,
+      totalPreguntas: 0,
+      respuestasCorrectasSeguidas: 0, // Nuevo estado para contar respuestas correctas consecutivas
     };
+  },
+  computed: {
+    progresoPreguntas() {
+      return (this.preguntasRespondidas / this.totalPreguntas) * 100;
+    },
+    mostrarAnimacionFuego() {
+      // Mostrar la animación de fuego después de dos respuestas correctas seguidas
+      return this.respuestasCorrectasSeguidas >= 2;
+    },
   },
   methods: {
     async cargarPreguntas() {
@@ -61,40 +76,43 @@ export default {
 
         this.aleatorizarPreguntas();
 
-        // ++index, iterar por data_preguntas, establecer enunciadom opciones y respuesta_correcta
         this.preguntaActual = this.getPreguntaActual();
         this.preguntas_guardadas = true;
+        this.totalPreguntas = this.data_preguntas["preguntas_unidades"].length;
 
       } catch (error) {
         console.error("Error al cargar la pregunta:", error);
       }
     },
     evento_respuestaEnviada(opcion) {
-
       const respuestaUsuarioTrimmed = opcion.trim();
       const respuestaCorrecta = this.preguntaActual.respuesta_correcta.trim();
 
       if (respuestaUsuarioTrimmed === respuestaCorrecta) {
-        // respuesta correcta
         this.blocks -= 1;
         if (this.blocks === 0) {
           this.partidaAcabada();
         }
+
+        // Incrementar el contador de respuestas correctas seguidas
+        this.respuestasCorrectasSeguidas += 1;
       } else {
-        // respuesta incorrecta
         this.blocks += 1;
+        
+        // Reiniciar el contador si la respuesta es incorrecta
+        this.respuestasCorrectasSeguidas = 0;
       }
 
       this.guardarRespuestasParaProfesor(opcion);
+      this.preguntasRespondidas += 1;
 
-      if (this.index < this.data_preguntas["preguntas_unidades"].length - 1) {
+      if (this.index < this.totalPreguntas - 1) {
         this.index++;
         this.preguntaActual = this.getPreguntaActual();
       } else {
         console.log("No hay más preguntas disponibles");
         this.partidaAcabada();
       }
-      
     },
     getPreguntaActual() {
       return {
@@ -112,7 +130,6 @@ export default {
       this.partida_respuestas.push(this.preguntaActual.respuesta_correcta.trim());
     },
     partidaAcabada() {
-
       const store = useStore();
       store.setPartidaUsuarioRespuestas(this.partida_usuario_respuestas);
       store.setPartidaPreguntas(this.partida_preguntas);
@@ -123,8 +140,6 @@ export default {
         this.partida_usuario_respuestas
       );
       this.categoria = '';
-
-
       this.$router.push("/scores");
     },
     aleatorizarPreguntas() {
@@ -148,7 +163,6 @@ export default {
     socket.on('establecer_players', (players) => {
       this.players = players;
     });
-
   },
   beforeDestroy() {
     socket.off("redirectPantallaJuego");
@@ -163,31 +177,62 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
-
-body {
+.game-container {
   display: flex;
-  font-family: 'Audiowide', cursive;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
-  margin: 0;
-  color: #ffffff;
-  background: url("/space_background.jpg") center/cover no-repeat; /* Reemplaza con tu imagen espacial */
+  background: url("/space_background.jpg") center/cover no-repeat;
 }
 
-.container {
+.panel-juego {
   margin: 60px;
-  display: grid;
-  min-width: 600px;
-  min-height: 300px;
-  margin-top: 5%;
   padding: 40px;
   text-align: center;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  background-color: rgba(243, 118, 216, 0.075); /* Fondo semi-transparente */
+  font-family: Arial, Helvetica, sans-serif;
 }
 
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #4f96d8, #67a4e1);
+  width: 0;
+  transition: width 1s cubic-bezier(0.77, 0, 0.175, 1); /* Efecto de transición */
+}
+
+.fire-animation {
+  animation: fireAnimation 0.9s ease-in-out infinite;
+}
+
+@keyframes fireAnimation {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 165, 0, 0.8), 0 0 60px rgba(255, 255, 0, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 165, 0, 0.8), 0 0 60px rgba(255, 255, 0, 0.8), 0 0 80px rgba(255, 69, 0, 0.8), 0 0 100px rgba(255, 0, 0, 0.8);
+  }
+}
+
+.question-container {
+  margin-bottom: 20px;
+}
+
+.pregunta-destacada {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #ffffff;
+}
 
 .options {
   display: flex;
@@ -199,42 +244,14 @@ body {
   margin: 0 20px;
   padding: 20px 40px;
   width: auto;
-  border: 3px solid #67a4e1; /* Color del borde azul espacial */
-  background-color: #203142; /* Color de fondo más oscuro */
+  border: 3px solid #67a4e1;
+  background-color: #203142;
   color: #ffffff;
   border-radius: 25px;
   cursor: pointer;
   font-size: 20px;
   transition: background 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   box-shadow: 0 0 15px rgba(108, 17, 253, 0.5);
-}
-
-.option:hover,
-.option:focus {
-  background-color: #2c394b; /* Cambio de color al pasar el ratón para resaltar */
-  color: #67a4e1;
-  box-shadow: 0 0 20px rgba(103, 164, 225, 0.7); /* Efecto de sombra al pasar el ratón */
-}
-
-.option:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(rgba(255, 255, 255, 0.2), transparent);
-  border-radius: 50%;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  z-index: -1;
-}
-
-.option:hover:before,
-.option:focus:before {
-  opacity: 1;
-  transform: scale(1.2);
 }
 
 .tetris-container {
@@ -244,7 +261,7 @@ body {
 }
 
 @media (max-width: 1000px) {
-  .container {
+  .panel-juego {
     margin: 20px;
     min-width: auto;
     min-height: auto;
@@ -255,7 +272,7 @@ body {
     grid-gap: 20px;
   }
 
-  .title {
+  .pregunta-destacada {
     font-size: 3em;
   }
 
