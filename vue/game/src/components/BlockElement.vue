@@ -12,7 +12,6 @@ export default {
 </script>
 
 <style scoped>
-/* Estilos específicos para este componente */
 
 .blocks-container {
   width: 100%;
