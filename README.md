@@ -174,5 +174,15 @@ Se requiere autenticación mediante Sanctum para acceder a las siguientes rutas.
         Controlador: preguntas
         Método del Controlador: destroy
         Nombre: preguntas.destroy
+        
+### Rutas de Vue.js
 
+    /login: Ruta para la pantalla de inicio de sesión.
+    /scoresMult/:id: Ruta para la pantalla de puntuaciones múltiples, con parámetro dinámico id.
+    /GameScreen: Ruta para la pantalla de juego individual.
+    /register: Ruta para la pantalla de registro de usuario.
+    /Lobby: Ruta para la pantalla del lobby.
+    /: Ruta para la página de inicio o landing.
+    /scores: Ruta para la pantalla de puntuaciones, con parámetro dinámico.
+    /GameScreenMult: Ruta para la pantalla de juego multijugador.
 
