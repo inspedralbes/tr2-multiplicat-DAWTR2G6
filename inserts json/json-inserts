@@ -25,7 +25,6 @@ INSERT INTO categoria (id, nombre_categoria) VALUES
 (1, 'massa'), (2, 'volumen'), (3, 'longitud'), (4, 'capacitat'), (5, 'superficie'), (6, 'temps');
 
 
-COMMIT;
 -- Inserts para preguntas de la categoría "massa"
 INSERT INTO preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VALUES
 ('¿Cuál es la masa de un objeto con una densidad de 2 kg/m³ y un volumen de 5 m³?', '{"opcion1": "8 kg", "opcion2": "10 kg", "opcion3": "12 kg", "opcion4": "15 kg"}', '10 kg', 1),
@@ -89,3 +88,26 @@ INSERT INTO preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VAL
 ('¿Qué relación hay entre el área y la longitud de una superficie?', '{"opcion1": "No hay relación", "opcion2": "El área depende únicamente de la longitud", "opcion3": "El área es la longitud al cuadrado", "opcion4": "El área es la raíz cuadrada de la longitud"}', 'El área depende únicamente de la longitud', 5),
 ('¿Cómo se calcula el área de un hexágono regular?', '{"opcion1": "Área = Lado × Lado", "opcion2": "Área = (3√3 / 2) × Lado²", "opcion3": "Área = πr²", "opcion4": "Área = Diámetro × Diámetro"}', 'Área = (3√3 / 2) × Lado²', 5),
 ('Si tienes un rectángulo con una longitud de 10 metros y una anchura de 5 metros, ¿cuál es su área?', '{"opcion1": "15 m²", "opcion2": "25 m²", "opcion3": "30 m²", "opcion4": "50 m²"}', '50 m²', 5);
+
+
+-- Inserts para preguntas de la categoría "temps"
+INSERT INTO preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VALUES
+('¿Cuántos segundos hay en una hora?', '{"opcion1": "3600 segundos", "opcion2": "1200 segundos", "opcion3": "1800 segundos", "opcion4": "2400 segundos"}', '3600 segundos', 6),
+('Explica la diferencia entre tiempo y clima.', '{"opcion1": "Son sinónimos", "opcion2": "El tiempo se refiere a condiciones a corto plazo, el clima a condiciones a largo plazo", "opcion3": "El clima se refiere a condiciones a corto plazo, el tiempo a condiciones a largo plazo", "opcion4": "No hay diferencia"}', 'El tiempo se refiere a condiciones a corto plazo, el clima a condiciones a largo plazo', 6),
+('Si son las 3:45 PM, ¿cuántos minutos faltan para las 5:30 PM?', '{"opcion1": "45 minutos", "opcion2": "60 minutos", "opcion3": "75 minutos", "opcion4": "90 minutos"}', '45 minutos', 6),
+('¿Cuántos días hay en un año bisiesto?', '{"opcion1": "365 días", "opcion2": "366 días", "opcion3": "364 días", "opcion4": "367 días"}', '366 días', 6),
+('Si un tren sale de una estación a las 8:15 AM y llega a otra estación a las 2:45 PM, ¿cuántas horas duró el viaje?', '{"opcion1": "4 horas y 30 minutos", "opcion2": "6 horas y 15 minutos", "opcion3": "5 horas y 30 minutos", "opcion4": "7 horas y 15 minutos"}', '6 horas y 15 minutos', 6),
+('¿Cuál es la unidad de medida estándar para expresar la duración de un evento?', '{"opcion1": "Segundos", "opcion2": "Minutos", "opcion3": "Horas", "opcion4": "Días"}', 'Segundos', 6),
+('Si un reloj marca las 6:30 AM, ¿en formato de 24 horas, cómo se mostraría la hora?', '{"opcion1": "06:30", "opcion2": "18:30", "opcion3": "06:15", "opcion4": "12:30"}', '06:30', 6),
+('¿Cuántas semanas hay en un mes?', '{"opcion1": "2 semanas", "opcion2": "3 semanas", "opcion3": "4 semanas", "opcion4": "5 semanas"}', '4 semanas', 6),
+('Explica la diferencia entre el tiempo local y el tiempo universal coordinado (UTC).', '{"opcion1": "Son lo mismo", "opcion2": "El tiempo local varía según la ubicación, UTC es una referencia estándar", "opcion3": "UTC varía según la ubicación, el tiempo local es una referencia estándar", "opcion4": "No hay diferencia"}', 'El tiempo local varía según la ubicación, UTC es una referencia estándar', 6),
+('¿Qué es un milisegundo?', '{"opcion1": "Una milésima parte de un segundo", "opcion2": "Mil segundos", "opcion3": "Un millón de segundos", "opcion4": "Diez mil segundos"}', 'Una milésima parte de un segundo', 6);
+
+
+
+
+
+COMMIT;
+
+
+
