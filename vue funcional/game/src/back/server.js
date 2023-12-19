@@ -35,7 +35,7 @@ io.on("connection", (socket) => {
 
     let room = rooms.find(
       (room) =>
-        room.jugadores.length < maxJugsMult &&
+        room.jugadores.length < minJugsMult &&
         !room.en_progreso
     );
     if (!room) {

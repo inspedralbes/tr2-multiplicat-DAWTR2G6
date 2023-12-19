@@ -6,6 +6,7 @@ import LandingScreen from '../components/LandingScreen.vue';
 import LobbyScreen from '../components/LobbyScreen.vue';
 import ScoreScreen from '../components/ScoreScreen.vue';
 import GameScreenMult from '../components/GameScreenMult.vue';
+import ScoreScreenMult from '../components/ScoreScreenMult.vue';
 
 const isAuthenticated = () => {
   const authToken = localStorage.getItem('authToken');
@@ -34,6 +35,12 @@ const router = createRouter({
       path: '/scores',
       name: 'ScoreScreen',
       component: ScoreScreen,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/scoresMult',
+      name: 'scoresMulti',
+      component: ScoreScreenMult,
       meta: { requiresAuth: true },
     },
     {
