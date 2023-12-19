@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     register() {
-      fetch('http://localhost:8000/api/register', {
+      fetch('http://xifraxaladag6.daw.inspedralbes.cat/public/api/laravel/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

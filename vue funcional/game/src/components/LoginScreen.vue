@@ -29,7 +29,7 @@ export default {
     login() {
       this.isLoading = true;
 
-      fetch('http://localhost:8000/api/login', {
+      fetch('http://xifraxaladag6.daw.inspedralbes.cat/public/api/laravel/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
