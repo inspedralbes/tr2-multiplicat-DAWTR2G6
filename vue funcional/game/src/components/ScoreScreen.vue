@@ -101,7 +101,7 @@ body {
   width: 10%;
   margin: 0 auto;
   position: relative;
-  top: -11%;
+  top: -100%;
   right: -42%;
 }
 * {
@@ -124,6 +124,7 @@ body {
   border: 2px solid #1c1c1c;
   background-color: #2e263f;
   z-index: 1;
+  height: 200px;
 }
 
 h3 {

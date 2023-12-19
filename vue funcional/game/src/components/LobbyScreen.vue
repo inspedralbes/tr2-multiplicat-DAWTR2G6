@@ -53,14 +53,15 @@ export default {
 
     },
     startMultiPlayerMode() {
+      this.contador_jugadors++;
       this.mode = "multiPlayer";
       this.updatear_players();
 
       socket.emit("comprobar_suficientes_jugadores");
     },
     updatear_players() {
-      socket.on("update_llista_jugadors", (jugsEnLaSala) => {
-        this.contador_jugadors = jugsEnLaSala;
+      socket.on("update_llista_jugadors", (players) => {
+        this.contador_jugadors = players;
       });
     },
   },

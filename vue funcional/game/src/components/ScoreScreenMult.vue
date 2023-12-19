@@ -103,14 +103,13 @@ body {
   margin: 0;
 }
 
-.ScoreGrafico {
+.ScoreGrafico{
   width: 10%;
   margin: 0 auto;
   position: relative;
-  top: -10%;
+  top: -100%;
   right: -42%;
 }
-
 * {
   font-family: "Anek Bangla", sans-serif;
   z-index: -1;
