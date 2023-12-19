@@ -38,6 +38,12 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
+      path: '/scoresMult',
+      name: 'scoresMulti',
+      component: ScoreScreenMult,
+      meta: { requiresAuth: true },
+    },
+    {
       path: '/lobby',
       name: 'lobby',
       component: LobbyScreen,
