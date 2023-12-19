@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pagina-especifica">
     <div class="overlay"></div>
 
     <header>
@@ -17,10 +17,9 @@
 
       <div v-for="(category, index) in categories" :key="index" class="category" @click="selectCategory(category.id)">
         <img :src="category.image" :alt="category.alt">
-        <div   class="category-content">
-          <h2 >{{ category.title }}</h2>
+        <div class="category-content">
+          <h2>{{ category.title }}</h2>
           <p>{{ category.description }}</p>
-         
         </div>
       </div>
     </div>
@@ -101,7 +100,7 @@ export default {
 <style>
 @import url('https://fonts.cdnfonts.com/css/tetris');
 
-body {
+.pagina-especifica{
   margin: 0;
   padding: 0;
   font-family: 'Tetris', sans-serif;
@@ -112,24 +111,29 @@ body {
   z-index: 0;
 }
 
-.overlay {
+.pagina-especifica .overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.151);
+  background: url('https://i.pinimg.com/originals/2f/f9/4d/2ff94dfff599bc37a27450a858612763.gif');
   z-index: -1;
 }
 
-
-header {
+.pagina-especifica header {
   background-color: #33333300;
   overflow: hidden;
   padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.pagina-especifica header a,
+.pagina-especifica .login-register-btn button,
+.pagina-especifica .category {
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 header ul {
@@ -144,11 +148,7 @@ header li {
   margin: 0 15px;
   display: flex;
   align-items: center;
-}
-header a, .login-register-btn button, .category {
-  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
-}
-
+}º 
 header a {
   color: #bb7ff3ee;
   text-decoration: none;

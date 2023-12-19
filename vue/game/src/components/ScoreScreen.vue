@@ -1,24 +1,24 @@
 <template>
   <body>
-    <div class="score-container">
-      <h2>PUNTUACIO DE LA PARTIDA: {{ score }}/{{ }}</h2>
-      <button @click="$router.push('/lobby')">Ves'ne al Lobby</button>
-      <button @click="$router.push('/ranking')">Mira com vas al rankings!</button>
+    <div class="scroll-container">
+      <div class="score-container">
+        <h2>PUNTUACIO DE LA PARTIDA: {{ score }}/{{ }}</h2>
+        <button @click="$router.push('/lobby')">Ves'ne al Lobby</button>
+        <button @click="$router.push('/ranking')">Mira com vas al rankings!</button>
+      </div>
 
-    </div>
-
-    <h3>Revisa les teves respostes incorrectes aqui!:</h3>
-    <div class="preguntas-incorrectas-container">
-      <div v-for="(pregunta, index) in preguntas_filtradas" :key="index" class="score-preguntas-incorrectas">
-        <p>{{ pregunta.pregunta }}</p>
-        <p>Resposta correcta: {{ pregunta.respuesta_correcta }}</p>
-        <p>La teva resposta: {{ pregunta.user_respuesta }}</p>
+      <h3>Revisa les teves respostes incorrectes aqui!:</h3>
+      <div class="preguntas-incorrectas-container">
+        <div v-for="(pregunta, index) in preguntas_filtradas" :key="index" class="score-preguntas-incorrectas">
+          <p>{{ pregunta.pregunta }}</p>
+          <p>Resposta correcta: {{ pregunta.respuesta_correcta }}</p>
+          <p>La teva resposta: {{ pregunta.user_respuesta }}</p>
+        </div>
       </div>
     </div>
-
-
   </body>
 </template>
+
 <script>
 import { useStore } from "../store";
 
