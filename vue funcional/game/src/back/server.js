@@ -35,7 +35,7 @@ io.on("connection", (socket) => {
 
     let room = rooms.find(
       (room) =>
-        room.jugadores.length < minJugsMult &&
+        room.jugadores.length < 2 &&
         !room.en_progreso
     );
     if (!room) {
@@ -53,19 +53,20 @@ io.on("connection", (socket) => {
     console.log(`Contador de jugadores de la sala ${room.id}: ${room.jugadores.length}`);
     console.log(`Jugador ${socket.id} se ha conectado a la sala ${room.id}`);
 
-    if (cont_jugadors >= minJugsMult && cont_jugadors <= maxJugsMult && !room.en_progreso) {
-      console.log(`Empieza la partida multijugador, enviando señal a los jugadores de la sala ${room.id}`);
 
+    setTimeout(() => {
+      if (room.jugadores.length >= minJugsMult && room.jugadores.length <= maxJugsMult && !room.en_progreso) {
+        console.log(`Empieza la partida multijugador, enviando señal a los jugadores de la sala ${room.id}`);
 
-      io.to(room.id).emit("empezarJuego-mult");
-      io.to(room.id).emit("establecerJugadores", room.jugadores);
-      io.to(room.id).emit("array jugadors", room.jugadores);
+        io.to(room.id).emit("empezarJuego-mult");
+        io.to(room.id).emit("establecerJugadores", room.jugadores);
+        io.to(room.id).emit("array jugadors", room.jugadores);
 
-
-      room.en_progreso = true;
-    } else {
-      console.log("Se requiren mas jugadores para una partida multijugador");
-    }
+        room.en_progreso = true;
+      } else {
+        console.log("Se requiren mas jugadores para una partida multijugador");
+      }
+    }, 1000);
 
   });
 

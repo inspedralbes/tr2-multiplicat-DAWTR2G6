@@ -106,8 +106,8 @@ body {
   padding: 0;
   font-family: 'Tetris', sans-serif;
   background: url('https://i.pinimg.com/originals/2f/f9/4d/2ff94dfff599bc37a27450a858612763.gif');
+  background-repeat: repeat;
   color: #fff;
-  overflow: hidden;
   position: relative;
   z-index: 0;
 }

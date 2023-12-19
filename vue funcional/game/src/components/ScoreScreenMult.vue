@@ -1,7 +1,7 @@
 <template>
   <body>
     <div class="score-container">
-      <h2>PUNTUACIO DE LA PARTIDA:{{ score }} de {{ preguntas_filtradas.length+score }}
+      <h2>PUNTUACIO DE LA PARTIDA:{{ score }} de {{ preguntas_filtradas.length + score }}
       </h2>
       <button @click="$router.push('/lobby')">Ves'ne al Lobby</button>
       <div class="ScoreGrafico">
@@ -11,17 +11,12 @@
 
     <h3>Revisa les teves respostes incorrectes aqui!:</h3>
     <div class="preguntas-incorrectas-container" v-if="preguntas_filtradas.length > 0">
-      <div
-        v-for="(pregunta, index) in preguntas_filtradas"
-        :key="index"
-        class="score-preguntas-incorrectas"
-      >
+      <div v-for="(pregunta, index) in preguntas_filtradas" :key="index" class="score-preguntas-incorrectas">
         <p>{{ pregunta.pregunta }}</p>
         <p>Resposta correcta: {{ pregunta.respuesta_correcta }}</p>
         <p>La teva resposta: {{ pregunta.user_respuesta }}</p>
       </div>
 
-      
 
     </div>
   </body>
@@ -30,24 +25,26 @@
 import { useStore } from "../store";
 import Chart from "chart.js/auto";
 import { onMounted, ref } from "vue";
-
+import { useRoute } from 'vue-router';
 export default {
   data() {
     return {};
   },
   name: "ScoreScreen",
   setup() {
-  
+
     const score = ref(0);
     const preguntas_filtradas = ref([]);
     const store = useStore();
     const chart = ref(null);
+    const route = useRoute();
+    const socketId = route.params.id;
 
     onMounted(() => {
 
-      let preguntas = store.returnPreguntas_sp();
-      let respuestas = store.returnRespuestas_sp();
-      let usuarioRespuestas = store.returnUsuarioRespuestas_sp();
+      let preguntas = store.returnPreguntas(socketId);
+      let respuestas = store.returnRespuestas(socketId);
+      let usuarioRespuestas = store.returnUsuarioRespuestas(socketId);
       console.log("preguntas", preguntas);
       console.log("respuestas", respuestas);
       console.log("usuarioRespuestas", usuarioRespuestas);
@@ -82,7 +79,7 @@ export default {
             borderWidth: 1
           }]
         },
-        
+
       });
     });
 
@@ -93,7 +90,7 @@ export default {
       chart
     };
   },
-  
+
 
 };
 </script>
@@ -106,7 +103,7 @@ body {
   margin: 0;
 }
 
-.ScoreGrafico{
+.ScoreGrafico {
   width: 10%;
   margin: 0 auto;
   position: relative;

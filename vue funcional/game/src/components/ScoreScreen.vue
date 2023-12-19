@@ -1,21 +1,17 @@
 <template>
   <body>
     <div class="score-container">
-      <h2>PUNTUACIO DE LA PARTIDA:{{ score }} de {{ preguntas_filtradas.length }}
+      <h2>PUNTUACIO DE LA PARTIDA:{{ score }} de {{ preguntas_filtradas.length + score }}
       </h2>
       <button @click="$router.push('/lobby')">Ves'ne al Lobby</button>
-      <button @click="$router.push('/ranking')">
-        Mira com vas al rankings!
-      </button>
+      <div class="ScoreGrafico">
+        <canvas id="scoreChart"></canvas>
+      </div>
     </div>
 
     <h3>Revisa les teves respostes incorrectes aqui!:</h3>
     <div class="preguntas-incorrectas-container" v-if="preguntas_filtradas.length > 0">
-      <div
-        v-for="(pregunta, index) in preguntas_filtradas"
-        :key="index"
-        class="score-preguntas-incorrectas"
-      >
+      <div v-for="(pregunta, index) in preguntas_filtradas" :key="index" class="score-preguntas-incorrectas">
         <p>{{ pregunta.pregunta }}</p>
         <p>Resposta correcta: {{ pregunta.respuesta_correcta }}</p>
         <p>La teva resposta: {{ pregunta.user_respuesta }}</p>
@@ -25,7 +21,7 @@
 </template>
 <script>
 import { useStore } from "../store";
-
+import Chart from "chart.js/auto";
 import { onMounted, ref } from "vue";
 
 export default {
@@ -34,11 +30,11 @@ export default {
   },
   name: "ScoreScreen",
   setup() {
-  
+
     const score = ref(0);
     const preguntas_filtradas = ref([]);
     const store = useStore();
-
+    const chart = ref(null);
 
     onMounted(() => {
 
@@ -60,16 +56,34 @@ export default {
           });
         }
       }
-    });
+      chart.value = new Chart(document.getElementById('scoreChart'), {
+        type: 'pie',
+        data: {
+          labels: ['Correctas', 'Incorrectas'],
+          datasets: [{
+            label: '# of Votes',
+            data: [score.value, preguntas.length - score.value],
+            backgroundColor: [
+              '#80D483',
+              '#FF6C6C'
+            ],
+            borderColor: [
+              'rgba(75, 192, 192, 1)',
+              'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
 
-    return {
-      score,
-      preguntas_filtradas,
-      totalPreguntas: store.partida_preguntas[socketId]
-        ? store.partida_preguntas[socketId].length
-        : 0,
-    };
-  },
+      });
+    });
+ 
+  return {
+    score,
+    preguntas_filtradas,
+    chart
+  };
+},
 };
 </script>
 
@@ -79,17 +93,17 @@ export default {
 body {
   padding: 0;
   margin: 0;
+  height: 100vh;
+  overflow:visible;
 }
 
 .ScoreGrafico{
   width: 10%;
   margin: 0 auto;
   position: relative;
-  top: -11
-  0%;
+  top: -11%;
   right: -42%;
 }
-
 * {
   font-family: "Anek Bangla", sans-serif;
   z-index: -1;
@@ -108,7 +122,7 @@ body {
   font-size: 30px;
   text-align: center;
   border: 2px solid #1c1c1c;
-  background-color: #dfdfdf;
+  background-color: #2e263f;
   z-index: 1;
 }
 
