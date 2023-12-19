@@ -30,11 +30,9 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     
 });
 
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 
 Route::get('recibir-preguntas-todas', [preguntas::class, 'recibir_preguntas_TODAS']);
 Route::get('recibir-preguntas-porCategoriaID/{id}', [preguntas::class, 'recibir_preguntas_porCategoriaID']);
