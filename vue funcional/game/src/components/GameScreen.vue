@@ -66,11 +66,11 @@ export default {
         const store = useStore();
         this.categoria = store.returnCategoria();
         if (this.categoria === '') {
-          const response = await fetch("http://xifraxaladag6.daw.inspedralbes.cat/public/api/laravel/recibir-preguntas-todas");
+          const response = await fetch("http://xifraxaladag6.daw.inspedralbes.cat/public/api/backend/recibir-preguntas-todas");
           this.data_preguntas = await response.json();
 
         } else {
-          const response = await fetch("http://localhost:8000/api/recibir-preguntas-porCategoria/" + this.categoria);
+          const response = await fetch("http://xifraxaladag6.daw.inspedralbes.cat/public/api/backend/recibir-preguntas-porCategoria/" + this.categoria);
           this.data_preguntas = await response.json();
         }
 
