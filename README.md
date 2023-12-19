@@ -67,13 +67,13 @@ Vue.js se utiliza como el framework frontend para construir interfaces de usuari
 ## Rutas de API en Laravel
 ### Autenticación de Usuario
 
-    * Registro de Usuario:
+    Registro de Usuario:
         Método: POST
         Ruta: /register
         Controlador: UserController
         Método del Controlador: register
 
-    * Inicio de Sesión:
+    Inicio de Sesión:
         Método: POST
         Ruta: /login
         Controlador: UserController
@@ -83,13 +83,13 @@ Vue.js se utiliza como el framework frontend para construir interfaces de usuari
 
 Se requiere autenticación mediante Sanctum para acceder a las siguientes rutas.
 
-    * Perfil de Usuario:
+    Perfil de Usuario:
         Método: GET
         Ruta: /user-profile
         Controlador: UserController
         Método del Controlador: userProfile
 
-    * Cierre de Sesión:
+    Cierre de Sesión:
         Método: GET
         Ruta: /logout
         Controlador: UserController
@@ -97,7 +97,7 @@ Se requiere autenticación mediante Sanctum para acceder a las siguientes rutas.
 
 ### Rutas Adicionales Protegidas por Sanctum
 
-Además de las rutas de usuario, estas rutas también están protegidas por Sanctum.
+#### Además de las rutas de usuario, estas rutas también están protegidas por Sanctum.
 
     Obtener Usuario Autenticado:
         Método: GET
@@ -123,8 +123,8 @@ Además de las rutas de usuario, estas rutas también están protegidas por Sanc
         Controlador: preguntas
         Método del Controlador: recibir_preguntas_porCategoria
 
-Rutas en web.php
-Gestión de Preguntas
+### Rutas en web.php
+#### Gestión de Preguntas
 
     Listar Todas las Preguntas:
         Método: GET
