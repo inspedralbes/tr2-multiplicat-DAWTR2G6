@@ -117,7 +117,7 @@ io.on("connection", (socket) => {
       delete todos_los_jugadores[socket.id];
       cont_jugadors -= 1;
       delete rooms[socket.id];
-      io.emit("update_llista_jugadors", cont_jugadors);
+      io.emit("update_llista_jugadors", room.jugadores.length);
       io.emit("updatejugadores", Object.keys(todos_los_jugadores));
     } else {
       console.log('No se ha encontrado la sala');
