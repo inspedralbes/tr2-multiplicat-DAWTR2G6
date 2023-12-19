@@ -14,7 +14,7 @@ però per la resta de jugadors, la seva pila de blocks augmentarà per 1. Mentre
 el seu nombre de blocks augmentarà per 1.
 
 INTEGRANTS DEL EQUIP
-* Josu Largo Fernandez, Pol Donya Pozuelo, Hugo Tripiana Gonzalez, Ruben de la Cerreza
+* Josu Largo Fernandez, Pol Doña Pozuelo, Hugo Tripiana Gonzalez, Ruben de la Cerreza
 * URL del prototip de penpod :
 * URL del taiga.io: https://tree.taiga.io/project/poleet-xifraxalada/timeline
 * URL de preproducció
