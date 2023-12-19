@@ -1,24 +1,27 @@
 <template>
   <body>
-    <div class="container">
-      <h2 class="title">Aguanta tot el que puguis!</h2>
+    <div class="game-container">
+    <div class="panel-juego" v-if="preguntas_guardadas">
+      <div class="progress-container">
+        <div :class="{ 'progress-bar': true, 'fire-animation': mostrarAnimacionFuego }" :style="{ width: progresoPreguntas + '%' }"></div>
+      </div>
 
-      <div class="panel-juego" v-if="preguntas_guardadas">
-        <p>{{ preguntaActual.enunciado }}</p>
+      <div class="question-container">
+        <p class="pregunta-destacada">{{ preguntaActual.enunciado }}</p>
+      </div>
 
-        <div class="options">
-          <button v-for="(opcion, index) in preguntaActual.opciones" :key="index" class="option"
-            @click="evento_respuestaEnviada(opcion)">
-            {{ opcion }}
-          </button>
-        </div>
+      <div class="options">
+        <button v-for="(opcion, index) in preguntaActual.opciones" :key="index" class="option"
+          @click="evento_respuestaEnviada(opcion)">
+          {{ opcion }}
+        </button>
+      </div>
 
-        <div class="tetris-container">
-          <BlockElement v-for="blockIndex in blocks" :key="blockIndex" :cantidad="blockIndex" />
-        </div>
-
+      <div class="tetris-container">
+        <BlockElement v-for="blockIndex in blocks" :key="blockIndex" :cantidad="blockIndex" />
       </div>
     </div>
+  </div>
   </body>
 </template>
 
@@ -30,6 +33,14 @@ export default {
   name: "GameScreen",
   components: {
     BlockElement,
+  },
+  computed:{
+    progresoPreguntas() {
+      return (this.preguntasRespondidas / this.totalPreguntas) * 100;
+    },
+    mostrarAnimacionFuego() {
+      return this.respuestasCorrectasSeguidas >= 2;
+    },
   },
   data() {
     return {
@@ -44,6 +55,9 @@ export default {
       modo: 'solitario',
       players: [],
       categoria: '',
+      preguntasRespondidas: 0,
+      totalPreguntas: 0,
+      respuestasCorrectasSeguidas: 0, 
     };
   },
   methods: {
@@ -164,99 +178,91 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap');
-
-body {
-  padding: 0;
-  margin: -10px;
-  font-family: 'Anek Bangla', sans-serif;
-  height: 100vh;
-  background-repeat: repeat;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  letter-spacing: 0.3rem;
-  font-weight: lighter;
-  background-color: rgba(226, 222, 222, 0.815);
-  /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)), url("/giphy.gif");*/
-
-}
-
-* {
-  border-radius: 15px;
-}
-
-.tetris-container {
-  display: grid;
-  align-items: center;
+.game-container {
+  display: flex;
   justify-content: center;
-  color: #1c1c1c;
+  align-items: center;
+  height: 100vh;
+  background: url("/space_background.jpg") center/cover no-repeat;
 }
 
-.container {
+.panel-juego {
   margin: 60px;
-  display: grid;
-  min-width: 600px;
-  min-height: 300px;
-  margin-top: 5%;
   padding: 40px;
   text-align: center;
-  border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  color: #1c1c1c;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  background-color: rgba(243, 118, 216, 0.075); /* Fondo semi-transparente */
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-h2 {
-  font-size: 2em;
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 20px;
 }
 
-p {
-  font-size: 2em;
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #4f96d8, #67a4e1);
+  width: 0;
+  transition: width 1s cubic-bezier(0.77, 0, 0.175, 1); /* Efecto de transición */
+}
+
+.fire-animation {
+  animation: fireAnimation 0.9s ease-in-out infinite;
+}
+
+@keyframes fireAnimation {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 165, 0, 0.8), 0 0 60px rgba(255, 255, 0, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 165, 0, 0.8), 0 0 60px rgba(255, 255, 0, 0.8), 0 0 80px rgba(255, 69, 0, 0.8), 0 0 100px rgba(255, 0, 0, 0.8);
+  }
+}
+
+.question-container {
+  margin-bottom: 20px;
+}
+
+.pregunta-destacada {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #ffffff;
 }
 
 .options {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .option {
-  margin: 0 25px;
-  padding: 30px;
+  margin: 0 20px;
+  padding: 20px 40px;
   width: auto;
-  height: auto;
-  border: 3px solid rgba(0, 0, 0, 0.719);
-  border-radius: 6px;
+  border: 3px solid #67a4e1;
+  background-color: #203142;
+  color: #ffffff;
+  border-radius: 25px;
   cursor: pointer;
-  background-color: #dfdfdf;
-  color: #1c1c1ca4;
-  font-size: 25px;
-  box-shadow: 4px 4px rgb(0, 0, 0);
-  transition: box-shadow 0.2s ease-in-out;
-}
-
-button {
-  width: auto;
-  height: auto;
-  padding: 10px 20px;
-  letter-spacing: 0.3rem;
-}
-
-.option:hover {
-  box-shadow: 0 0 0 0 rgb(255, 255, 255);
+  font-size: 20px;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0 0 15px rgba(108, 17, 253, 0.5);
 }
 
 .tetris-container {
   display: flex;
-  align-content: stretch;
-  justify-content: space-between;
-  justify-items: stretch;
-  width: auto;
-  height: auto;
+  align-items: center;
+  justify-content: center;
 }
 
-
 @media (max-width: 1000px) {
-  .container {
+  .panel-juego {
     margin: 20px;
     min-width: auto;
     min-height: auto;
@@ -264,33 +270,25 @@ button {
     padding: 20px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: 10px;
+    grid-gap: 20px;
   }
 
-  h2 {
-    font-size: 1.5em;
-  }
-
-  p {
-    font-size: 1.5em;
+  .pregunta-destacada {
+    font-size: 3em;
   }
 
   .options {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 30px;
   }
 
   .option {
-    margin: 10px;
-    padding: 20px;
-    font-size: 20px;
+    margin: 15px;
+    padding: 25px 40px;
+    font-size: 22px;
     width: 100%;
-  }
-
-  button {
-    padding: 5px 10px;
   }
 }
 </style>
