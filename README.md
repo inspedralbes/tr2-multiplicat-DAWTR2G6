@@ -13,7 +13,7 @@ Si un jugador està jugant amb altres i respon correctament, el seu nombre de bl
 però per la resta de jugadors, la seva pila de blocks augmentarà per 1. Mentre que si respon incorrectament,
 el seu nombre de blocks augmentarà per 1.
 
-INTEGRANTS DEL EQUIP
+## INTEGRANTS DEL EQUIP
 * Josu Largo Fernandez, Pol Doña Pozuelo, Hugo Tripiana Gonzalez, Ruben de la Cerreza
 * URL del prototip de penpod :
 * URL del taiga.io: https://tree.taiga.io/project/poleet-xifraxalada/timeline
@@ -21,7 +21,7 @@ INTEGRANTS DEL EQUIP
 * URL github : https://github.com/inspedralbes/tr2-multiplicat-DAWTR2G6
 * URL de producció xifraxalada6.daw.inspedralbes.cat
 
-Instrucciones para Desarrolladores
+## Instrucciones para Desarrolladores
 
     Clona el repositorio desde GitHub: git clone https://github.com/inspedralbes/tr2-multiplicat-DAWTR2G6.git
     Accede al directorio del proyecto: cd tr2-multiplicat-DAWTR2G6
@@ -33,8 +33,8 @@ Instrucciones para Desarrolladores
     Ejecuta el servidor de desarrollo: php artisan serve
 
 
-Tecnologías Utilizadas
-Laravel
+## Tecnologías Utilizadas
+### Laravel
 
 Laravel fue elegido como el framework backend principal para el proyecto debido a su elegante sintaxis, facilidad de uso y potentes características. Algunas de las razones para elegir Laravel incluyen:
 
@@ -42,7 +42,7 @@ Laravel fue elegido como el framework backend principal para el proyecto debido 
 
     ORM Eloquent: Utilizamos Eloquent, el ORM de Laravel, para interactuar con la base de datos. Esto simplifica la manipulación de datos y la relación entre los modelos en la aplicación.
 
-MariaDB (phpMyAdmin)
+## MariaDB (phpMyAdmin)
 
 MariaDB se utiliza como sistema de gestión de bases de datos en conjunto con phpMyAdmin para administrar la base de datos de manera gráfica. Algunas consideraciones incluyen:
 
@@ -50,7 +50,7 @@ MariaDB se utiliza como sistema de gestión de bases de datos en conjunto con ph
 
     Interfaz Gráfica con phpMyAdmin: La interfaz de usuario de phpMyAdmin proporciona una manera intuitiva de gestionar la base de datos, realizar consultas y realizar tareas de administración sin necesidad de comandos SQL directos.
 
-Vue.js
+## Vue.js
 
 Vue.js se utiliza como el framework frontend para construir interfaces de usuario interactivas y reactivas. Algunas características destacadas son:
 
@@ -58,44 +58,44 @@ Vue.js se utiliza como el framework frontend para construir interfaces de usuari
 
     Enlace de Datos Reactivo: Vue.js facilita la manipulación del DOM de manera eficiente gracias a su sistema de enlace de datos reactivo.
 
-Otras Tecnologías
+## Otras Tecnologías
 
     MariaDB: Base de datos relacional utilizada para almacenar y gestionar los datos del proyecto.
 
     PHPMyAdmin: Herramienta de administración de bases de datos utilizada para gestionar la base de datos MariaDB de manera gráfica.
 
-Rutas de API en Laravel
-Autenticación de Usuario
+## Rutas de API en Laravel
+### Autenticación de Usuario
 
-    Registro de Usuario:
+    * Registro de Usuario:
         Método: POST
         Ruta: /register
         Controlador: UserController
         Método del Controlador: register
 
-    Inicio de Sesión:
+    * Inicio de Sesión:
         Método: POST
         Ruta: /login
         Controlador: UserController
         Método del Controlador: login
 
-Rutas Protegidas por Autenticación Sanctum
+### Rutas Protegidas por Autenticación Sanctum
 
 Se requiere autenticación mediante Sanctum para acceder a las siguientes rutas.
 
-    Perfil de Usuario:
+    * Perfil de Usuario:
         Método: GET
         Ruta: /user-profile
         Controlador: UserController
         Método del Controlador: userProfile
 
-    Cierre de Sesión:
+    * Cierre de Sesión:
         Método: GET
         Ruta: /logout
         Controlador: UserController
         Método del Controlador: logout
 
-Rutas Adicionales Protegidas por Sanctum
+### Rutas Adicionales Protegidas por Sanctum
 
 Además de las rutas de usuario, estas rutas también están protegidas por Sanctum.
 
