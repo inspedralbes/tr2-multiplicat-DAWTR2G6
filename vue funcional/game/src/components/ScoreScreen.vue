@@ -1,12 +1,12 @@
 <template>
   <body>
     <div class="score-container">
-      <h2>PUNTUACIO DE LA PARTIDA:{{ score }} de {{ preguntas_filtradas.length+score }}
+      <h2>PUNTUACIO DE LA PARTIDA:{{ score }} de {{ preguntas_filtradas.length }}
       </h2>
       <button @click="$router.push('/lobby')">Ves'ne al Lobby</button>
-      <div class="ScoreGrafico">
-        <canvas id="scoreChart"></canvas>
-      </div>
+      <button @click="$router.push('/ranking')">
+        Mira com vas al rankings!
+      </button>
     </div>
 
     <h3>Revisa les teves respostes incorrectes aqui!:</h3>
@@ -20,15 +20,12 @@
         <p>Resposta correcta: {{ pregunta.respuesta_correcta }}</p>
         <p>La teva resposta: {{ pregunta.user_respuesta }}</p>
       </div>
-
-      
-
     </div>
   </body>
 </template>
 <script>
 import { useStore } from "../store";
-import Chart from "chart.js/auto";
+
 import { onMounted, ref } from "vue";
 
 export default {
@@ -41,7 +38,7 @@ export default {
     const score = ref(0);
     const preguntas_filtradas = ref([]);
     const store = useStore();
-    const chart = ref(null);
+
 
     onMounted(() => {
 
@@ -63,40 +60,16 @@ export default {
           });
         }
       }
-
-      chart.value = new Chart(document.getElementById('scoreChart'), {
-        type: 'pie',
-        data: {
-          labels: ['Correctas', 'Incorrectas'],
-          datasets: [{
-            label: '# of Votes',
-            data: [score.value, preguntas.length - score.value],
-            backgroundColor: [
-              '#80D483',
-              '#FF6C6C'
-            ],
-            borderColor: [
-              'rgba(75, 192, 192, 1)',
-              'rgba(255, 99, 132, 1)'
-            ],
-            borderWidth: 1
-          }]
-        },
-        
-      });
     });
-
-     
-
 
     return {
       score,
       preguntas_filtradas,
-      chart
+      totalPreguntas: store.partida_preguntas[socketId]
+        ? store.partida_preguntas[socketId].length
+        : 0,
     };
   },
-  
-
 };
 </script>
 
@@ -112,7 +85,8 @@ body {
   width: 10%;
   margin: 0 auto;
   position: relative;
-  top: -110%;
+  top: -11
+  0%;
   right: -42%;
 }
 
@@ -136,7 +110,6 @@ body {
   border: 2px solid #1c1c1c;
   background-color: #dfdfdf;
   z-index: 1;
-  height: 200px;
 }
 
 h3 {
@@ -146,7 +119,8 @@ h3 {
   margin: 10px;
 }
 
-.score-container button:nth-child(2) {
+.score-container button:nth-child(2),
+.score-container button:nth-child(3) {
   margin: 10px;
   padding: 8px;
   font-weight: 400;
@@ -154,12 +128,10 @@ h3 {
   color: #1c1c1c;
   box-shadow: 1px 1px 1px 1px black;
   font-size: 20px;
-  position: relative;
-  width: 20%;
-  top: -70px;
 }
 
-.score-container button:nth-child(2):hover {
+.score-container button:nth-child(2):hover,
+.score-container button:nth-child(3):hover {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 }
 
