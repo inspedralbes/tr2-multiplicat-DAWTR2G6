@@ -33,8 +33,8 @@ el seu nombre de blocks augmentarà per 1.
     Ejecuta el servidor de desarrollo: php artisan serve
 
 
-## Tecnologías Utilizadas
-### Laravel
+# Tecnologías Utilizadas
+## Laravel
 
 Laravel fue elegido como el framework backend principal para el proyecto debido a su elegante sintaxis, facilidad de uso y potentes características. Algunas de las razones para elegir Laravel incluyen:
 
