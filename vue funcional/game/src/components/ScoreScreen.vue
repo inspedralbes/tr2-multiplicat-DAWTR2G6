@@ -112,8 +112,7 @@ body {
   width: 10%;
   margin: 0 auto;
   position: relative;
-  top: -11
-  0%;
+  top: -110%;
   right: -42%;
 }
 
