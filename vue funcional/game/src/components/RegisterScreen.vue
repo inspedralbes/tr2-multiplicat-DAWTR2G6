@@ -4,16 +4,13 @@
       <form @submit.prevent="register" class="form">
         <h2 class="title mt-5">Registrarse</h2>
         <div class="group">
-          <label for="name">Nombre de usuario</label>
-          <input type="text" class="inputbox" id="name" v-model="name" required>
+          <input type="text" class="inputbox" placeholder="Nombre de usuario" id="name" v-model="name" required>
         </div>
         <div class="group">
-          <label for="email">Email</label>
-          <input type="email" class="inputbox" id="email" v-model="email" required>
+          <input type="email" class="inputbox" placeholder="Email" id="email" v-model="email" required>
         </div>
         <div class="group">
-          <label for="password">Contraseña</label>
-          <input type="password" class="inputbox" id="password" v-model="password" required>
+          <input type="password" class="inputbox" placeholder="Contraseña" id="password" v-model="password" required>
         </div>
         <button type="submit" class="btn btn-success btn-register">Registrarse</button>
       </form>
@@ -83,7 +80,6 @@ export default {
 
 * {
   font-family: 'Anek Bangla', sans-serif;
-  border-radius: 15px;
   margin: 0;
 }
 
@@ -100,41 +96,54 @@ body {
 
 .title {
   font-size: 50px;
-}
+    top: -26px;
+    position: relative;}
 
 .form {
-  min-height: auto;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
-  text-align: center;
-  gap: 10px;
-  max-width: 400px;
-  background-color: #f5f5f5;
-  color: #1c1c1c;
-  padding: 80px;
-  width: 100%;
+  box-shadow: 0 0 10px rgba(255, 253, 253, 0.959);
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    background-color: #e5e5ec00;
+    padding: 20px;
+    width: 100%;
+    height: 600px;
 }
 
 .inputbox {
-  margin-bottom: 20px;
   outline: none;
-  width: 100%;
-  padding: 10px;
+    width: 73%;
+    padding: 10px;
+    background-color: #ebebf300;
+    border: none;
+    color: #ffffff;
+    margin-bottom: 10px;
+    border-bottom: 2px solid white;
+    position: relative;
+    font-size: 21px;
+    top: 39px;
+
+
+}
+.inputbox::placeholder {
+  color: #ffffffce;
 }
 
-
 .btn-register {
-  padding: 10px;
-  background-color: #1c1c1c;
-  color: #f5f5f5;
-  border: none;
-  cursor: pointer;
-  width: 106%;
-  margin-top: 20px;
-  transition: background-color 0.2s ease-out;
+  padding: 13px;
+    background-color: #f5f5f5;
+    color: #3b3a3a;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    transition: background-color 0.2s ease-out;
+    font-size: 21px;
+    top: 100px;
+    position: relative;
+    border-radius: 30px;
 }
 
 .btn-register:hover {
-  background-color: #000000;
+  background-color: #d095e7;
 }
 </style>
