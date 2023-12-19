@@ -38,21 +38,21 @@ export default {
           image: './public/VOLUM.jpg',
           alt: 'Volumen matemático',
           title: 'Volum',
-          description: 'Sumérgete en la emoción del juego mientras calculas volúmenes virtuales, desde pequeñas gotas hasta vastos océanos. ¡Ajusta tu precisión y descubre el poder de medir en 3D!',
+          description: 'Explora conceptos matemáticos relacionados con el volumen. Descubre fórmulas y propiedades fascinantes',
         },
         {
           id: 'massa',
           image: './public/MASA.jpg',
           alt: 'Masa',
           title: 'Massa',
-          description: '¡Equilibra la diversión y el aprendizaje al desafiar tu destreza con masas variadas! Domina la ciencia detrás de la balanza virtual y conviértete en el maestro de la masa exacta.',
+          description: 'Explora conceptos matemáticos relacionados con la masa. Descubre fórmulas y propiedades fascinantes',
         },
         {
           id: 'capacitat',
           image: './public/CAPACIDAD.jpg',
           alt: 'Capacitat',
           title: 'Capacitat',
-          description: 'Llena tu experiencia de juego con desafíos de capacidad, desde tazas hasta barriles. ¡Mide con precisión y perfecciona tus habilidades para estimar volúmenes en situaciones del mundo real!',
+          description: 'Explora conceptos matemáticos relacionados con la capacidad. Descubre fórmulas y propiedades fascinantes',
         },
 
         {
@@ -60,7 +60,7 @@ export default {
           image: './public/TIEMPO.jpg',
           alt: 'Temps',
           title: 'Temps',
-          description: 'Atrévete a viajar en el tiempo virtualmente mientras resuelves rompecabezas temporales. ¡Mide con precisión intervalos y domina la cuarta dimensión en este juego emocionante!',
+          description: 'Explora conceptos matemáticos relacionados con el tiempo. Descubre fórmulas y propiedades fascinantes',
         },
 
 
@@ -69,7 +69,7 @@ export default {
           image: './public/SUPERFICIE.jpg',
           alt: 'Superficie',
           title: 'Superficie',
-          description: 'Enfréntate a desafíos que abarcan desde pequeñas áreas hasta vastos paisajes. ¡Perfecciona tu habilidad para calcular superficies y conquista el juego mientras te conviertes en el rey de las mediciones bidimensionales!',
+          description: 'Explora conceptos matemáticos relacionados con la superficie. Descubre fórmulas y propiedades fascinantes',
         },
 
 
@@ -78,7 +78,7 @@ export default {
           image: './public/LONGITUT.jpg',
           alt: 'Longitut',
           title: 'Longitut',
-          description: 'Explora mundos virtuales con desafíos de longitud que van desde el microcosmos hasta galaxias lejanas. ¡Afina tus habilidades de medición y conviértete en el héroe de la dimensión lineal!',
+          description: 'Explora conceptos matemáticos relacionados con la longitud. Descubre fórmulas y propiedades fascinantes',
         },
       ],
     };
