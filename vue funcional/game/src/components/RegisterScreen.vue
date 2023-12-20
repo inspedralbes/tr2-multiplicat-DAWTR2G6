@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     register() {
-      fetch('http://xifraxaladag6.daw.inspedralbes.cat/public/api/backend/register', {
+      fetch('http://xifraxaladag6.daw.inspedralbes.cat/backend/public/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

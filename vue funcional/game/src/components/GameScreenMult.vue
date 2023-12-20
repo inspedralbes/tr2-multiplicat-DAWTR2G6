@@ -48,7 +48,7 @@ export default {
         async cargarPreguntas() {
             try {
                 const response = await fetch(
-                    "http://xifraxaladag6.daw.inspedralbes.cat/public/api/backend/recibir-preguntas-todas"
+                    "http://xifraxaladag6.daw.inspedralbes.cat/backend/public/api/recibir-preguntas-todas"
                 );
                 this.data_preguntas = await response.json();
 

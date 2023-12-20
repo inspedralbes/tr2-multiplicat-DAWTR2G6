@@ -14,7 +14,7 @@ export default socket;
 import io from 'socket.io-client';
 
 // Connect to the Socket.io server
-export const socket = io('http://localhost:3333'); // Replace with your server URL
+export const socket = io('http://xifraxaladag6.daw.inspedralbes.cat:3333'); // Replace with your server URL
 
 // Example: Listen for the 'updatePlayers' event
 socket.on('updatePlayers', (players) => {
