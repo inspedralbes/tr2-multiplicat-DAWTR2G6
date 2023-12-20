@@ -1,8 +1,9 @@
 <template>
-  <div class="game-container">
+<div class="game-container specific-page">
     <div class="panel-juego" v-if="preguntas_guardadas">
       <div class="progress-container">
-        <div :class="{ 'progress-bar': true, 'fire-animation': mostrarAnimacionFuego }" :style="{ width: progresoPreguntas + '%' }"></div>
+        <div :class="{ 'progress-bar': true, 'fire-animation': mostrarAnimacionFuego }"
+          :style="{ width: progresoPreguntas + '%' }"></div>
       </div>
 
       <div class="question-container">
@@ -20,7 +21,7 @@
         <BlockElement v-for="blockIndex in blocks" :key="blockIndex" :cantidad="blockIndex" />
       </div>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -98,7 +99,7 @@ export default {
         this.respuestasCorrectasSeguidas += 1;
       } else {
         this.blocks += 1;
-        
+
         // Reiniciar el contador si la respuesta es incorrecta
         this.respuestasCorrectasSeguidas = 0;
       }
@@ -168,22 +169,27 @@ export default {
     socket.off("redirectPantallaJuego");
   },
   mounted() {
+  document.body.classList.add('specific-page');
+  this.cargarPreguntas();
+  socket.on("redirectPantallaJuego", () => {
     this.cargarPreguntas();
-    socket.on("redirectPantallaJuego", () => {
-      this.cargarPreguntas();
-    });
-  },
+  });
+},
 };
 </script>
 
-<style scoped>
-.game-container {
+<style>
+html>body{
+  background: url('https://i.pinimg.com/originals/2f/f9/4d/2ff94dfff599bc37a27450a858612763.gif');
+}
+.specific-page .game-container{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url("/space_background.jpg") center/cover no-repeat;
+  background: url('https://i.pinimg.com/originals/2f/f9/4d/2ff94dfff599bc37a27450a858612763.gif');
 }
+
 
 .panel-juego {
   margin: 60px;
@@ -191,7 +197,8 @@ export default {
   text-align: center;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-  background-color: rgba(243, 118, 216, 0.075); /* Fondo semi-transparente */
+  background-color: rgba(243, 118, 216, 0.075);
+  /* Fondo semi-transparente */
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -208,7 +215,8 @@ export default {
   height: 100%;
   background: linear-gradient(90deg, #4f96d8, #67a4e1);
   width: 0;
-  transition: width 1s cubic-bezier(0.77, 0, 0.175, 1); /* Efecto de transición */
+  transition: width 1s cubic-bezier(0.77, 0, 0.175, 1);
+  /* Efecto de transición */
 }
 
 .fire-animation {
@@ -216,9 +224,12 @@ export default {
 }
 
 @keyframes fireAnimation {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 165, 0, 0.8), 0 0 60px rgba(255, 255, 0, 0.8);
   }
+
   50% {
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 165, 0, 0.8), 0 0 60px rgba(255, 255, 0, 0.8), 0 0 80px rgba(255, 69, 0, 0.8), 0 0 100px rgba(255, 0, 0, 0.8);
   }
@@ -289,5 +300,4 @@ export default {
     font-size: 22px;
     width: 100%;
   }
-}
-</style>
+}</style>
