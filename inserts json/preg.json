@@ -192,7 +192,7 @@
       "pregunta": "Si tienes un cilindro con diámetro de 6 metros y altura de 10 metros, ¿cuál es el volumen del cilindro?",
       "opciones": {
         "opcion1": "90π m³",
-        "opcion2": "180π m³,
+        "opcion2": "180π m³",
         "opcion3": "270π m³",
         "opcion4": "360π m³",
         "opcion_correcta": "180π m³"
