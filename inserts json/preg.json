@@ -220,8 +220,6 @@
     "categoria_id": 1
   },
   {
-  "preguntas": [
-    {
       "pregunta": "Un cubo tiene una arista de 2 metros. ¿Cuál es su volumen?",
       "opciones": {
         "opcion1": "2 m³",
