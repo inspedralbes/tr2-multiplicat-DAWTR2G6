@@ -126,7 +126,6 @@ body {
 header {
   background-color: #33333300;
   overflow: hidden;
-  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
