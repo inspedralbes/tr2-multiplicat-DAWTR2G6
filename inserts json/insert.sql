@@ -167,5 +167,3 @@ INSERT INTO preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VAL
 ('Si un cuadrado tiene un lado de 5 metros, ¿cuánto mide su perímetro?', '{"opcion1": "15 m", "opcion2": "20 m", "opcion3": "25 m", "opcion4": "30 m"}', '25 m', 6),
 ('La diagonal de un rectángulo mide 10 metros, y uno de los lados mide 6 metros. ¿Cuánto mide el otro lado?', '{"opcion1": "8 m", "opcion2": "9 m", "opcion3": "10 m", "opcion4": "12 m"}', '9 m', 6),
 ('Si un círculo tiene un diámetro de 14 metros, ¿cuánto mide su perímetro? (Utiliza π como 3.1416)', '{"opcion1": "22 m", "opcion2": "28 m", "opcion3": "34 m", "opcion4": "40 m"}', '28 m', 6);
-
-COMMIT;
