@@ -115,3 +115,54 @@ INSERT INTO preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VAL
 ('Si Pablo cena a las 21:00 y la cena le toma 40 minutos, ¿a qué hora concluye de cenar?', '{"opcion1": "21:20", "opcion2": "21:30", "opcion3": "21:40", "opcion4": "21:50"}', '21:40', 4),
 ('Si Laura empieza a trabajar a las 8:45 a.m. y trabaja durante 3 horas y 30 minutos, ¿a qué hora termina su jornada laboral?', '{"opcion1": "12:15 pm", "opcion2": "12:30 pm", "opcion3": "12:45 pm", "opcion4": "1:00 pm"}', '12:15 p.m.', 4),
 ('Si Javier se levanta a las 6:20 a.m. y tarda 50 minutos en prepararse para el colegio, ¿a qué hora sale de casa?', '{"opcion1": "6:50 am", "opcion2": "7:00 am", "opcion3": "7:10 am", "opcion4": "7:20 am"}', '7:10 am', 4);
+
+
+
+-- Inserts para preguntas de la categoría "superficie"
+INSERT INTO preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VALUES
+('¿Cuál es la fórmula para calcular el área de un rectángulo?', '{"opcion1": "Área = Lado × Lado", "opcion2": "Área = Longitud × Ancho", "opcion3": "Área = πr²", "opcion4": "Área = Diámetro × Diámetro"}', 'Área = Longitud × Ancho', 5),
+('Si un cuadrado tiene un lado de 4 metros, ¿cuál es su área?', '{"opcion1": "4 m²", "opcion2": "8 m²", "opcion3": "12 m²", "opcion4": "16 m²"}', '16 m²', 5),
+('¿Cómo se calcula el área de un círculo?', '{"opcion1": "Área = Lado × Lado", "opcion2": "Área = Longitud × Ancho", "opcion3": "Área = πr²", "opcion4": "Área = Diámetro × Diámetro"}', 'Área = πr²', 5),
+('Si un triángulo tiene una base de 6 metros y una altura de 8 metros, ¿cuál es su área?', '{"opcion1": "24 m²", "opcion2": "30 m²", "opcion3": "36 m²", "opcion4": "40 m²"}', '24 m²', 5),
+('¿Cuál es la unidad comúnmente utilizada para medir el área de una superficie?', '{"opcion1": "Metros cuadrados", "opcion2": "Kilómetros cuadrados", "opcion3": "Centímetros cuadrados", "opcion4": "Kilogramos"}', 'Metros cuadrados', 5),
+('¿Puede el área de una superficie ser negativa?', '{"opcion1": "Sí", "opcion2": "No", "opcion3": "Solo en casos especiales", "opcion4": "Depende del material"}', 'No', 5),
+('¿Cómo se calcula el área de un trapecio?', '{"opcion1": "Área = (Base mayor + Base menor) × Altura / 2", "opcion2": "Área = Lado × Lado", "opcion3": "Área = Longitud × Ancho", "opcion4": "Área = πr²"}', 'Área = (Base mayor + Base menor) × Altura / 2', 5),
+('¿Qué relación hay entre el área y la longitud de una superficie?', '{"opcion1": "No hay relación", "opcion2": "El área depende únicamente de la longitud", "opcion3": "El área es la longitud al cuadrado", "opcion4": "El área es la raíz cuadrada de la longitud"}', 'El área depende únicamente de la longitud', 5),
+('¿Cómo se calcula el área de un hexágono regular?', '{"opcion1": "Área = Lado × Lado", "opcion2": "Área = (3√3 / 2) × Lado²", "opcion3": "Área = πr²", "opcion4": "Área = Diámetro × Diámetro"}', 'Área = (3√3 / 2) × Lado²', 5),
+('Si tienes un rectángulo con una longitud de 10 metros y una anchura de 5 metros, ¿cuál es su área?', '{"opcion1": "15 m²", "opcion2": "25 m²", "opcion3": "30 m²", "opcion4": "50 m²"}', '50 m²', 5),
+('¿Cuál es el área de un rectángulo con longitud de 8 metros y ancho de 5 metros?', '{"opcion1": "30 m²", "opcion2": "35 m²", "opcion3": "40 m²", "opcion4": "45 m²"}', '40 m²', 5),
+('Si un triángulo tiene una base de 10 metros y una altura de 12 metros, ¿cuál es su área?', '{"opcion1": "40 m²", "opcion2": "50 m²", "opcion3": "60 m²", "opcion4": "70 m²"}', '60 m²', 5),
+('¿Cuál es el área de un círculo con un radio de 6 metros? (Utiliza π como 3.1416)', '{"opcion1": "18.85 m²", "opcion2": "37.70 m²", "opcion3": "56.55 m²", "opcion4": "113.10 m²"}', '113.10 m²', 5),
+('Si un cuadrado tiene un lado de 7 metros, ¿cuál es su área?', '{"opcion1": "35 m²", "opcion2": "42 m²", "opcion3": "49 m²", "opcion4": "56 m²"}', '49 m²', 5),
+('¿Cuál es el área de un trapecio con bases de 5 metros y 8 metros, y una altura de 6 metros?', '{"opcion1": "39 m²", "opcion2": "45 m²", "opcion3": "51 m²", "opcion4": "57 m²"}', '51 m²', 5),
+('Si un romboide tiene una base de 9 metros y una altura de 12 metros, ¿cuál es su área?', '{"opcion1": "81 m²", "opcion2": "108 m²", "opcion3": "135 m²", "opcion4": "162 m²"}', '135 m²', 5),
+('¿Cuál es el área de un pentágono regular inscrito en un círculo de radio 10 metros? (Utiliza π como 3.1416)', '{"opcion1": "128.60 m²", "opcion2": "157.08 m²", "opcion3": "183.01 m²", "opcion4": "210.44 m²"}', '128.60 m²', 5),
+('Si un hexágono regular tiene un lado de 8 metros, ¿cuál es su área?', '{"opcion1": "192 m²", "opcion2": "256 m²", "opcion3": "320 m²", "opcion4": "384 m²"}', '320 m²', 5),
+('¿Cuál es el área de un triángulo equilátero con lados de 15 metros?', '{"opcion1": "97.43 m²", "opcion2": "108.97 m²", "opcion3": "120.51 m²", "opcion4": "130.90 m²"}', '130.90 m²', 5),
+('Si un círculo tiene un diámetro de 14 metros, ¿cuál es su área? (Utiliza π como 3.1416)', '{"opcion1": "69.58 m²", "opcion2": "115.88 m²", "opcion3": "154 m²", "opcion4": "154 m²"}', '154 m²', 5);
+
+
+
+-- Inserts para preguntas de la categoría "longitud"
+INSERT INTO preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VALUES
+('¿Cuántos centímetros hay en un metro?', '{"opcion1": "100 cm", "opcion2": "10 cm", "opcion3": "1000 cm", "opcion4": "1 cm"}', '100 cm', 3),
+('¿Cuál es la herramienta adecuada para medir la longitud de un objeto pequeño?', '{"opcion1": "Calibrador", "opcion2": "Regla", "opcion3": "Cinta métrica", "opcion4": "Transportador"}', 'Calibrador', 3),
+('¿Qué es el sistema métrico?', '{"opcion1": "Un sistema de medición basado en pulgadas y libras", "opcion2": "Un sistema de medición basado en metros y kilogramos", "opcion3": "Un sistema de medición basado en millas y onzas", "opcion4": "Un sistema de medición basado en pies y galones"}', 'Un sistema de medición basado en metros y kilogramos', 3),
+('¿Cuántos milímetros hay en un centímetro?', '{"opcion1": "10 mm", "opcion2": "100 mm", "opcion3": "1000 mm", "opcion4": "1 mm"}', '10 mm', 3),
+('Explica la diferencia entre longitud y distancia.', '{"opcion1": "Son términos intercambiables", "opcion2": "La longitud se refiere a objetos pequeños, la distancia a objetos grandes", "opcion3": "La longitud es una medida precisa, la distancia es más general", "opcion4": "No hay diferencia"}', 'La longitud es una medida precisa, la distancia es más general', 3),
+('¿Qué unidad se utiliza para medir la longitud de una carrera?', '{"opcion1": "Metros", "opcion2": "Kilómetros", "opcion3": "Centímetros", "opcion4": "Pies"}', 'Metros', 3),
+('¿Cómo se mide la longitud de un círculo?', '{"opcion1": "Diámetro", "opcion2": "Radio", "opcion3": "Circunferencia", "opcion4": "Área"}', 'Circunferencia', 3),
+('Si caminas 5 kilómetros hacia el norte y luego 3 kilómetros hacia el este, ¿cuál es la distancia total recorrida?', '{"opcion1": "2 km", "opcion2": "5 km", "opcion3": "8 km", "opcion4": "15 km"}', '8 km', 3),
+('¿Cómo se expresa la longitud de una onda en física?', '{"opcion1": "En metros", "opcion2": "En hertzios", "opcion3": "En julios", "opcion4": "En decibelios"}', 'En metros', 3),
+('¿Cuál es la herramienta principal para medir la longitud de una habitación?', '{"opcion1": "Regla", "opcion2": "Cinta métrica", "opcion3": "Calibrador", "opcion4": "Transportador"}', 'Cinta métrica', 3),
+INSERT INTO Preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VALUES
+('Si un rectángulo tiene un largo de 15 metros y un ancho de 8 metros, ¿cuál es su perímetro?', '{"opcion1": "38 m", "opcion2": "46 m", "opcion3": "52 m", "opcion4": "60 m"}', '52 m', 6),
+('Si caminas 500 metros hacia el norte, 300 metros hacia el este, y luego 200 metros hacia el sur, ¿cuántos metros has recorrido en total?', '{"opcion1": "700 m", "opcion2": "800 m", "opcion3": "900 m", "opcion4": "1000 m"}', '700 m', 6),
+('Si el radio de una circunferencia es de 12 metros, ¿cuál es la longitud de la circunferencia? (Utiliza π como 3.1416)', '{"opcion1": "25.13 m", "opcion2": "37.70 m", "opcion3": "50.27 m", "opcion4": "62.83 m"}', '37.70 m', 6),
+('Un triángulo tiene lados de 9 metros, 12 metros y 15 metros. ¿Cuánto mide su perímetro?', '{"opcion1": "30 m", "opcion2": "36 m", "opcion3": "42 m", "opcion4": "48 m"}', '36 m', 6),
+('Si corres a una velocidad constante de 8 metros por segundo durante 40 segundos, ¿cuánta distancia has recorrido?', '{"opcion1": "240 m", "opcion2": "320 m", "opcion3": "400 m", "opcion4": "480 m"}', '400 m', 6),
+('La hipotenusa de un triángulo rectángulo mide 17 metros, y uno de los catetos mide 8 metros. ¿Cuánto mide el otro cateto?', '{"opcion1": "7 m", "opcion2": "9 m", "opcion3": "11 m", "opcion4": "15 m"}', '9 m', 6),
+('Si corres a una velocidad constante de 12 km/h durante 1 hora, ¿cuántos kilómetros has recorrido?', '{"opcion1": "6 km", "opcion2": "8 km", "opcion3": "10 km", "opcion4": "12 km"}', '12 km', 6),
+('Si un cuadrado tiene un lado de 5 metros, ¿cuánto mide su perímetro?', '{"opcion1": "15 m", "opcion2": "20 m", "opcion3": "25 m", "opcion4": "30 m"}', '25 m', 6),
+('La diagonal de un rectángulo mide 10 metros, y uno de los lados mide 6 metros. ¿Cuánto mide el otro lado?', '{"opcion1": "8 m", "opcion2": "9 m", "opcion3": "10 m", "opcion4": "12 m"}', '9 m', 6),
+('Si un círculo tiene un diámetro de 14 metros, ¿cuánto mide su perímetro? (Utiliza π como 3.1416)', '{"opcion1": "22 m", "opcion2": "28 m", "opcion3": "34 m", "opcion4": "40 m"}', '28 m', 6);
