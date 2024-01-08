@@ -69,7 +69,7 @@ export default {
           image: './public/SUPERFICIE.jpg',
           alt: 'Superficie',
           title: 'Superficie',
-          description: 'Enfréntate a desafíos que abarcan desde pequeñas áreas hasta vastos paisajes. ¡Perfecciona tu habilidad para calcular superficies y conquista el juego mientras te conviertes en el rey de las mediciones bidimensionales!',
+          description: 'Enfréntate a desafíos que abarcan desde pequeñas áreas hasta vastos paisajes. ¡Perfecciona tu habilidad para calcular superficies y conquista el juego mientras te conviertes en el rey ',
         },
 
 
