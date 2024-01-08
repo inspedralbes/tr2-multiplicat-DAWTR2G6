@@ -92,3 +92,26 @@ INSERT INTO preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VAL
 ('Tienes dos vasos con capacidades de 400 ml y 600 ml, respectivamente. ¿Cuántos mililitros necesitas verter del segundo vaso al primero para que ambos tengan la misma cantidad de líquido?', '{"opcion1": "100 ml", "opcion2": "150 ml", "opcion3": "200 ml", "opcion4": "250 ml", "opcion_correcta": "200 ml"}', '200 ml', 3),
 ('Si una jarra tiene una capacidad de 1 litro y le añades 750 ml más, ¿cuánta capacidad total tendrá la jarra?', '{"opcion1": "1.25 litros", "opcion2": "1.5 litros", "opcion3": "1.75 litros", "opcion4": "2 litros", "opcion_correcta": "1.75 litros"}', '1.75 litros', 3);
 
+
+-- Inserts para preguntas de la categoría "temps"
+INSERT INTO preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VALUES
+('¿Cuántos segundos hay en una hora?', '{"opcion1": "3600 segundos", "opcion2": "1200 segundos", "opcion3": "1800 segundos", "opcion4": "2400 segundos"}', '3600 segundos', 6),
+('Explica la diferencia entre tiempo y clima.', '{"opcion1": "Son sinónimos", "opcion2": "El tiempo se refiere a condiciones a corto plazo, el clima a condiciones a largo plazo", "opcion3": "El clima se refiere a condiciones a corto plazo, el tiempo a condiciones a largo plazo", "opcion4": "No hay diferencia"}', 'El tiempo se refiere a condiciones a corto plazo, el clima a condiciones a largo plazo', 6),
+('Si son las 3:45 PM, ¿cuántos minutos faltan para las 5:30 PM?', '{"opcion1": "45 minutos", "opcion2": "60 minutos", "opcion3": "75 minutos", "opcion4": "90 minutos"}', '45 minutos', 6),
+('¿Cuántos días hay en un año bisiesto?', '{"opcion1": "365 días", "opcion2": "366 días", "opcion3": "364 días", "opcion4": "367 días"}', '366 días', 6),
+('Si un tren sale de una estación a las 8:15 AM y llega a otra estación a las 2:45 PM, ¿cuántas horas duró el viaje?', '{"opcion1": "4 horas y 30 minutos", "opcion2": "6 horas y 15 minutos", "opcion3": "5 horas y 30 minutos", "opcion4": "7 horas y 15 minutos"}', '6 horas y 15 minutos', 6),
+('¿Cuál es la unidad de medida estándar para expresar la duración de un evento?', '{"opcion1": "Segundos", "opcion2": "Minutos", "opcion3": "Horas", "opcion4": "Días"}', 'Segundos', 6),
+('Si un reloj marca las 6:30 AM, ¿en formato de 24 horas, cómo se mostraría la hora?', '{"opcion1": "06:30", "opcion2": "18:30", "opcion3": "06:15", "opcion4": "12:30"}', '06:30', 6),
+('¿Cuántas semanas hay en un mes?', '{"opcion1": "2 semanas", "opcion2": "3 semanas", "opcion3": "4 semanas", "opcion4": "5 semanas"}', '4 semanas', 6),
+('Explica la diferencia entre el tiempo local y el tiempo universal coordinado (UTC).', '{"opcion1": "Son lo mismo", "opcion2": "El tiempo local varía según la ubicación, UTC es una referencia estándar", "opcion3": "UTC varía según la ubicación, el tiempo local es una referencia estándar", "opcion4": "No hay diferencia"}', 'El tiempo local varía según la ubicación, UTC es una referencia estándar', 6),
+('¿Qué es un milisegundo?', '{"opcion1": "Una milésima parte de un segundo", "opcion2": "Mil segundos", "opcion3": "Un millón de segundos", "opcion4": "Diez mil segundos"}', 'Una milésima parte de un segundo', 6),
+('Si Juan se levanta a las 7:30 a.m. y desayuna durante 20 minutos, ¿a qué hora termina su desayuno?', '{"opcion1": "7:50 am", "opcion2": "8:00 am", "opcion3": "8:10 am", "opcion4": "8:20 am"}', '7:50 am', 4),
+('Si María comienza a estudiar a las 16:45 y estudia durante 1 hora y 30 minutos, ¿a qué hora termina de estudiar?', '{"opcion1": "18:00", "opcion2": "18:15", "opcion3": "18:30", "opcion4": "18:45"}', '18:15', 4),
+('Juan sale de su casa a las 9:15 a.m. y regresa después de 2 horas y 45 minutos. ¿A qué hora vuelve a casa?', '{"opcion1": "11:45 am", "opcion2": "12:00 pm", "opcion3": "12:15 pm", "opcion4": "12:30 pm"}', '12:00 pm', 4),
+('Si Marta comienza a correr a las 18:20 y corre durante 40 minutos, ¿a qué hora termina de correr?', '{"opcion1": "18:40", "opcion2": "18:50", "opcion3": "19:00", "opcion4": "19:10"}', '19:00', 4),
+('Carlos almuerza a las 13:00 y la comida le lleva 35 minutos. ¿A qué hora termina de almorzar?', '{"opcion1": "13:25", "opcion2": "13:30", "opcion3": "13:35", "opcion4": "13:40"}', '13:35', 4),
+('Si Juanita comienza a ver una película a las 20:45 y la película dura 1 hora y 50 minutos, ¿a qué hora termina de ver la película?', '{"opcion1": "22:55", "opcion2": "22:30", "opcion3": "22:45", "opcion4": "22:35"}', '22:35', 4),
+('Si Ana inicia una tarea a las 19:30 y trabaja en ella durante 2 horas y 15 minutos, ¿a qué hora finaliza la tarea?', '{"opcion1": "21:15", "opcion2": "21:30", "opcion3": "21:45", "opcion4": "22:00"}', '21:45', 4),
+('Si Pablo cena a las 21:00 y la cena le toma 40 minutos, ¿a qué hora concluye de cenar?', '{"opcion1": "21:20", "opcion2": "21:30", "opcion3": "21:40", "opcion4": "21:50"}', '21:40', 4),
+('Si Laura empieza a trabajar a las 8:45 a.m. y trabaja durante 3 horas y 30 minutos, ¿a qué hora termina su jornada laboral?', '{"opcion1": "12:15 pm", "opcion2": "12:30 pm", "opcion3": "12:45 pm", "opcion4": "1:00 pm"}', '12:15 p.m.', 4),
+('Si Javier se levanta a las 6:20 a.m. y tarda 50 minutos en prepararse para el colegio, ¿a qué hora sale de casa?', '{"opcion1": "6:50 am", "opcion2": "7:00 am", "opcion3": "7:10 am", "opcion4": "7:20 am"}', '7:10 am', 4);
