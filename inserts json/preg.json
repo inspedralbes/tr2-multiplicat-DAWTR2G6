@@ -1,5 +1,115 @@
 [
   {
+      "pregunta": "¿Cuál es la masa de un objeto con una densidad de 2 kg/m³ y un volumen de 5 m³?",
+      "opciones": {
+        "opcion1": "2.5 kg",
+        "opcion2": "5 kg",
+        "opcion3": "10 kg",
+        "opcion4": "15 kg",
+        "opcion_correcta": "10 kg"
+      },
+      "categoria_id": 1
+    },
+    {
+      "pregunta": "Si tienes un bloque de metal con una masa de 500 g y cortas una parte que tiene una masa de 150 g, ¿cuál es la masa restante del bloque original?",
+      "opciones": {
+        "opcion1": "350 g",
+        "opcion2": "450 g",
+        "opcion3": "500 g",
+        "opcion4": "650 g",
+        "opcion_correcta": "350 g"
+      }
+      "categoria_id": 1
+    },
+    {
+      "pregunta": "Una caja tiene una masa de 2 kg. Si le añades tres manzanas, cada una con una masa de 150 g, ¿cuál es la masa total de la caja y las manzanas?",
+      "opciones": {
+        "opcion1": "2.45 kg",
+        "opcion2": "2.50 kg",
+        "opcion3": "2.70 kg",
+        "opcion4": "3.00 kg",
+        "opcion_correcta": "2.70 kg"
+      },
+      "categoria_id": 1
+    },
+    {
+      "pregunta": "Imagina que tienes una mezcla de dos sustancias. Si la primera tiene una masa de 300 g y la segunda una masa de 500 g, ¿cuál es la masa total de la mezcla?",
+      "opciones": {
+        "opcion1": "700 g",
+        "opcion2": "800 g",
+        "opcion3": "900 g",
+        "opcion4": "1000 g",
+        "opcion_correcta": "800 g"
+      },
+      "categoria_id": 1
+    },
+    {
+      "pregunta": "Si tienes una caja con libros y su masa es de 1.5 kg, ¿cuál es la masa promedio de cada libro si hay 6 libros en la caja?",
+      "opciones": {
+        "opcion1": "150 g",
+        "opcion2": "200 g",
+        "opcion3": "250 g",
+        "opcion4": "300 g",
+        "opcion_correcta": "250 g"
+      },
+      "categoria_id": 1
+    },
+    {
+      "pregunta": "Imagina que tienes una barra de oro con una masa de 750 g. Si cortas la barra en tres partes iguales, ¿cuánto pesa cada parte?",
+      "opciones": {
+        "opcion1": "250 g",
+        "opcion2": "375 g",
+        "opcion3": "500 g",
+        "opcion4": "625 g",
+        "opcion_correcta": "250 g"
+      },
+      "categoria_id": 1
+    },
+    {
+      "pregunta": "Si un objeto tiene una masa de 0.2 kg y cae desde una altura de 5 metros, ¿cuál será su energía potencial gravitatoria?",
+      "opciones": {
+        "opcion1": "1 J",
+        "opcion2": "2 J",
+        "opcion3": "5 J",
+        "opcion4": "10 J",
+        "opcion_correcta": "10 J"
+      },
+      "categoria_id": 1
+    },
+    {
+      "pregunta": "Si tienes una mezcla de harina y azúcar, y la harina tiene una masa de 300 g y el azúcar una masa de 200 g, ¿cuál es la proporción de masa de harina respecto a la masa total?",
+      "opciones": {
+        "opcion1": "40%",
+        "opcion2": "50%",
+        "opcion3": "60%",
+        "opcion4": "70%",
+        "opcion_correcta": "60%"
+      },
+      "categoria_id": 1
+    },
+    {
+      "pregunta": "Si una persona pesa 70 kg en la Tierra, ¿cuál sería su peso en la Luna, donde la gravedad es aproximadamente 1/6 de la terrestre?",
+      "opciones": {
+        "opcion1": "10 kg",
+        "opcion2": "20 kg",
+        "opcion3": "30 kg",
+        "opcion4": "40 kg",
+        "opcion_correcta": "10 kg"
+      },
+      "categoria_id": 1
+    },
+    {
+      "pregunta": "Un recipiente contiene agua con una masa de 800 g y hielo con una masa de 200 g. ¿Cuál es la masa total del contenido del recipiente?",
+      "opciones": {
+        "opcion1": "800 g",
+        "opcion2": "900 g",
+        "opcion3": "1000 g",
+        "opcion4": "1100 g",
+        "opcion_correcta": "1000 g"
+      },
+      "categoria_id": 1
+    },
+  {
     "pregunta": "¿Cuántos litros de agua caben en una botella pequeña?",
       "opciones": {
         "opcion1": "0.25 L",
@@ -8,7 +118,7 @@
         "opcion4": "1 L",
         "opcion_correcta": "0.5 L"
       },
-      "categoria_id": 1
+      "categoria_id": 2
     },
     {
       "pregunta": "¿Cuántas tazas de sopa hay en un plato hondo?",
@@ -19,7 +129,7 @@
         "opcion4": "4 tazas",
         "opcion_correcta": "5 tazas"
       },
-      "categoria_id": 1
+      "categoria_id": 2
     },
     {
       "pregunta": "¿Cuántos mililitros de jugo hay en un vaso común?",
@@ -30,7 +140,7 @@
         "opcion4": "400 ml",
         "opcion_correcta": "500 ml"
       },
-      "categoria_id": 1
+      "categoria_id": 2
     },
     {
       "pregunta": "¿Cuántos litros de helado hay en un cubo de helado grande?",
@@ -41,7 +151,7 @@
         "opcion4": "4 litros",
         "opcion_correcta": "3 litros"
       },
-      "categoria_id": 1
+      "categoria_id": 2
     },
     {
       "pregunta": "¿Cuántos mililitros de agua puedes beber en un vaso grande?",
@@ -52,7 +162,7 @@
         "opcion4": "1000 ml",
         "opcion_correcta": "1500 ml"
       },
-      "categoria_id": 1
+      "categoria_id": 2
     },
     {
       "pregunta": "¿Cuántos litros de leche caben en una jarra pequeña?",
@@ -63,7 +173,7 @@
         "opcion4": "1000 ml",
         "opcion_correcta": "1000 ml"
       },
-      "categoria_id": 1
+      "categoria_id": 2
     },
     {
       "pregunta": "¿Cuántos mililitros de leche hay en un vaso de desayuno?",
@@ -74,7 +184,7 @@
         "opcion4": "400 ml",
         "opcion_correcta": "200 ml"
       },
-      "categoria_id": 1
+      "categoria_id": 2
     },
     {
       "pregunta": "¿Cuántos litros de agua hay en una piscina pequeña?",
@@ -85,7 +195,7 @@
         "opcion4": "4000 ml",
         "opcion_correcta": "5000 ml"
       },
-      "categoria_id": 1
+      "categoria_id": 2
     },
     {
       "pregunta": "¿Cuántos litros de agua necesita una planta pequeña cada semana?",
@@ -96,7 +206,7 @@
         "opcion4": "4 litros",
         "opcion_correcta": "2 litros"
       },
-      "categoria_id": 1
+      "categoria_id": 2
     },
     {
       "pregunta": "¿Cuántas tazas de harina necesitas para hacer una torta?",
@@ -107,6 +217,7 @@
         "opcion4": "4 tazas",
         "opcion_correcta": "2 tazas"
       },
-      "categoria_id": 1
-    }
+      "categoria_id": 2
+    }, 
+  
   ]
