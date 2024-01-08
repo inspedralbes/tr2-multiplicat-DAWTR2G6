@@ -440,5 +440,115 @@
         "opcion_correcta": "7:10 am"
       },
       "categoria_id": 4
-    }    
+    },
+    {
+      "pregunta": "¿Cuál es el área de un rectángulo con longitud de 8 metros y ancho de 5 metros?",
+      "opciones": {
+        "opcion1": "30 m²",
+        "opcion2": "35 m²",
+        "opcion3": "40 m²",
+        "opcion4": "45 m²",
+        "opcion_correcta": "40 m²"
+      },
+      "categoria_id": 5
+    },
+    {
+      "pregunta": "Si un triángulo tiene una base de 10 metros y una altura de 12 metros, ¿cuál es su área?",
+      "opciones": {
+        "opcion1": "40 m²",
+        "opcion2": "50 m²",
+        "opcion3": "60 m²",
+        "opcion4": "70 m²",
+        "opcion_correcta": "60 m²"
+      },
+      "categoria_id": 5
+    },
+    {
+      "pregunta": "¿Cuál es el área de un círculo con un radio de 6 metros? (Utiliza π como 3.1416)",
+      "opciones": {
+        "opcion1": "18.85 m²",
+        "opcion2": "37.70 m²",
+        "opcion3": "56.55 m²",
+        "opcion4": "113.10 m²",
+        "opcion_correcta": "113.10 m²"
+      },
+      "categoria_id": 5
+    },
+    {
+      "pregunta": "Si un cuadrado tiene un lado de 7 metros, ¿cuál es su área?",
+      "opciones": {
+        "opcion1": "35 m²",
+        "opcion2": "42 m²",
+        "opcion3": "49 m²",
+        "opcion4": "56 m²",
+        "opcion_correcta": "49 m²"
+      },
+      "categoria_id": 5
+    },
+    {
+      "pregunta": "¿Cuál es el área de un trapecio con bases de 5 metros y 8 metros, y una altura de 6 metros?",
+      "opciones": {
+        "opcion1": "39 m²",
+        "opcion2": "45 m²",
+        "opcion3": "51 m²",
+        "opcion4": "57 m²",
+        "opcion_correcta": "51 m²"
+      },
+      "categoria_id": 5
+    },
+    {
+      "pregunta": "Si un romboide tiene una base de 9 metros y una altura de 12 metros, ¿cuál es su área?",
+      "opciones": {
+        "opcion1": "81 m²",
+        "opcion2": "108 m²",
+        "opcion3": "135 m²",
+        "opcion4": "162 m²",
+        "opcion_correcta": "135 m²"
+      },
+      "categoria_id": 5
+    },
+    {
+      "pregunta": "¿Cuál es el área de un pentágono regular inscrito en un círculo de radio 10 metros? (Utiliza π como 3.1416)",
+      "opciones": {
+        "opcion1": "128.60 m²",
+        "opcion2": "157.08 m²",
+        "opcion3": "183.01 m²",
+        "opcion4": "210.44 m²",
+        "opcion_correcta": "128.60 m²"
+      },
+      "categoria_id": 5
+    },
+    {
+      "pregunta": "Si un hexágono regular tiene un lado de 8 metros, ¿cuál es su área?",
+      "opciones": {
+        "opcion1": "192 m²",
+        "opcion2": "256 m²",
+        "opcion3": "320 m²",
+        "opcion4": "384 m²",
+        "opcion_correcta": "320 m²"
+      },
+      "categoria_id": 5
+    },
+    {
+      "pregunta": "¿Cuál es el área de un triángulo equilátero con lados de 15 metros?",
+      "opciones": {
+        "opcion1": "97.43 m²",
+        "opcion2": "108.97 m²",
+        "opcion3": "120.51 m²",
+        "opcion4": "130.90 m²",
+        "opcion_correcta": "130.90 m²"
+      },
+      "categoria_id": 5
+    },
+    {
+      "pregunta": "Si un círculo tiene un diámetro de 14 metros, ¿cuál es su área? (Utiliza π como 3.1416)",
+      "opciones": {
+        "opcion1": "69.58 m²",
+        "opcion2": "115.88 m²",
+        "opcion3": "154 m²",
+        "opcion4": "154 m²",
+        "opcion_correcta": "154 m²"
+      },
+      "categoria_id": 5
+    },
   ]
