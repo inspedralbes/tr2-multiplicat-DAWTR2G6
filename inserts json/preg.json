@@ -116,7 +116,7 @@
       "opciones": {
         "opcion1": "2 m³",
         "opcion2": "4 m³",
-        "opcion3": "6 m³ (Correcta)",
+        "opcion3": "6 m³",
         "opcion4": "8 m³",
         "opcion_correcta": "6 m³"
       },
@@ -125,7 +125,7 @@
     {
       "pregunta": "Si tienes un cilindro con radio de 3 metros y altura de 4 metros, ¿cuál es el volumen del cilindro?",
       "opciones": {
-        "opcion1": "12π m³ (Correcta)",
+        "opcion1": "12π m³",
         "opcion2": "24π m³",
         "opcion3": "36π m³",
         "opcion4": "48π m³",
@@ -138,7 +138,7 @@
       "opciones": {
         "opcion1": "58.33π m³",
         "opcion2": "108.33π m³",
-        "opcion3": "183.33π m³ (Correcta)",
+        "opcion3": "183.33π m³",
         "opcion4": "275π m³",
         "opcion_correcta": "183.33π m³"
       },
@@ -148,7 +148,7 @@
       "pregunta": "Si tienes una esfera con radio de 4 metros, ¿cuál es su volumen?",
       "opciones": {
         "opcion1": "33.51π m³",
-        "opcion2": "67.03π m³ (Correcta)",
+        "opcion2": "67.03π m³",
         "opcion3": "100.54π m³",
         "opcion4": "134.06π m³",
         "opcion_correcta": "67.03π m³"
@@ -159,7 +159,7 @@
       "pregunta": "Un prisma rectangular tiene una base de 6 metros por 9 metros y una altura de 8 metros. ¿Cuál es el volumen del prisma?",
       "opciones": {
         "opcion1": "324 m³",
-        "opcion2": "432 m³ (Correcta)",
+        "opcion2": "432 m³",
         "opcion3": "540 m³",
         "opcion4": "648 m³",
         "opcion_correcta": "432 m³"
@@ -169,7 +169,7 @@
     {
       "pregunta": "Si tienes un tetraedro con una arista de 3 metros, ¿cuál es su volumen?",
       "opciones": {
-        "opcion1": "3√2 m³ (Correcta)",
+        "opcion1": "3√2 m³",
         "opcion2": "9√2 m³",
         "opcion3": "18√2 m³",
         "opcion4": "27√2 m³",
@@ -182,7 +182,7 @@
       "opciones": {
         "opcion1": "8 m³",
         "opcion2": "16 m³",
-        "opcion3": "32 m³ (Correcta)",
+        "opcion3": "32 m³",
         "opcion4": "64 m³",
         "opcion_correcta": "32 m³"
       },
@@ -192,7 +192,7 @@
       "pregunta": "Si tienes un cilindro con diámetro de 6 metros y altura de 10 metros, ¿cuál es el volumen del cilindro?",
       "opciones": {
         "opcion1": "90π m³",
-        "opcion2": "180π m³ (Correcta)",
+        "opcion2": "180π m³,
         "opcion3": "270π m³",
         "opcion4": "360π m³",
         "opcion_correcta": "180π m³"
@@ -203,7 +203,7 @@
       "pregunta": "Un cono tiene radio de 8 metros y altura de 12 metros. ¿Cuál es el volumen del cono?",
       "opciones": {
         "opcion1": "268.22π m³",
-        "opcion2": "536.44π m³ (Correcta)",
+        "opcion2": "536.44π m³",
         "opcion3": "804.66π m³",
         "opcion4": "1072.88π m³",
         "opcion_correcta": "536.44π m³"
@@ -215,7 +215,7 @@
       "opciones": {
         "opcion1": "36π m³",
         "opcion2": "54π m³",
-        "opcion3": "72π m³ (Correcta)",
+        "opcion3": "72π m³",
         "opcion4": "90π m³",
         "opcion_correcta": "72π m³"
       },
@@ -226,7 +226,7 @@
       "opciones": {
         "opcion1": "600 ml",
         "opcion2": "700 ml",
-        "opcion3": "800 ml (Correcta)",
+        "opcion3": "800 ml",
         "opcion4": "900 ml",
         "opcion_correcta": "800 ml"
       },
@@ -237,7 +237,7 @@
       "opciones": {
         "opcion1": "50 ml",
         "opcion2": "75 ml",
-        "opcion3": "100 ml (Correcta)",
+        "opcion3": "100 ml",
         "opcion4": "125 ml",
         "opcion_correcta": "100 ml"
       },
@@ -248,7 +248,7 @@
       "opciones": {
         "opcion1": "2 litros",
         "opcion2": "3 litros",
-        "opcion3": "4 litros (Correcta)",
+        "opcion3": "4 litros",
         "opcion4": "5 litros",
         "opcion_correcta": "4 litros"
       },
@@ -260,7 +260,7 @@
         "opcion1": "400 ml",
         "opcion2": "550 ml",
         "opcion3": "650 ml",
-        "opcion4": "750 ml (Correcta)",
+        "opcion4": "750 ml",
         "opcion_correcta": "750 ml"
       },
       "categoria_id": 3
@@ -269,7 +269,7 @@
       "pregunta": "Tienes tres botellas con capacidades de 300 ml, 500 ml y 700 ml, respectivamente. ¿Cuál es la capacidad total si unes el contenido de las tres botellas en una sola?",
       "opciones": {
         "opcion1": "1200 ml",
-        "opcion2": "1500 ml (Correcta)",
+        "opcion2": "1500 ml",
         "opcion3": "1800 ml",
         "opcion4": "2100 ml",
         "opcion_correcta": "1500 ml"
@@ -281,7 +281,7 @@
       "opciones": {
         "opcion1": "0.3 litros",
         "opcion2": "0.5 litros",
-        "opcion3": "0.7 litros (Correcta)",
+        "opcion3": "0.7 litros",
         "opcion4": "1 litro",
         "opcion_correcta": "0.7 litros"
       },
@@ -291,7 +291,7 @@
       "pregunta": "Tienes una jarra con una capacidad de 1.2 litros y otra jarra con una capacidad de 900 ml. ¿Cuántos mililitros más puede contener la primera jarra que la segunda?",
       "opciones": {
         "opcion1": "100 ml",
-        "opcion2": "200 ml (Correcta)",
+        "opcion2": "200 ml",
         "opcion3": "300 ml",
         "opcion4": "400 ml",
         "opcion_correcta": "200 ml"
@@ -302,7 +302,7 @@
       "pregunta": "Si una botella tiene una capacidad de 750 ml y otra botella tiene el doble de capacidad, ¿cuántos mililitros tiene la segunda botella?",
       "opciones": {
         "opcion1": "750 ml",
-        "opcion2": "1000 ml (Correcta)",
+        "opcion2": "1000 ml",
         "opcion3": "1250 ml",
         "opcion4": "1500 ml",
         "opcion_correcta": "1000 ml"
@@ -314,7 +314,7 @@
       "opciones": {
         "opcion1": "100 ml",
         "opcion2": "150 ml",
-        "opcion3": "200 ml (Correcta)",
+        "opcion3": "200 ml",
         "opcion4": "250 ml",
         "opcion_correcta": "200 ml"
       },
@@ -325,12 +325,120 @@
       "opciones": {
         "opcion1": "1.25 litros",
         "opcion2": "1.5 litros",
-        "opcion3": "1.75 litros (Correcta)",
+        "opcion3": "1.75 litros",
         "opcion4": "2 litros",
         "opcion_correcta": "1.75 litros"
       },
       "categoria_id": 3
     },
-    
-  
+    {
+      "pregunta": "Si Juan se levanta a las 7:30 a.m. y desayuna durante 20 minutos, ¿a qué hora termina su desayuno?",
+      "opciones": {
+        "opcion1": "7:50 am",
+        "opcion2": "8:00 am",
+        "opcion3": "8:10 am",
+        "opcion4": "8:20 am",
+        "opcion_correcta": "7:50 am"
+      },
+      "categoria_id": 4
+    },
+    {
+      "pregunta": "Si María comienza a estudiar a las 16:45 y estudia durante 1 hora y 30 minutos, ¿a qué hora termina de estudiar?",
+      "opciones": {
+        "opcion1": "18:00",
+        "opcion2": "18:15",
+        "opcion3": "18:30",
+        "opcion4": "18:45",
+        "opcion_correcta": "18:15"
+      },
+      "categoria_id": 4
+    },
+    {
+      "pregunta": "Juan sale de su casa a las 9:15 a.m. y regresa después de 2 horas y 45 minutos. ¿A qué hora vuelve a casa?",
+      "opciones": {
+        "opcion1": "11:45 am",
+        "opcion2": "12:00 pm",
+        "opcion3": "12:15 pm",
+        "opcion4": "12:30 pm",
+        "opcion_correcta": "12:00 pm"
+      },
+      "categoria_id": 4
+    },
+    {
+      "pregunta": "Si Marta comienza a correr a las 18:20 y corre durante 40 minutos, ¿a qué hora termina de correr?",
+      "opciones": {
+        "opcion1": "18:40",
+        "opcion2": "18:50",
+        "opcion3": "19:00",
+        "opcion4": "19:10",
+        "opcion_correcta": "19:00"
+      },
+      "categoria_id": 4
+    },
+    {
+      "pregunta": "Carlos almuerza a las 13:00 y la comida le lleva 35 minutos. ¿A qué hora termina de almorzar?",
+      "opciones": {
+        "opcion1": "13:25",
+        "opcion2": "13:30",
+        "opcion3": "13:35",
+        "opcion4": "13:40",
+        "opcion_correcta": "13:35"
+      },
+      "categoria_id": 4
+    },
+    {
+      "pregunta": "Si Juanita comienza a ver una película a las 20:45 y la película dura 1 hora y 50 minutos, ¿a qué hora termina de ver la película?",
+      "opciones": {
+        "opcion1": "22:55",
+        "opcion2": "22:30",
+        "opcion3": "22:45",
+        "opcion4": "22:35",
+        "opcion_correcta": "22:35"
+      },
+      "categoria_id": 4
+    },
+    {
+      "pregunta": "Si Ana inicia una tarea a las 19:30 y trabaja en ella durante 2 horas y 15 minutos, ¿a qué hora finaliza la tarea?",
+      "opciones": {
+        "opcion1": "21:15",
+        "opcion2": "21:30",
+        "opcion3": "21:45",
+        "opcion4": "22:00",
+        "opcion_correcta": "21:45"
+      },
+      "categoria_id": 4
+    },
+    {
+      "pregunta": "Si Pablo cena a las 21:00 y la cena le toma 40 minutos, ¿a qué hora concluye de cenar?",
+      "opciones": {
+        "opcion1": "21:20",
+        "opcion2": "21:30",
+        "opcion3": "21:40",
+        "opcion4": "21:50",
+        "opcion_correcta": "21:40"
+      },
+      "categoria_id": 4
+    },
+    {
+      "pregunta": "Si Laura empieza a trabajar a las 8:45 a.m. y trabaja durante 3 horas y 30 minutos, ¿a qué hora termina su jornada laboral?",
+      "opciones": {
+        "opcion1": "12:15 pm",
+        "opcion2": "12:30 pm",
+        "opcion3": "12:45 pm",
+        "opcion4": "1:00 pm",
+        "opcion_correcta": "12:15 p.m."
+      },
+      "categoria_id": 4
+    },
+    {
+      "pregunta": "Si Javier se levanta a las 6:20 a.m. y tarda 50 minutos en prepararse para el colegio, ¿a qué hora sale de casa?",
+      "opciones": {
+        "opcion1": "6:50 am",
+        "opcion2": "7:00 am",
+        "opcion3": "7:10 am",
+        "opcion4": "7:20 am",
+        "opcion_correcta": "7:10 am"
+      },
+      "categoria_id": 4
+    }    
   ]
