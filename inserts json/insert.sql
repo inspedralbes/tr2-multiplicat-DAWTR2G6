@@ -47,3 +47,23 @@ INSERT INTO preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VAL
 ('Si una persona pesa 70 kg en la Tierra, ¿cuál sería su peso en la Luna, donde la gravedad es aproximadamente 1/6 de la terrestre?', '{"opcion1": "10 kg", "opcion2": "20 kg", "opcion3": "30 kg", "opcion4": "40 kg", "opcion_correcta": "10 kg"}', '10 kg', 1),
 ('Un recipiente contiene agua con una masa de 800 g y hielo con una masa de 200 g. ¿Cuál es la masa total del contenido del recipiente?', '{"opcion1": "800 g", "opcion2": "900 g", "opcion3": "1000 g", "opcion4": "1100 g", "opcion_correcta": "1000 g"}', '1000 g', 1);
 
+
+-- Inserts para preguntas de la categoría "volumen"
+INSERT INTO preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VALUES
+('¿Cuál es el volumen de un cubo con arista de 3 metros?', '{"opcion1": "6 m³", "opcion2": "9 m³", "opcion3": "18 m³", "opcion4": "27 m³"}', '27 m³', 2),
+('Explica cómo se calcula el volumen de un objeto irregular.', '{"opcion1": "Por la fórmula V = l × a × h", "opcion2": "Por la fórmula V = πr²h", "opcion3": "No se puede calcular el volumen de un objeto irregular", "opcion4": "Por la fórmula V = B × h"}', 'No se puede calcular el volumen de un objeto irregular', 2),
+('¿Cuál es la relación entre el volumen y la forma de un objeto?', '{"opcion1": "El volumen depende únicamente de la forma", "opcion2": "La forma no afecta el volumen", "opcion3": "Objetos de formas diferentes pueden tener el mismo volumen", "opcion4": "La forma determina el volumen y la masa"}', 'Objetos de formas diferentes pueden tener el mismo volumen', 2),
+('Si el volumen de un líquido es de 500 ml, ¿cuántos litros son?', '{"opcion1": "0.5 L", "opcion2": "5 L", "opcion3": "50 L", "opcion4": "5000 L"}', '0.5 L', 2),
+('¿Cómo se mide el volumen de un gas?', '{"opcion1": "En litros", "opcion2": "En metros cúbicos", "opcion3": "En gramos", "opcion4": "En kilogramos"}', 'En litros', 2),
+('¿Puede el volumen de un objeto ser negativo?', '{"opcion1": "Sí", "opcion2": "No", "opcion3": "Solo en el espacio", "opcion4": "Depende del material"}', 'No', 2),
+('Explica la ley de Boyle en relación con el volumen de los gases.', '{"opcion1": "El volumen de un gas es inversamente proporcional a su presión", "opcion2": "El volumen de un gas es directamente proporcional a su temperatura", "opcion3": "El volumen de un gas es constante a diferentes presiones", "opcion4": "El volumen de un gas no está relacionado con la presión"}', 'El volumen de un gas es inversamente proporcional a su presión', 2),
+('Un cubo tiene una arista de 2 metros. ¿Cuál es su volumen?', '{"opcion1": "2 m³", "opcion2": "4 m³", "opcion3": "6 m³", "opcion4": "8 m³"}', '6 m³', 2),
+('Si tienes un cilindro con radio de 3 metros y altura de 4 metros, ¿cuál es el volumen del cilindro?', '{"opcion1": "12π m³", "opcion2": "24π m³", "opcion3": "36π m³", "opcion4": "48π m³"}', '12π m³', 2),
+('Un cono tiene radio de 5 metros y altura de 7 metros. ¿Cuál es el volumen del cono?', '{"opcion1": "58.33π m³", "opcion2": "108.33π m³", "opcion3": "183.33π m³", "opcion4": "275π m³"}', '183.33π m³', 2),
+('Si tienes una esfera con radio de 4 metros, ¿cuál es su volumen?', '{"opcion1": "33.51π m³", "opcion2": "67.03π m³", "opcion3": "100.54π m³", "opcion4": "134.06π m³"}', '67.03π m³', 2),
+('Un prisma rectangular tiene una base de 6 metros por 9 metros y una altura de 8 metros. ¿Cuál es el volumen del prisma?', '{"opcion1": "324 m³", "opcion2": "432 m³", "opcion3": "540 m³", "opcion4": "648 m³"}', '432 m³', 2),
+('Si tienes un tetraedro con una arista de 3 metros, ¿cuál es su volumen?', '{"opcion1": "3√2 m³", "opcion2": "9√2 m³", "opcion3": "18√2 m³", "opcion4": "27√2 m³"}', '3√2 m³', 2),
+('Un cubo tiene una diagonal de 4 metros. ¿Cuál es su volumen?', '{"opcion1": "8 m³", "opcion2": "16 m³", "opcion3": "32 m³", "opcion4": "64 m³"}', '32 m³', 2),
+('Si tienes un cilindro con diámetro de 6 metros y altura de 10 metros, ¿cuál es el volumen del cilindro?', '{"opcion1": "90π m³", "opcion2": "180π m³", "opcion3": "270π m³", "opcion4": "360π m³"}', '180π m³', 2),
+('Un cono tiene radio de 8 metros y altura de 12 metros. ¿Cuál es el volumen del cono?', '{"opcion1": "268.22π m³", "opcion2": "536.44π m³", "opcion3": "804.66π m³", "opcion4": "1072.88π m³"}', '536.44π m³', 2),
+('Si tienes una esfera con circunferencia de 18 metros, ¿cuál es su volumen?', '{"opcion1": "36π m³", "opcion2": "54π m³", "opcion3": "72π m³", "opcion4": "90π m³"}', '72π m³', 2);
