@@ -551,4 +551,114 @@
       },
       "categoria_id": 5
     },
+    {
+      "pregunta": "Si un rectángulo tiene un largo de 15 metros y un ancho de 8 metros, ¿cuál es su perímetro?",
+      "opciones": {
+        "opcion1": "38 m",
+        "opcion2": "46 m",
+        "opcion3": "52 m",
+        "opcion4": "60 m",
+        "opcion_correcta": "52 m"
+      },
+      "categoria_id": 6
+    },
+    {
+      "pregunta": "Si caminas 500 metros hacia el norte, 300 metros hacia el este, y luego 200 metros hacia el sur, ¿cuántos metros has recorrido en total?",
+      "opciones": {
+        "opcion1": "700 m",
+        "opcion2": "800 m",
+        "opcion3": "900 m",
+        "opcion4": "1000 m",
+        "opcion_correcta": "700 m"
+      },
+      "categoria_id": 6
+    },
+    {
+      "pregunta": "Si el radio de una circunferencia es de 12 metros, ¿cuál es la longitud de la circunferencia? (Utiliza π como 3.1416)",
+      "opciones": {
+        "opcion1": "25.13 m",
+        "opcion2": "37.70 m",
+        "opcion3": "50.27 m",
+        "opcion4": "62.83 m",
+        "opcion_correcta": "37.70 m"
+      },
+      "categoria_id": 6
+    },
+    {
+      "pregunta": "Un triángulo tiene lados de 9 metros, 12 metros y 15 metros. ¿Cuánto mide su perímetro?",
+      "opciones": {
+        "opcion1": "30 m",
+        "opcion2": "36 m",
+        "opcion3": "42 m",
+        "opcion4": "48 m",
+        "opcion_correcta": "36 m"
+      },
+      "categoria_id": 6
+    },
+    {
+      "pregunta": "Si corres a una velocidad constante de 8 metros por segundo durante 40 segundos, ¿cuánta distancia has recorrido?",
+      "opciones": {
+        "opcion1": "240 m",
+        "opcion2": "320 m",
+        "opcion3": "400 m",
+        "opcion4": "480 m",
+        "opcion_correcta": "400 m"
+      },
+      "categoria_id": 6
+    },
+    {
+      "pregunta": "La hipotenusa de un triángulo rectángulo mide 17 metros, y uno de los catetos mide 8 metros. ¿Cuánto mide el otro cateto?",
+      "opciones": {
+        "opcion1": "7 m",
+        "opcion2": "9 m",
+        "opcion3": "11 m",
+        "opcion4": "15 m",
+        "opcion_correcta": "9 m"
+      },
+      "categoria_id": 6
+    },
+    {
+      "pregunta": "Si corres a una velocidad constante de 12 km/h durante 1 hora, ¿cuántos kilómetros has recorrido?",
+      "opciones": {
+        "opcion1": "6 km",
+        "opcion2": "8 km",
+        "opcion3": "10 km",
+        "opcion4": "12 km",
+        "opcion_correcta": "12 km"
+      },
+      "categoria_id": 6
+    },
+    {
+      "pregunta": "Si un cuadrado tiene un lado de 5 metros, ¿cuánto mide su perímetro?",
+      "opciones": {
+        "opcion1": "15 m",
+        "opcion2": "20 m",
+        "opcion3": "25 m",
+        "opcion4": "30 m",
+        "opcion_correcta": "25 m"
+      },
+      "categoria_id": 6
+    },
+    {
+      "pregunta": "La diagonal de un rectángulo mide 10 metros, y uno de los lados mide 6 metros. ¿Cuánto mide el otro lado?",
+      "opciones": {
+        "opcion1": "8 m",
+        "opcion2": "9 m",
+        "opcion3": "10 m",
+        "opcion4": "12 m",
+        "opcion_correcta": "9 m"
+      },
+      "categoria_id": 6
+    },
+    {
+      "pregunta": "Si un círculo tiene un diámetro de 14 metros, ¿cuánto mide su perímetro? (Utiliza π como 3.1416)",
+      "opciones": {
+        "opcion1": "22 m",
+        "opcion2": "28 m",
+        "opcion3": "34 m",
+        "opcion4": "40 m",
+        "opcion_correcta": "28 m"
+      },
+      "categoria_id": 6
+    }
   ]
