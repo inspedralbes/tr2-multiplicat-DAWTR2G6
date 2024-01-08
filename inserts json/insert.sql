@@ -155,7 +155,6 @@ INSERT INTO preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VAL
 ('Si caminas 5 kilómetros hacia el norte y luego 3 kilómetros hacia el este, ¿cuál es la distancia total recorrida?', '{"opcion1": "2 km", "opcion2": "5 km", "opcion3": "8 km", "opcion4": "15 km"}', '8 km', 3),
 ('¿Cómo se expresa la longitud de una onda en física?', '{"opcion1": "En metros", "opcion2": "En hertzios", "opcion3": "En julios", "opcion4": "En decibelios"}', 'En metros', 3),
 ('¿Cuál es la herramienta principal para medir la longitud de una habitación?', '{"opcion1": "Regla", "opcion2": "Cinta métrica", "opcion3": "Calibrador", "opcion4": "Transportador"}', 'Cinta métrica', 3),
-INSERT INTO Preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VALUES
 ('Si un rectángulo tiene un largo de 15 metros y un ancho de 8 metros, ¿cuál es su perímetro?', '{"opcion1": "38 m", "opcion2": "46 m", "opcion3": "52 m", "opcion4": "60 m"}', '52 m', 6),
 ('Si caminas 500 metros hacia el norte, 300 metros hacia el este, y luego 200 metros hacia el sur, ¿cuántos metros has recorrido en total?', '{"opcion1": "700 m", "opcion2": "800 m", "opcion3": "900 m", "opcion4": "1000 m"}', '700 m', 6),
 ('Si el radio de una circunferencia es de 12 metros, ¿cuál es la longitud de la circunferencia? (Utiliza π como 3.1416)', '{"opcion1": "25.13 m", "opcion2": "37.70 m", "opcion3": "50.27 m", "opcion4": "62.83 m"}', '37.70 m', 6),
