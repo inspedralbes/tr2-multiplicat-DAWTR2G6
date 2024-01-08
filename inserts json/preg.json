@@ -110,114 +110,116 @@
       "categoria_id": 1
     },
   {
-    "pregunta": "¿Cuántos litros de agua caben en una botella pequeña?",
+  "preguntas": [
+    {
+      "pregunta": "Un cubo tiene una arista de 2 metros. ¿Cuál es su volumen?",
       "opciones": {
-        "opcion1": "0.25 L",
-        "opcion2": "0.5 L",
-        "opcion3": "0.75 L",
-        "opcion4": "1 L",
-        "opcion_correcta": "0.5 L"
+        "opcion1": "2 m³",
+        "opcion2": "4 m³",
+        "opcion3": "6 m³ (Correcta)",
+        "opcion4": "8 m³",
+        "opcion_correcta": "6 m³"
       },
       "categoria_id": 2
     },
     {
-      "pregunta": "¿Cuántas tazas de sopa hay en un plato hondo?",
+      "pregunta": "Si tienes un cilindro con radio de 3 metros y altura de 4 metros, ¿cuál es el volumen del cilindro?",
       "opciones": {
-        "opcion1": "1 taza",
-        "opcion2": "2 tazas",
-        "opcion3": "3 tazas",
-        "opcion4": "4 tazas",
-        "opcion_correcta": "5 tazas"
+        "opcion1": "12π m³ (Correcta)",
+        "opcion2": "24π m³",
+        "opcion3": "36π m³",
+        "opcion4": "48π m³",
+        "opcion_correcta": "12π m³"
       },
       "categoria_id": 2
     },
     {
-      "pregunta": "¿Cuántos mililitros de jugo hay en un vaso común?",
+      "pregunta": "Un cono tiene radio de 5 metros y altura de 7 metros. ¿Cuál es el volumen del cono?",
       "opciones": {
-        "opcion1": "100 ml",
-        "opcion2": "200 ml",
-        "opcion3": "300 ml",
-        "opcion4": "400 ml",
-        "opcion_correcta": "500 ml"
+        "opcion1": "58.33π m³",
+        "opcion2": "108.33π m³",
+        "opcion3": "183.33π m³ (Correcta)",
+        "opcion4": "275π m³",
+        "opcion_correcta": "183.33π m³"
       },
       "categoria_id": 2
     },
     {
-      "pregunta": "¿Cuántos litros de helado hay en un cubo de helado grande?",
+      "pregunta": "Si tienes una esfera con radio de 4 metros, ¿cuál es su volumen?",
       "opciones": {
-        "opcion1": "1 litro",
-        "opcion2": "2 litros",
-        "opcion3": "3 litros",
-        "opcion4": "4 litros",
-        "opcion_correcta": "3 litros"
+        "opcion1": "33.51π m³",
+        "opcion2": "67.03π m³ (Correcta)",
+        "opcion3": "100.54π m³",
+        "opcion4": "134.06π m³",
+        "opcion_correcta": "67.03π m³"
       },
       "categoria_id": 2
     },
     {
-      "pregunta": "¿Cuántos mililitros de agua puedes beber en un vaso grande?",
+      "pregunta": "Un prisma rectangular tiene una base de 6 metros por 9 metros y una altura de 8 metros. ¿Cuál es el volumen del prisma?",
       "opciones": {
-        "opcion1": "250 ml",
-        "opcion2": "500 ml",
-        "opcion3": "750 ml",
-        "opcion4": "1000 ml",
-        "opcion_correcta": "1500 ml"
+        "opcion1": "324 m³",
+        "opcion2": "432 m³ (Correcta)",
+        "opcion3": "540 m³",
+        "opcion4": "648 m³",
+        "opcion_correcta": "432 m³"
       },
       "categoria_id": 2
     },
     {
-      "pregunta": "¿Cuántos litros de leche caben en una jarra pequeña?",
+      "pregunta": "Si tienes un tetraedro con una arista de 3 metros, ¿cuál es su volumen?",
       "opciones": {
-        "opcion1": "250 ml",
-        "opcion2": "500 ml",
-        "opcion3": "750 ml",
-        "opcion4": "1000 ml",
-        "opcion_correcta": "1000 ml"
+        "opcion1": "3√2 m³ (Correcta)",
+        "opcion2": "9√2 m³",
+        "opcion3": "18√2 m³",
+        "opcion4": "27√2 m³",
+        "opcion_correcta": "3√2 m³"
       },
       "categoria_id": 2
     },
     {
-      "pregunta": "¿Cuántos mililitros de leche hay en un vaso de desayuno?",
+      "pregunta": "Un cubo tiene una diagonal de 4 metros. ¿Cuál es su volumen?",
       "opciones": {
-        "opcion1": "100 ml",
-        "opcion2": "200 ml",
-        "opcion3": "300 ml",
-        "opcion4": "400 ml",
-        "opcion_correcta": "200 ml"
+        "opcion1": "8 m³",
+        "opcion2": "16 m³",
+        "opcion3": "32 m³ (Correcta)",
+        "opcion4": "64 m³",
+        "opcion_correcta": "32 m³"
       },
       "categoria_id": 2
     },
     {
-      "pregunta": "¿Cuántos litros de agua hay en una piscina pequeña?",
+      "pregunta": "Si tienes un cilindro con diámetro de 6 metros y altura de 10 metros, ¿cuál es el volumen del cilindro?",
       "opciones": {
-        "opcion1": "1000 ml",
-        "opcion2": "2000 ml",
-        "opcion3": "3000 ml",
-        "opcion4": "4000 ml",
-        "opcion_correcta": "5000 ml"
+        "opcion1": "90π m³",
+        "opcion2": "180π m³ (Correcta)",
+        "opcion3": "270π m³",
+        "opcion4": "360π m³",
+        "opcion_correcta": "180π m³"
       },
       "categoria_id": 2
     },
     {
-      "pregunta": "¿Cuántos litros de agua necesita una planta pequeña cada semana?",
+      "pregunta": "Un cono tiene radio de 8 metros y altura de 12 metros. ¿Cuál es el volumen del cono?",
       "opciones": {
-        "opcion1": "1 litro",
-        "opcion2": "2 litros",
-        "opcion3": "3 litros",
-        "opcion4": "4 litros",
-        "opcion_correcta": "2 litros"
+        "opcion1": "268.22π m³",
+        "opcion2": "536.44π m³ (Correcta)",
+        "opcion3": "804.66π m³",
+        "opcion4": "1072.88π m³",
+        "opcion_correcta": "536.44π m³"
       },
       "categoria_id": 2
     },
     {
-      "pregunta": "¿Cuántas tazas de harina necesitas para hacer una torta?",
+      "pregunta": "Si tienes una esfera con circunferencia de 18 metros, ¿cuál es su volumen?",
       "opciones": {
-        "opcion1": "1 taza",
-        "opcion2": "2 tazas",
-        "opcion3": "3 tazas",
-        "opcion4": "4 tazas",
-        "opcion_correcta": "2 tazas"
+        "opcion1": "36π m³",
+        "opcion2": "54π m³",
+        "opcion3": "72π m³ (Correcta)",
+        "opcion4": "90π m³",
+        "opcion_correcta": "72π m³"
       },
       "categoria_id": 2
-    }, 
+    }
   
   ]
