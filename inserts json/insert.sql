@@ -24,6 +24,8 @@ CREATE TABLE IF NOT EXISTS preguntas (
 INSERT INTO categoria (id, nombre_categoria) VALUES
 (1, 'massa'), (2, 'volumen'), (3, 'longitud'), (4, 'capacitat'), (5, 'superficie'), (6, 'temps');
 
+ALTER TABLE preguntas MODIFY COLUMN id INT AUTO_INCREMENT;
+
 
 -- Inserts para preguntas de la categoría "massa"
 INSERT INTO preguntas (pregunta, opciones, respuesta_correcta, categoria_id) VALUES
