@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pagina-especifica">
     <div class="overlay"></div>
 
     <header>
@@ -17,10 +17,9 @@
 
       <div v-for="(category, index) in categories" :key="index" class="category" @click="selectCategory(category.id)">
         <img :src="category.image" :alt="category.alt">
-        <div   class="category-content">
-          <h2 >{{ category.title }}</h2>
+        <div class="category-content">
+          <h2>{{ category.title }}</h2>
           <p>{{ category.description }}</p>
-         
         </div>
       </div>
     </div>
@@ -38,21 +37,21 @@ export default {
           image: './public/VOLUM.jpg',
           alt: 'Volumen matemático',
           title: 'Volum',
-          description: 'Sumérgete en la emoción del juego mientras calculas volúmenes virtuales, desde pequeñas gotas hasta vastos océanos. ¡Ajusta tu precisión y descubre el poder de medir en 3D!',
+          description: 'Explora conceptos matemáticos relacionados con el volumen. Descubre fórmulas y propiedades fascinantes',
         },
         {
           id: 'massa',
           image: './public/MASA.jpg',
           alt: 'Masa',
           title: 'Massa',
-          description: '¡Equilibra la diversión y el aprendizaje al desafiar tu destreza con masas variadas! Domina la ciencia detrás de la balanza virtual y conviértete en el maestro de la masa exacta.',
+          description: 'Explora conceptos matemáticos relacionados con la masa. Descubre fórmulas y propiedades fascinantes',
         },
         {
           id: 'capacitat',
           image: './public/CAPACIDAD.jpg',
           alt: 'Capacitat',
           title: 'Capacitat',
-          description: 'Llena tu experiencia de juego con desafíos de capacidad, desde tazas hasta barriles. ¡Mide con precisión y perfecciona tus habilidades para estimar volúmenes en situaciones del mundo real!',
+          description: 'Explora conceptos matemáticos relacionados con la capacidad. Descubre fórmulas y propiedades fascinantes',
         },
 
         {
@@ -60,7 +59,7 @@ export default {
           image: './public/TIEMPO.jpg',
           alt: 'Temps',
           title: 'Temps',
-          description: 'Atrévete a viajar en el tiempo virtualmente mientras resuelves rompecabezas temporales. ¡Mide con precisión intervalos y domina la cuarta dimensión en este juego emocionante!',
+          description: 'Explora conceptos matemáticos relacionados con el tiempo. Descubre fórmulas y propiedades fascinantes',
         },
 
 
@@ -69,7 +68,7 @@ export default {
           image: './public/SUPERFICIE.jpg',
           alt: 'Superficie',
           title: 'Superficie',
-          description: 'Enfréntate a desafíos que abarcan desde pequeñas áreas hasta vastos paisajes. ¡Perfecciona tu habilidad para calcular superficies y conquista el juego mientras te conviertes en el rey ',
+          description: 'Explora conceptos matemáticos relacionados con la superficie. Descubre fórmulas y propiedades fascinantes',
         },
 
 
@@ -78,7 +77,7 @@ export default {
           image: './public/LONGITUT.jpg',
           alt: 'Longitut',
           title: 'Longitut',
-          description: 'Explora mundos virtuales con desafíos de longitud que van desde el microcosmos hasta galaxias lejanas. ¡Afina tus habilidades de medición y conviértete en el héroe de la dimensión lineal!',
+          description: 'Explora conceptos matemáticos relacionados con la longitud. Descubre fórmulas y propiedades fascinantes',
         },
       ],
     };
@@ -101,34 +100,40 @@ export default {
 <style>
 @import url('https://fonts.cdnfonts.com/css/tetris');
 
-body {
+.pagina-especifica{
   margin: 0;
   padding: 0;
   font-family: 'Tetris', sans-serif;
   background: url('https://i.pinimg.com/originals/2f/f9/4d/2ff94dfff599bc37a27450a858612763.gif');
-  background-repeat: repeat;
   color: #fff;
+  overflow: hidden;
   position: relative;
   z-index: 0;
 }
 
-.overlay {
+.pagina-especifica .overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.151);
+  background: url('https://i.pinimg.com/originals/2f/f9/4d/2ff94dfff599bc37a27450a858612763.gif');
   z-index: -1;
 }
 
-
-header {
+.pagina-especifica header {
   background-color: #33333300;
   overflow: hidden;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.pagina-especifica header a,
+.pagina-especifica .login-register-btn button,
+.pagina-especifica .category {
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 header ul {
@@ -143,11 +148,7 @@ header li {
   margin: 0 15px;
   display: flex;
   align-items: center;
-}
-header a, .login-register-btn button, .category {
-  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
-}
-
+}º 
 header a {
   color: #bb7ff3ee;
   text-decoration: none;
@@ -169,7 +170,7 @@ header a:hover {
   display: inline-block;
   padding: 10px 15px;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 1.2em;
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
@@ -230,6 +231,10 @@ header a:hover {
   border: 3px solid #e2b8f3;
 }
 
+
+h1:hover {
+  transform: scale(1.1);
+}
 
 .login-register-btn:hover {
   color: #fff;
