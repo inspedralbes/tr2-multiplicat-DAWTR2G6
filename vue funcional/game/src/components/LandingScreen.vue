@@ -34,21 +34,21 @@ export default {
       categories: [
         {
           id: 'volumen',
-          image: './public/VOLUM.jpg',
+          image: 'http://xifraxaladag6.daw.inspedralbes.cat/imagenes/VOLUM.jpg',
           alt: 'Volumen matemático',
           title: 'Volumen',
           description: 'Explora conceptos matemáticos relacionados con el volumen. Descubre fórmulas y propiedades fascinantes',
         },
         {
           id: 'massa',
-          image: './public/MASA.jpg',
+          image: 'http://xifraxaladag6.daw.inspedralbes.cat/imagenes/MASA.jpg',
           alt: 'Masa',
           title: 'Masa',
           description: 'Explora conceptos matemáticos relacionados con la masa. Descubre fórmulas y propiedades fascinantes',
         },
         {
           id: 'capacitat',
-          image: './public/CAPACIDAD.jpg',
+          image: 'http://xifraxaladag6.daw.inspedralbes.cat/imagenes/CAPACIDAD.jpg',
           alt: 'Capacitat',
           title: 'Capacidad',
           description: 'Explora conceptos matemáticos relacionados con la capacidad. Descubre fórmulas y propiedades fascinantes',
@@ -56,7 +56,7 @@ export default {
 
         {
           id: 'temps',
-          image: './public/TIEMPO.jpg',
+          image: 'http://xifraxaladag6.daw.inspedralbes.cat/imagenes/TIEMPO.jpg',
           alt: 'Temps',
           title: 'Tiempo',
           description: 'Explora conceptos matemáticos relacionados con el tiempo. Descubre fórmulas y propiedades fascinantes',
@@ -65,7 +65,7 @@ export default {
 
         {
           id: 'superficie',
-          image: './public/SUPERFICIE.jpg',
+          image: 'http://xifraxaladag6.daw.inspedralbes.cat/imagenes/SUPERFICIE.jpg',
           alt: 'Superficie',
           title: 'Superfície',
           description: 'Explora conceptos matemáticos relacionados con la superficie. Descubre fórmulas y propiedades fascinantes',
@@ -74,7 +74,7 @@ export default {
 
         {
           id: 'longitut',
-          image: './public/LONGITUT.jpg',
+          image: 'http://xifraxaladag6.daw.inspedralbes.cat/imagenes/LONGITUT.jpg',
           alt: 'Longitut',
           title: 'Longitud',
           description: 'Explora conceptos matemáticos relacionados con la longitud. Descubre fórmulas y propiedades fascinantes',
