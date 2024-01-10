@@ -213,6 +213,7 @@ body {
 }
 
 .container {
+    
     margin: 60px;
     display: grid;
     min-width: 600px;

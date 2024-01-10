@@ -36,21 +36,21 @@ export default {
           id: 'volumen',
           image: './public/VOLUM.jpg',
           alt: 'Volumen matemático',
-          title: 'Volum',
+          title: 'Volumen',
           description: 'Explora conceptos matemáticos relacionados con el volumen. Descubre fórmulas y propiedades fascinantes',
         },
         {
           id: 'massa',
           image: './public/MASA.jpg',
           alt: 'Masa',
-          title: 'Massa',
+          title: 'Masa',
           description: 'Explora conceptos matemáticos relacionados con la masa. Descubre fórmulas y propiedades fascinantes',
         },
         {
           id: 'capacitat',
           image: './public/CAPACIDAD.jpg',
           alt: 'Capacitat',
-          title: 'Capacitat',
+          title: 'Capacidad',
           description: 'Explora conceptos matemáticos relacionados con la capacidad. Descubre fórmulas y propiedades fascinantes',
         },
 
@@ -58,7 +58,7 @@ export default {
           id: 'temps',
           image: './public/TIEMPO.jpg',
           alt: 'Temps',
-          title: 'Temps',
+          title: 'Tiempo',
           description: 'Explora conceptos matemáticos relacionados con el tiempo. Descubre fórmulas y propiedades fascinantes',
         },
 
@@ -67,7 +67,7 @@ export default {
           id: 'superficie',
           image: './public/SUPERFICIE.jpg',
           alt: 'Superficie',
-          title: 'Superficie',
+          title: 'Superfície',
           description: 'Explora conceptos matemáticos relacionados con la superficie. Descubre fórmulas y propiedades fascinantes',
         },
 
@@ -76,7 +76,7 @@ export default {
           id: 'longitut',
           image: './public/LONGITUT.jpg',
           alt: 'Longitut',
-          title: 'Longitut',
+          title: 'Longitud',
           description: 'Explora conceptos matemáticos relacionados con la longitud. Descubre fórmulas y propiedades fascinantes',
         },
       ],
@@ -96,44 +96,37 @@ export default {
   },
 };
 </script>
-
 <style>
 @import url('https://fonts.cdnfonts.com/css/tetris');
 
-.pagina-especifica{
+body {
   margin: 0;
   padding: 0;
   font-family: 'Tetris', sans-serif;
   background: url('https://i.pinimg.com/originals/2f/f9/4d/2ff94dfff599bc37a27450a858612763.gif');
+  background-repeat: repeat;
   color: #fff;
-  overflow: hidden;
   position: relative;
   z-index: 0;
 }
 
-.pagina-especifica .overlay {
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('https://i.pinimg.com/originals/2f/f9/4d/2ff94dfff599bc37a27450a858612763.gif');
+  background: rgba(0, 0, 0, 0.151);
   z-index: -1;
 }
 
-.pagina-especifica header {
+
+header {
   background-color: #33333300;
   overflow: hidden;
-  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.pagina-especifica header a,
-.pagina-especifica .login-register-btn button,
-.pagina-especifica .category {
-  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 header ul {
@@ -148,7 +141,11 @@ header li {
   margin: 0 15px;
   display: flex;
   align-items: center;
-}º 
+}
+header a, .login-register-btn button, .category {
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
 header a {
   color: #bb7ff3ee;
   text-decoration: none;
@@ -170,7 +167,7 @@ header a:hover {
   display: inline-block;
   padding: 10px 15px;
   cursor: pointer;
-  font-size: 1.2em;
+  font-size: 24px;
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
@@ -232,10 +229,6 @@ header a:hover {
 }
 
 
-h1:hover {
-  transform: scale(1.1);
-}
-
 .login-register-btn:hover {
   color: #fff;
 }
@@ -260,7 +253,6 @@ h1:hover {
   header {
     background-color: #33333300;
     overflow: hidden;
-    padding: 20px;
     display: flex;
     justify-content: center; /* Centrar elementos horizontalmente */
     align-items: center; /* Centrar elementos verticalmente */

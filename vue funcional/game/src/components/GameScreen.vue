@@ -2,9 +2,6 @@
   <body>
     <div class="game-container">
     <div class="panel-juego" v-if="preguntas_guardadas">
-      <div class="progress-container">
-        <div :class="{ 'progress-bar': true, 'fire-animation': mostrarAnimacionFuego }" :style="{ width: progresoPreguntas + '%' }"></div>
-      </div>
 
       <div class="question-container">
         <p class="pregunta-destacada">{{ preguntaActual.enunciado }}</p>
@@ -176,7 +173,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .game-container {
   display: flex;
@@ -262,33 +258,52 @@ export default {
 }
 
 @media (max-width: 1000px) {
-  .panel-juego {
-    margin: 20px;
-    min-width: auto;
-    min-height: auto;
-    margin-top: 10%;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 20px;
+  
+
+    .panel-juego {
+      margin: 0px;
+      min-width: auto;
+      min-height: auto;
+      margin-top: 4%;
+      padding: 7px;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .pregunta-destacada {
+    font-size: 180%;
+    color: #ffffff;
+    margin-bottom: 10px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .pregunta-destacada {
-    font-size: 3em;
-  }
+    .options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px; /* Add some margin to separate from the highlighted question */
+      position: relative;
+    }
 
-  .options {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 30px;
-  }
+    .option {
+      margin: 15px;
+      padding: 25px 40px;
+      font-size: 22px;
+      width: 100%;
+      border: 3px solid #67a4e1;
+      background-color: #203142;
+      color: #ffffff;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      box-shadow: 0 0 15px rgba(108, 17, 253, 0.5);
+    }
 
-  .option {
-    margin: 15px;
-    padding: 25px 40px;
-    font-size: 22px;
-    width: 100%;
+    .tetris-container {
+      margin-top: 10px; /* Add some margin to separate from the options */
+      position: relative;
+    }
   }
-}
 </style>
