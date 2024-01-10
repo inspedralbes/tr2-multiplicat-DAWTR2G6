@@ -4,13 +4,16 @@
       <form @submit.prevent="register" class="form">
         <h2 class="title mt-5">Registrarse</h2>
         <div class="group">
-          <input type="text" class="inputbox" placeholder="Nombre de usuario" id="name" v-model="name" required>
+          <input type="text" class="inputbox" placeholder="Nombre de usuario" v-model="name" required>
         </div>
         <div class="group">
-          <input type="email" class="inputbox" placeholder="Email" id="email" v-model="email" required>
+          <input type="email" class="inputbox" placeholder="Correo Electrónico" v-model="email" required>
         </div>
         <div class="group">
-          <input type="password" class="inputbox" placeholder="Contraseña" id="password" v-model="password" required>
+          <input type="password" class="inputbox" placeholder="Contraseña" v-model="password" required>
+        </div>
+        <div class="group">
+          <input type="password" class="inputbox" placeholder="Confirmar Contraseña" v-model="confirmPassword" required>
         </div>
         <button type="submit" class="btn btn-success btn-register">Registrarse</button>
       </form>
@@ -25,12 +28,18 @@ export default {
     return {
       name: '',
       password: '',
+      confirmPassword: '',
       email: ''
     };
   },
   methods: {
     register() {
-      fetch('http://localhost:8000/api/register', {
+      if (this.password !== this.confirmPassword) {
+        alert('Las contraseñas no coinciden. Por favor, inténtalo de nuevo.');
+        return;
+      }
+
+      fetch('http://xifraxaladag6.daw.inspedralbes.cat/backend/public/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -56,7 +65,6 @@ export default {
           }
         })
         .then(data => {
-
           if (data.error) {
             alert(data.error);
             return;
@@ -64,7 +72,6 @@ export default {
             alert('Usuario registrado correctamente');
             this.$router.push('/lobby');
           }
-
         })
         .catch((error) => {
           console.error('Error:', error);
@@ -75,79 +82,73 @@ export default {
 </script>
 
 <style scoped>
-/* Updated CSS for login template with styles from the provided CSS */
 @import url('https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap');
 
 * {
   font-family: 'Anek Bangla', sans-serif;
   margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background-color: rgba(226, 222, 222, 0.815);
-  /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)), url("/giphy.gif");*/
-}
-
-.register {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
-  background: url('https://i.pinimg.com/originals/2f/f9/4d/2ff94dfff599bc37a27450a858612763.gif');
+  margin: 0;
 }
 
 .title {
-  font-size: 50px;
-  top: -26px;
-  position: relative;
-  color: white;
+  font-size: 2.5rem;
+  margin-top: -1rem;
+  color: #673AB7; /* Púrpura profundo */
 }
 
 .form {
-  box-shadow: 0 0 10px rgba(255, 253, 253, 0.959);
+  box-shadow: 0 0 20px rgba(103, 58, 183, 0.6); /* Sombra más pronunciada */
   border-radius: 10px;
   text-align: center;
   max-width: 400px;
-  background-color: #e5e5ec00;
-  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.95); /* Fondo semitransparente blanco */
+  padding: 30px;
   width: 100%;
-  height: 600px;
+  height: auto;
+}
+
+.group {
+  margin-bottom: 20px; /* Espaciado uniforme entre grupos de entrada */
 }
 
 .inputbox {
   outline: none;
-  width: 73%;
-  padding: 10px;
-  background-color: #ebebf300;
+  width: 100%;
+  padding: 15px;
+  background-color: #EDE7F6; /* Fondo lila claro */
   border: none;
-  color: #ffffff;
-  margin-bottom: 10px;
-  border-bottom: 2px solid white;
-  position: relative;
-  font-size: 21px;
-  top: 39px;
-
-
+  color: #333;
+  border-bottom: 2px solid #673AB7; /* Línea púrpura */
+  font-size: 1.2rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-out; /* Transición de color al pasar el mouse */
 }
 
 .inputbox::placeholder {
-  color: #ffffffce;
+  color: #757575; /* Gris suave */
 }
 
 .btn-register {
-  padding: 13px;
-  background-color: #f5f5f5;
-  color: #3b3a3a;
+  padding: 15px;
+  background-color: #673AB7; /* Púrpura */
+  color: #fff;
   border: none;
   cursor: pointer;
-  width: 80%;
-  transition: background-color 0.2s ease-out;
-  font-size: 21px;
-  top: 100px;
-  position: relative;
-  border-radius: 30px;
+  width: 100%;
+  transition: background-color 0.3s ease-out; /* Transición de color al pasar el mouse */
+  font-size: 1.2rem;
+  border-radius: 5px;
 }
 
 .btn-register:hover {
-  background-color: #d095e7;
+  background-color: #512DA8; /* Tono más oscuro al pasar el mouse */
 }
 </style>
