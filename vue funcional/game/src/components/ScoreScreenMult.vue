@@ -3,7 +3,8 @@
     <div class="score-container">
       <h2>PUNTUACIO DE LA PARTIDA:{{ score }} de {{ preguntas_filtradas.length + score }}
       </h2>
-      <button @click="$router.push('/lobby')">Ves'ne al Lobby</button>
+      <button @click="$router.push('/lobby')">Lobby</button><br><br>
+      <button @click="$router.push('/')">Home</button>
       <div class="ScoreGrafico">
         <canvas id="scoreChart"></canvas>
       </div>
@@ -16,8 +17,6 @@
         <p>Resposta correcta: {{ pregunta.respuesta_correcta }}</p>
         <p>La teva resposta: {{ pregunta.user_respuesta }}</p>
       </div>
-
-
     </div>
   </body>
 </template>
@@ -95,103 +94,108 @@ export default {
 };
 </script>
 
+
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap");
-
-body {
-  padding: 0;
-  margin: 0;
-}
-
-.ScoreGrafico{
-  width: 10%;
-  margin: 0 auto;
-  position: relative;
-  top: -100%;
-  right: -42%;
-}
-* {
-  font-family: "Anek Bangla", sans-serif;
-  z-index: -1;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  letter-spacing: 0.1rem;
-}
-
+/* Estilo CSS proporcionado para el HTML actual */
 .score-container {
-  display: grid;
-  position: sticky;
+  
   width: 100%;
-  top: 0px;
-  padding: 1%;
-  font-size: 30px;
-  text-align: center;
-  border: 2px solid #1c1c1c;
-  background-color: #dfdfdf;
-  z-index: 1;
-  height: 200px;
+  height: 350px;
+  min-height: auto;
+  position: sticky;
+  background-color:#dfdfdf;
 }
+
+.ScoreGrafico {
+  height: 250px;
+  width: 250px;
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  transform: translate(-50%, -50%);
+}
+
+
+h2 {
+  margin: 0;
+  font-size: 40px;
+  color: #000000;
+  text-align: center;
+
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 16px;
+  color: #dfdfdf;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background-color: #0056b3;
+  width: 200px;
+  margin-left: 8px;
+  padding: 30px;
+}
+
+button:hover {
+  background-color: #75b1f1;
+}
+
+
 
 h3 {
+  font-size: 42px;
+  color: #ffffff;
   text-align: center;
-  font-size: 30px;
-  color: #1c1c1c;
-  margin: 10px;
-}
-
-.score-container button:nth-child(2) {
-  margin: 10px;
-  padding: 8px;
-  font-weight: 400;
-  background-color: #1c1c1c1a;
-  color: #1c1c1c;
-  box-shadow: 1px 1px 1px 1px black;
-  font-size: 20px;
-  position: relative;
-  width: 20%;
-  top: -70px;
-}
-
-.score-container button:nth-child(2):hover {
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 }
 
 .preguntas-incorrectas-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  overflow-y: auto;
+  padding: 4%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
 }
 
 .score-preguntas-incorrectas {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-areas:
-    "pregunta"
-    "respuesta_correcta"
-    "user_respuesta";
+  margin: 5px;
+  height: 100%;
+  width: 100%;
   background-color: #dfdfdf;
-  border: 2px solid black;
-  height: 200px;
-  padding: 10px;
-  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
   text-align: center;
-  font-weight: 900;
+  font-weight: 700;
+  padding: 5%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
 }
 
-.score-preguntas-incorrectas p:nth-child(1) {
-  grid-area: pregunta;
+.score-preguntas-incorrectas:hover {
+  transform: translateY(-10px);
+}
+
+.score-preguntas-incorrectas>p:nth-child(1){
   font-size: 18px;
+  color: #000000;
 }
-
-.score-preguntas-incorrectas p:nth-child(2) {
-  margin: 10px;
+.score-preguntas-incorrectas>p:nth-child(2){
+  font-size: 18px;
   color: rgb(100, 128, 0);
-  grid-area: respuesta_correcta;
 }
 
-.score-preguntas-incorrectas p:nth-child(3) {
+.score-preguntas-incorrectas>p:nth-child(3){
+  font-size: 18px;
   color: rgba(255, 8, 0, 0.911);
-  grid-area: user_respuesta;
 }
+
+
+*{
+  font-family: "Anek Bangla", sans-serif;
+
+}
+/* Fin del estilo CSS proporcionado */
 </style>
