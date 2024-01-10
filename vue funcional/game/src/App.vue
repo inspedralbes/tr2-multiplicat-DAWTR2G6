@@ -5,11 +5,9 @@
 <template>
   <header>
     <div class="wrapper">
-      <h1>Maths Game</h1>
+     
       <nav>
-        <router-link to="/">Home</router-link>
-        <router-link to="/game">Game</router-link>
-        <router-link to="/score">Score</router-link>
+   
       </nav>
     </div>
   </header>
