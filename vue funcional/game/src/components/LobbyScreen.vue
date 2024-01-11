@@ -1,7 +1,7 @@
 <template>
   <body>
-    <div class="lobby-container">
-
+    
+    <div class="lobby-container"> 
       <h2 class="lobby-title">Sala de Lobby</h2>
       <div class="lobby-options">
         <div class="lobby-game">
@@ -117,10 +117,7 @@ body {
   overflow-y: hidden;
   letter-spacing: 0.3rem;
   font-weight: lighter;
-  background: url("/public/f2.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background: url("/public/space_background.gif");
 }
 
 * {
@@ -162,7 +159,7 @@ div p {
   padding: 50px;
   height: 150px;
   width: 150px;
-  background-color: #080808;
+  background-color: #ffffff2c;
   color: #f5f5f5;
   border: none;
   cursor: pointer;
@@ -193,10 +190,10 @@ div p {
 
 .info-card {
   position: fixed;
-  top: 60%;
+  top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #aa28bb;
+  background-color: #6e5d70;
   padding: 15px;
   border-radius: 10px;
   color: white;
@@ -210,11 +207,12 @@ div p {
 }
 
 .info-card button {
-  background-color: rgb(112, 138, 89);
+  background-color: rgb(0, 0, 0);
   cursor: pointer;
   float: right;
+  margin-top: 30px;
   border: none;
-  padding: 10px;
+  padding: 20px;
   border-radius: 5px;
   color: white;
   font-weight: bold;
