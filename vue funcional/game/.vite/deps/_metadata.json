@@ -1,0 +1,65 @@
+{
+  "hash": "0cc05ede",
+  "browserHash": "fce72dc8",
+  "optimized": {
+    "vue": {
+      "src": "../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "8f618c05",
+      "needsInterop": false
+    },
+    "pinia": {
+      "src": "../../node_modules/pinia/dist/pinia.mjs",
+      "file": "pinia.js",
+      "fileHash": "243826ea",
+      "needsInterop": false
+    },
+    "primevue/config": {
+      "src": "../../node_modules/primevue/config/config.esm.js",
+      "file": "primevue_config.js",
+      "fileHash": "1d4d81f7",
+      "needsInterop": false
+    },
+    "primevue/button": {
+      "src": "../../node_modules/primevue/button/button.esm.js",
+      "file": "primevue_button.js",
+      "fileHash": "99a2e6c7",
+      "needsInterop": false
+    },
+    "primevue/checkbox": {
+      "src": "../../node_modules/primevue/checkbox/checkbox.esm.js",
+      "file": "primevue_checkbox.js",
+      "fileHash": "55f7e746",
+      "needsInterop": false
+    },
+    "primevue/inputtext": {
+      "src": "../../node_modules/primevue/inputtext/inputtext.esm.js",
+      "file": "primevue_inputtext.js",
+      "fileHash": "98fee24c",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../node_modules/vue-router/dist/vue-router.mjs",
+      "file": "vue-router.js",
+      "fileHash": "8345ac45",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-KPPSEZ6Y": {
+      "file": "chunk-KPPSEZ6Y.js"
+    },
+    "chunk-7UAON2CU": {
+      "file": "chunk-7UAON2CU.js"
+    },
+    "chunk-RMBKWYC3": {
+      "file": "chunk-RMBKWYC3.js"
+    },
+    "chunk-3GOOGFKQ": {
+      "file": "chunk-3GOOGFKQ.js"
+    },
+    "chunk-KESUWDAB": {
+      "file": "chunk-KESUWDAB.js"
+    }
+  }
+}
