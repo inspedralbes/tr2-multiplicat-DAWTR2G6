@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container mt-5">
-        <h1 style="color: #3498db;">Create New Question</h1>
+        <h1 style="color: #3498db;">Crear una nueva pregunta</h1>
 
         <form action="{{ route('preguntas.store') }}" method="POST">
             @csrf
@@ -30,7 +30,7 @@
                 <input type="text" name="categoria_id" style="width: 100%; padding: 10px;" required>
             </div>
 
-            <button type="submit" style="background-color: #e74c3c; color: #fff; padding: 10px; border: none; cursor: pointer;">Submit</button>
+            <button type="submit" style="background-color: #e74c3c; color: #fff; padding: 10px; border: none; cursor: pointer;">Enviar</button>
         </form>
     </div>
 @endsection

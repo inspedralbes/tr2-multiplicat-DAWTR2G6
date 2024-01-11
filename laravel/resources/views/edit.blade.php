@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container mt-5">
-        <h1 style="color: #3498db;">Edit Question</h1>
+        <h1 style="color: #3498db;">Editar pregunta</h1>
 
         <form action="{{ route('preguntas.update', $pregunta->id) }}" method="POST">
             @csrf
@@ -30,7 +30,7 @@
                 <input type="text" name="categoria_id" style="width: 100%; padding: 10px;" value="{{ $pregunta->categoria_id }}" required>
             </div>
 
-            <button type="submit" style="background-color: #e74c3c; color: #fff; padding: 10px; border: none; cursor: pointer;">Update</button>
+            <button type="submit" style="background-color: #e74c3c; color: #fff; padding: 10px; border: none; cursor: pointer;">Actualizar</button>
         </form>
     </div>
 @endsection

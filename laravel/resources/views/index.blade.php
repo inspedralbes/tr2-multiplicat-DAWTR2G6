@@ -5,9 +5,9 @@
 
 @section('content')
     <div class="container mt-5">
-        <h1 class="title is-1 mb-4">All Questions</h1>
+        <h1 class="title is-1 mb-4">Preguntas</h1>
 
-        <a href="{{ route('preguntas.create') }}" class="button is-success mb-3">Create New Question</a>
+        <a href="{{ route('preguntas.create') }}" class="button is-success mb-3">Crea una nueva pregunta</a>
 
         <table class="table is-striped is-bordered is-fullwidth">
             <thead>
@@ -17,7 +17,7 @@
                     <th>Opciones</th>
                     <th>Respuesta Correcta</th>
                     <th>Categoria ID</th>
-                    <th>Actions</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,13 +29,13 @@
                         <td>{{ $pregunta->respuesta_correcta }}</td>
                         <td>{{ $pregunta->categoria_id }}</td>
                         <td>
-                            <a href="{{ route('preguntas.edit', $pregunta->id) }}" class="button is-primary">Edit</a>
+                            <a href="{{ route('preguntas.edit', $pregunta->id) }}" class="button is-primary">Editar</a>
 
                             <form action="{{ route('preguntas.destroy', $pregunta->id) }}" method="POST" style="display: inline-block; margin-left: 5px;">
                                 @csrf
                                 @method('DELETE')
 
-                                <button type="submit" class="button is-danger">Delete</button>
+                                <button type="submit" class="button is-danger">Eliminar</button>
                             </form>
                         </td>
                     </tr>
