@@ -1,7 +1,7 @@
 <template>
-  <body>  
+  <body>
     <div class="lobby-container">
-    
+
       <h2 class="lobby-title">Sala de Lobby</h2>
       <div class="lobby-options">
         <div class="lobby-game">
@@ -9,7 +9,7 @@
         </div>
         <div @click="toggleInfoCard" class="info-icon">ℹ️</div>
         <button @click="startSinglePlayerMode" class="btn" :disabled="multiPlayerModeStarted || mode === 'multiPlayer'">
-        
+
           {{ multiPlayerModeStarted ? 'Deshabilitado hasta encontrar partida' : 'Vs Tu Mismo!' }}
         </button>
         <button @click="startMultiPlayerMode" class="btn" :disabled="multiPlayerModeStarted">
@@ -26,12 +26,10 @@
       </div>
       <div v-if="showInfoCard" class="info-card">
         <p>¡Quedate sin bloques!</p>
-        <p>El objetivo del juego es responder correctamente el mayor número de preguntas. Por cada acierto, se elimina un bloque de tu pila y se añade a la del oponente. Gana el que se quede sin bloques primero! </p>
-    <button @click="closeInfoCard">De acuerdo!</button>
-
+        <p>El objetivo del juego es responder correctamente el mayor número de preguntas. Por cada acierto, se elimina un
+          bloque de tu pila y se añade a la del oponente. Gana el que se quede sin bloques primero! </p>
+        <button @click="closeInfoCard">De acuerdo!</button>
       </div>
-
-    
     </div>
   </body>
 </template>
@@ -46,19 +44,19 @@ export default {
   name: "LobbyScreen",
   data() {
     return {
-      mode: null, 
+      mode: null,
       contador_jugadors: 0,
       players: [],
       catergoria: null,
       multiPlayerModeStarted: false,
-
+      showInfoCard: false,
     };
   },
   methods: {
     toggleInfoCard() {
-    this.showInfoCard = !this.showInfoCard;
-  },
-  closeInfoCard() {
+      this.showInfoCard = !this.showInfoCard;
+    },
+    closeInfoCard() {
       this.showInfoCard = false;
     },
     startSinglePlayerMode() {
@@ -134,7 +132,7 @@ body {
   align-items: center;
   justify-content: center;
   color: white;
-  
+
 }
 
 .lobby-game {
@@ -175,43 +173,46 @@ div p {
 
 
 }
-.info-card p{
+
+.info-card p {
   font-size: 25px;
   margin-bottom: 10px;
   color: #ffffff;
   font-weight: bold;
   font-variant: small-caps;
 }
+
 .info-icon {
   position: fixed;
   top: 20px;
   right: 20px;
   font-size: 24px;
   cursor: help;
-    color: white;
+  color: white;
 }
 
 .info-card {
   position: fixed;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #aa28bb;
-    padding: 15px;
-    border-radius: 10px;
-    color: white;
-    z-index: 999;
-    width: 68%;
-    height: 39%;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #aa28bb;
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+  z-index: 999;
+  width: 68%;
+  height: 39%;
 }
 
 .info-content {
   text-align: center;
 }
+
 .info-card button {
   background-color: rgb(112, 138, 89);
   cursor: pointer;
- float: right;
+  float: right;
   border: none;
   padding: 10px;
   border-radius: 5px;
@@ -219,6 +220,7 @@ div p {
   font-weight: bold;
   transition: background-color 0.3s ease-out;
 }
+
 .btn:hover {
   background-color: #dfdfdf;
   color: #1c1c1c;
