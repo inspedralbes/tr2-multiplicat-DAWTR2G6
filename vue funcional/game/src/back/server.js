@@ -22,8 +22,8 @@ const io = new Server(server, {
 const todos_los_jugadores = {};
 let cont_jugadors = 0;
 const numBloques = 5;
-const minJugsMult = 2;
-const maxJugsMult = 4;
+const minJugsMult = 4;
+
 // obj con id, jugadores, en_progreso
 let rooms = [];
 
@@ -55,7 +55,7 @@ io.on("connection", (socket) => {
 
 
     setTimeout(() => {
-      if (room.jugadores.length >= minJugsMult && room.jugadores.length <= maxJugsMult && !room.en_progreso) {
+      if (room.jugadores.length === minJugsMult && !room.en_progreso) {
         console.log(`Empieza la partida multijugador, enviando señal a los jugadores de la sala ${room.id}`);
 
         io.to(room.id).emit("empezarJuego-mult");

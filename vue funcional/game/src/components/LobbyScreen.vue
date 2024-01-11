@@ -8,8 +8,13 @@
           <p>Selecciona el modo de juego:</p>
         </div>
         <div @click="toggleInfoCard" class="info-icon">ℹ️</div>
-        <button @click="startSinglePlayerMode" class="btn">Vs Tu Mateix!</button>
-        <button @click="startMultiPlayerMode" class="btn">Multijugador</button>
+        <button @click="startSinglePlayerMode" class="btn" :disabled="multiPlayerModeStarted || mode === 'multiPlayer'">
+        
+          {{ multiPlayerModeStarted ? 'Deshabilitado hasta encontrar partida' : 'Vs Tu Mismo!' }}
+        </button>
+        <button @click="startMultiPlayerMode" class="btn" :disabled="multiPlayerModeStarted">
+          {{ multiPlayerModeStarted ? 'Buscando Partida...' : 'Multijugador' }}
+        </button>
       </div>
       <div v-if="mode === 'multiPlayer'" class="player-info">
         <div v-if="contador_jugadors > 1">
@@ -41,12 +46,12 @@ export default {
   name: "LobbyScreen",
   data() {
     return {
-      showInfoCard: false, 
       mode: null, 
       contador_jugadors: 0,
       players: [],
       catergoria: null,
-      multiplayerBtn_desabilitado: false,
+      multiPlayerModeStarted: false,
+
     };
   },
   methods: {
@@ -69,6 +74,7 @@ export default {
 
     },
     startMultiPlayerMode() {
+      this.multiPlayerModeStarted = true;
       this.contador_jugadors++;
       this.mode = "multiPlayer";
       this.updatear_players();
@@ -104,15 +110,19 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap');
 
 body {
-  
-    font-family: Anek Bangla,sans-serif;
-    height: 100vh;
-    background-repeat: repeat;
-    letter-spacing: .3rem;
-    background: url(/front/dist/assets/f2-62310f91.jpg);
-    background-size: cover;
-    margin-top: -48px;
-    height: 100vh;
+  padding: 0;
+  margin: -10px;
+  font-family: 'Anek Bangla', sans-serif;
+  height: 100vh;
+  background-repeat: repeat;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  letter-spacing: 0.3rem;
+  font-weight: lighter;
+  background: url("/public/f2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 * {
@@ -124,6 +134,7 @@ body {
   align-items: center;
   justify-content: center;
   color: white;
+  
 }
 
 .lobby-game {
