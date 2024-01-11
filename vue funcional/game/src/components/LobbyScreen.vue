@@ -114,7 +114,7 @@ body {
   padding: 0;
   margin: -10px;
   font-family: 'Anek Bangla', sans-serif;
-  height: 90vh;
+  height: 95vh;
   background-repeat: repeat;
   overflow-x: hidden;
   overflow-y: hidden;

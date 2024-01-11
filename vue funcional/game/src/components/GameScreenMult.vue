@@ -198,7 +198,6 @@ export default {
   padding: 40px;
   text-align: center;
   border-radius: 20px;
-  box-shadow: 0 0 20px rgba(241, 12, 12, 0.829);
   background-color: rgba(243, 118, 216, 0.075); /* Fondo semi-transparente */
   font-family: Arial, Helvetica, sans-serif;
 }
