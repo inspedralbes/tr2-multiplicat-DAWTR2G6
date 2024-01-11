@@ -1,21 +1,27 @@
 <template>
-  <body>
-    <div class="register">
-      <form @submit.prevent="register" class="form">
-        <h2 class="title mt-5">Registrarse</h2>
-        <div class="group">
-          <input type="text" class="inputbox" placeholder="Nombre de usuario" id="name" v-model="name" required>
-        </div>
-        <div class="group">
-          <input type="email" class="inputbox" placeholder="Email" id="email" v-model="email" required>
-        </div>
-        <div class="group">
-          <input type="password" class="inputbox" placeholder="Contraseña" id="password" v-model="password" required>
-        </div>
-        <button type="submit" class="btn btn-success btn-register">Registrarse</button>
-      </form>
-    </div>
-  </body>
+   <router-link to="/">
+      <img src="/public/arrow.svg" alt="home" style="width:55px;height:55px;">
+    </router-link>
+  <div class="register">
+    <form @submit.prevent="register" class="form">
+      <h2 class="title mt-5">Registrarse</h2>
+      <div class="group">
+        <input type="text" class="inputbox" placeholder="Nombre de usuario" v-model="name" required>
+      </div>
+      <div class="group">
+        <input type="email" class="inputbox" placeholder="Correo Electrónico" v-model="email" required>
+      </div>
+      <div class="group">
+        <input type="password" class="inputbox" placeholder="Contraseña" v-model="password"
+          @input="checkPasswordStrength" required>
+        <div class="password-strength" :class="passwordStrengthClass">{{ passwordStrength }}</div>
+      </div>
+      <div class="group">
+        <input type="password" class="inputbox" placeholder="Confirmar Contraseña" v-model="confirmPassword" required>
+      </div>
+      <button type="submit" class="btn btn-success btn-register">Registrarse</button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -25,11 +31,30 @@ export default {
     return {
       name: '',
       password: '',
-      email: ''
+      confirmPassword: '',
+      email: '',
+      passwordStrength: '',
     };
   },
   methods: {
+    checkPasswordStrength() {
+      const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+      const mediumRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})");
+
+      if (strongRegex.test(this.password)) {
+        this.passwordStrength = 'Fuerte';
+      } else if (mediumRegex.test(this.password)) {
+        this.passwordStrength = 'Moderada';
+      } else {
+        this.passwordStrength = 'Débil';
+      }
+    },
     register() {
+      if (this.password !== this.confirmPassword) {
+        alert('Las contraseñas no coinciden. Por favor, inténtalo de nuevo.');
+        return;
+      }
+
       fetch('http://xifraxaladag6.daw.inspedralbes.cat/backend/public/api/register', {
         method: 'POST',
         headers: {
@@ -56,7 +81,6 @@ export default {
           }
         })
         .then(data => {
-
           if (data.error) {
             alert(data.error);
             return;
@@ -64,88 +88,118 @@ export default {
             alert('Usuario registrado correctamente');
             this.$router.push('/lobby');
           }
-
         })
         .catch((error) => {
           console.error('Error:', error);
         });
+    },
+    computed: {
+    passwordStrengthClass() {
+      if (this.passwordStrength === 'Fuerte') {
+        return 'strong';
+      } else if (this.passwordStrength === 'Moderada') {
+        return 'moderate';
+      } else {
+        return ''; // Para manejar el caso de 'Débil' o cualquier otro valor
+      }
     }
   }
+}
 };
+
 </script>
 
 <style scoped>
-/* Updated CSS for login template with styles from the provided CSS */
-@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla&display=swap');
-
 * {
   font-family: 'Anek Bangla', sans-serif;
   margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background-color: rgba(226, 222, 222, 0.815);
-  /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)), url("/giphy.gif");*/
-}
-
-.register {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
+  margin: 0;
 }
 
 .title {
-  font-size: 50px;
-  top: -26px;
-  position: relative;
+  font-size: 2.5rem;
+  margin-top: -1rem;
+  color: #673AB7;
+  /* Púrpura profundo */
+}
+
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
 }
 
 .form {
-  box-shadow: 0 0 10px rgba(255, 253, 253, 0.959);
+  box-shadow: 0 0 20px rgba(103, 58, 183, 0.6);
   border-radius: 10px;
   text-align: center;
   max-width: 400px;
-  background-color: #e5e5ec00;
-  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 30px;
   width: 100%;
-  height: 600px;
+  height: auto;
+}
+
+.group {
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .inputbox {
   outline: none;
-  width: 73%;
-  padding: 10px;
-  background-color: #ebebf300;
+  width: 100%;
+  padding: 15px;
+  background-color: #EDE7F6;
   border: none;
-  color: #ffffff;
-  margin-bottom: 10px;
-  border-bottom: 2px solid white;
-  position: relative;
-  font-size: 21px;
-  top: 39px;
+  color: #333;
+  border-bottom: 2px solid #673AB7;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-out, border-color 0.3s ease-out;
 
+}
 
+a{
+  position: fixed;
+  top: 20px;
+  margin-left: 30px;
+}
+
+.inputbox:focus {
+  background-color: #D1C4E9;
+  border-color: #512DA8;
+}
+
+.password-strength{
+  color: black;
 }
 
 .inputbox::placeholder {
-  color: #ffffffce;
+  color: #757575;
 }
 
 .btn-register {
-  padding: 13px;
-  background-color: #f5f5f5;
-  color: #3b3a3a;
+  padding: 15px;
+  background-color: #673AB7;
+  color: #fff;
   border: none;
   cursor: pointer;
-  width: 80%;
-  transition: background-color 0.2s ease-out;
-  font-size: 21px;
-  top: 100px;
-  position: relative;
-  border-radius: 30px;
+  width: 100%;
+  transition: background-color 0.3s ease-out;
+  font-size: 1.2rem;
+  border-radius: 5px;
 }
 
 .btn-register:hover {
-  background-color: #d095e7;
+  background-color: #512DA8;
 }
 </style>

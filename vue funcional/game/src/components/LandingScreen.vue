@@ -103,7 +103,7 @@ export default {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Tetris', sans-serif;
+  font-family: Verdana;
   background: url('https://i.pinimg.com/originals/2f/f9/4d/2ff94dfff599bc37a27450a858612763.gif');
   background-repeat: repeat;
   color: #fff;

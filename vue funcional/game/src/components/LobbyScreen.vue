@@ -1,6 +1,9 @@
 <template>
+
   <body>
-    
+    <router-link to="/">
+      <img src="/public/home.svg" alt="home" style="width:42px;height:42px;">
+    </router-link>
     <div class="lobby-container"> 
       <h2 class="lobby-title">Sala de Lobby</h2>
       <div class="lobby-options">
@@ -111,7 +114,7 @@ body {
   padding: 0;
   margin: -10px;
   font-family: 'Anek Bangla', sans-serif;
-  height: 100vh;
+  height: 90vh;
   background-repeat: repeat;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -130,6 +133,12 @@ body {
   justify-content: center;
   color: white;
 
+}
+
+a{
+  position: fixed;
+  top: 20px;
+  margin-left: 30px;
 }
 
 .lobby-game {

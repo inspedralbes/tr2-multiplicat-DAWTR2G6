@@ -110,7 +110,7 @@ export default {
 <style scoped>
 /* Contenedor principal */
 .score-container {
-  margin-top: -48px;
+
   font-family: "Anek Bangla", sans-serif;
   width: 100%;
   min-height: 100vh;
