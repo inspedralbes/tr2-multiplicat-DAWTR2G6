@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container mt-5">
-        <h1>Question Details</h1>
+        <h1>Detalle de las preguntas</h1>
 
         <ul>
             <li><strong>ID:</strong> {{ $pregunta->id }}</li>
@@ -14,6 +14,6 @@
             <li><strong>Categoría ID:</strong> {{ $pregunta->categoria_id }}</li>
         </ul>
 
-        <a href="{{ route('preguntas.index') }}" class="btn btn-secondary">Back to Questions</a>
+        <a href="{{ route('preguntas.index') }}" class="btn btn-secondary">Volver a las preguntas</a>
     </div>
 @endsection

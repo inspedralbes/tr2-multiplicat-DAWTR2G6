@@ -4,10 +4,10 @@
 
 @section('content')
     <div class="container mt-5">
-        <h1>Question Created Successfully</h1>
+        <h1>Pregunta creada correctamente</h1>
 
-        <p>Your question has been created successfully!</p>
+        <p>Tu pregunta ha sido creada!</p>
 
-        <a href="{{ route('preguntas.create') }}" class="btn btn-primary">Create Another Question</a>
+        <a href="{{ route('preguntas.create') }}" class="btn btn-primary">Crea otra pregunta</a>
     </div>
 @endsection
